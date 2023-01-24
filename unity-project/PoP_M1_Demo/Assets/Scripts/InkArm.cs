@@ -5,7 +5,7 @@ using UnityEngine;
 public class InkArm : MonoBehaviour
 {
 
-    Transform target;
+    public Transform player;
     bool move = false;
 
     public Transform ANCHOR;
@@ -23,20 +23,27 @@ public class InkArm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((move && !Stretched()))
+        Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
+        Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
+        if (move && (!Stretched(moveTo)))
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, ARM_SPEED * Time.deltaTime);
+            transform.position = moveTo;
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
+            transform.position = moveToA;
         }
     }
 
-    private bool Stretched()
+
+    private bool Stretched(Vector3 mT)
     {
         float x = Mathf.Abs(transform.position.x - ANCHOR.position.x);
         float y = Mathf.Abs(transform.position.y - ANCHOR.position.y);
+
+        float mX = Mathf.Abs(mT.x - ANCHOR.position.x);
+        float mY = Mathf.Abs(mT.y - ANCHOR.position.y);
+
 
         if (Mathf.Pow(x, 2) + Mathf.Pow(y, 2) < Mathf.Pow(ARM_REACH, 2))
         {
@@ -52,7 +59,7 @@ public class InkArm : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            target = other.transform;
+            player = other.transform;
             move = true;
         }
     }
