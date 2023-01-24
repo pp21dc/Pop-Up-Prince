@@ -42,6 +42,8 @@ public class PrinceMovement : MonoBehaviour
     public float DRAG = 0.7f;
     public float DENSITY = 1.2f;
 
+    public Transform pR; //this is the players current rotation
+
 
     float speed_x = 0f;
     float speed_y = 0f;
@@ -192,6 +194,7 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!isCollidingGround)
         {
+            pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
             transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             if (current_speed.y > terminal_vel)
             {
