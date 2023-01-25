@@ -63,7 +63,8 @@ public class PrinceMovement : MonoBehaviour
     float terminal_vel; // this is the max speed the player can fall at
     Vector3 current_speed;// current speed of the player
     bool isCollidingGround = false;
-    string isCollidingWall;
+    public bool isWallLeft = false;
+    public bool isWallRight = false;
 
     bool jump_start = false;
     bool jumpQueued = false;
@@ -223,8 +224,8 @@ public class PrinceMovement : MonoBehaviour
             if (pR.eulerAngles.z > 90)
             {
                 //Debug.Log(Mathf.Abs(pR.eulerAngles.z - 360f));
-                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z - 360f));
-                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z - 360f));
+                angledXMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z - 360f));
+                angledYMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z - 360f));
             }
             else
             {
@@ -268,40 +269,61 @@ public class PrinceMovement : MonoBehaviour
             {
                 speed_dashy = -DASH_SPEED;
             }
-            if (LR > 0)
+            if (LR > 0 && !isWallRight)
             {
                 speed_dashx = DASH_SPEED;
             }
-            else if (LR < 0)
+            else if (LR < 0 && !isWallLeft)
             {
                 speed_dashx = -DASH_SPEED;
             }
 
-            if (UD > 0 && LR > 0)
+            if (UD > 0 && LR > 0 && !isWallRight)
             {
                 //Debug.Log("TopRight");
                 speed_dashy = diag;
                 speed_dashx = diag;
             } 
-            else if (UD > 0 && LR < 0)
+            else if (UD > 0 && LR > 0 && isWallRight)
+            {
+                speed_dashy = diag;
+            }
+            
+            if (UD > 0 && LR < 0 && !isWallLeft)
             {
                 //Debug.Log("TopLeft");
                 speed_dashy = diag;
                 speed_dashx = -diag;
             }
-            else if (UD < 0 && LR < 0)
+            else if (UD > 0 && LR < 0 && isWallLeft)
+            {
+                speed_dashy = diag;
+            }
+
+            if (UD < 0 && LR < 0 && !isWallLeft)
             {
                 //Debug.Log("BottomLeft");
                 speed_dashy = -diag;
                 speed_dashx = -diag;
             }
-            else if (UD < 0 && LR > 0)
+            else if (UD < 0 && LR < 0 && isWallLeft) 
+            {
+                speed_dashy = -diag;
+            }
+            
+            if (UD < 0 && LR > 0 && !isWallRight)
             {
                 //Debug.Log("BottomRight");
                 speed_dashy = -diag;
                 speed_dashx = diag;
+            } 
+            else if (UD < 0 && LR > 0 && isWallRight) 
+            {
+                speed_dashy = -diag;
             }
             current_speed = new Vector3(0, 0, 0);
+            speed_x = 0;
+            //speed_y /= 2;
             
         }
     }
@@ -333,7 +355,7 @@ public class PrinceMovement : MonoBehaviour
         if (!dashing)
         {
             speed_x = 0;
-            if (dir > 0)
+            if (dir > 0 && !isWallRight)
             {
                 if (prevDir <= 0)
                 {
@@ -353,7 +375,7 @@ public class PrinceMovement : MonoBehaviour
 
 
             }
-            else if (dir < 0)
+            else if (dir < 0 && !isWallLeft)
             {
                 if (prevDir >= 0)
                 {
@@ -385,6 +407,16 @@ public class PrinceMovement : MonoBehaviour
         isCollidingGround = colliding;
         friction_current = friction;
         
+    }
+
+    public void WallCollisionDetected(bool left, bool right)
+    {
+        speed_dashx = 0;
+        speed_x = 0;
+        current_speed = new Vector3(0, current_speed.y, 0);
+        isWallLeft = left;
+        isWallRight = right;
+
     }
 
 

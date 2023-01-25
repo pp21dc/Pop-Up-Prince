@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
 
-    public float friction = 1f;
+    public float friction = 32f;
 
     // Start is called before the first frame update
     void Start()
