@@ -29,7 +29,7 @@ public class PrinceFootCollider : MonoBehaviour
 
             //Debug.Log(other.transform.rotation);
             transform.parent.SetPositionAndRotation(transform.parent.transform.position, new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
-            player.transform.position = new Vector3(transform.parent.transform.position.x, transform.position.y - pY, 0);
+            //player.transform.position = new Vector3(player.transform.position.x, other.transform.position.y, 0);
 
 
         }

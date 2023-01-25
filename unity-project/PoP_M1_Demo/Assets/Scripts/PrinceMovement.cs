@@ -25,6 +25,7 @@ public class PrinceMovement : MonoBehaviour
     [Tooltip("Starting Acceleration speed")]
     public float MOVE_ACCEL_X = 0.1f;
     public float MOVE_ACCEL_ACOEF;
+    public float ROTATE_TIME = 0.5f;
 
     [Header("Dash Settings")]
     public float DASH_SPEED = 20f;
@@ -194,7 +195,16 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!isCollidingGround)
         {
-            pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
+            //pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
+            if (pR.eulerAngles.z > 0 && pR.eulerAngles.z < 180)
+            {
+                pR.Rotate(new Vector3(0, 0, -1f / FPS*ROTATE_TIME));
+            } else if (pR.eulerAngles.z >= 180)
+            {
+                pR.Rotate(new Vector3(0, 0, 1f / FPS * ROTATE_TIME));
+            }
+            
+            
             transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             if (current_speed.y > terminal_vel)
             {
@@ -205,7 +215,27 @@ public class PrinceMovement : MonoBehaviour
         }
         else //player is on the ground
         {
-            transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / (FPS), 0, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            float totalXMove = (current_speed.x + speed_x + speed_dashx);
+            float totalYMove = 0;
+            float angledXMove;
+            float angledYMove;
+            if (pR.eulerAngles.z > 90)
+            {
+                //Debug.Log(Mathf.Abs(pR.eulerAngles.z - 360f));
+                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z - 360f));
+                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z - 360f));
+            }
+            else
+            {
+                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
+                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
+            }
+            
+
+            Debug.Log(angledXMove + " | " + angledYMove);
+            transform.position += new Vector3(angledXMove / (FPS), angledYMove/FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            
+
             current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
             speed_y = 0;
             if (jumpQueued) //IF JUMP QUEUED AND ON GROUND, THEN JUMP

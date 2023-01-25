@@ -7,6 +7,7 @@ public class PopUp : MonoBehaviour
     bool pop = false;
     int FPS = 60;
     public float POP_SPEED = 1f;
+    public float POP_TIME = 1f;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class PopUp : MonoBehaviour
     {
         if (transform.rotation.x < 0 && pop)
         {
-            transform.Rotate(-(1f/(FPS*POP_SPEED)), 0, 0);
+            transform.Rotate((POP_SPEED / (FPS*POP_TIME)), 0, 0);
         }
     }
 
