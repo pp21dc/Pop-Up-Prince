@@ -63,6 +63,7 @@ public class PrinceMovement : MonoBehaviour
     float terminal_vel; // this is the max speed the player can fall at
     Vector3 current_speed;// current speed of the player
     bool isCollidingGround = false;
+    string isCollidingWall;
 
     bool jump_start = false;
     bool jumpQueued = false;
@@ -232,7 +233,7 @@ public class PrinceMovement : MonoBehaviour
             }
             
 
-            Debug.Log(angledXMove + " | " + angledYMove);
+            //Debug.Log(angledXMove + " | " + angledYMove);
             transform.position += new Vector3(angledXMove / (FPS), angledYMove/FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             
 

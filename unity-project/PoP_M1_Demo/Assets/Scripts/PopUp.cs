@@ -5,13 +5,13 @@ using UnityEngine;
 public class PopUp : MonoBehaviour
 {
     bool pop = false;
-    int FPS = 60;
+    float FPS = 60;
     public float POP_SPEED = 1f;
     public float POP_TIME = 1f;
 
     private void Start()
     {
-        FPS = Application.targetFrameRate;
+        //FPS = Application.targetFrameRate;
     }
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class PopUp : MonoBehaviour
     {
         if (transform.rotation.x < 0 && pop)
         {
+            //Debug.Log(FPS);
             transform.Rotate((POP_SPEED / (FPS*POP_TIME)), 0, 0);
         }
     }

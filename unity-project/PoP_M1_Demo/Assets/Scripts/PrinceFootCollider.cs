@@ -18,6 +18,7 @@ public class PrinceFootCollider : MonoBehaviour
         {
             contacts++;
 
+            Debug.Log(contacts + " :CONTACTS");
             PM = player.GetComponent<PrinceMovement>();
             friciton = other.GetComponent<Ground>().friction;
             PM.CollisionDetected(true, friciton);
@@ -32,23 +33,27 @@ public class PrinceFootCollider : MonoBehaviour
             //player.transform.position = new Vector3(player.transform.position.x, other.transform.position.y, 0);
 
 
-        }
+        } 
         
     }
 
 
     private void OnTriggerExit(Collider other)
-    {   
-        contacts--;
-        if (contacts < 0)
+    {
+        if (other.transform.tag == "ground")
         {
-            contacts = 0;
-        }
+            contacts--;
+            if (contacts < 0)
+            {
+                contacts = 0;
+            }
 
-        if (other.transform.tag == "ground" & contacts <= 0)
-        {
-            PM = player.GetComponent<PrinceMovement>();
-            PM.CollisionDetected(false, PM.friction_air); //sets friction to air
+            Debug.Log(contacts + " :CONTACTS E");
+            if (other.transform.tag == "ground" & contacts <= 0)
+            {
+                PM = player.GetComponent<PrinceMovement>();
+                PM.CollisionDetected(false, PM.friction_air); //sets friction to air
+            }
         }
 
     }
