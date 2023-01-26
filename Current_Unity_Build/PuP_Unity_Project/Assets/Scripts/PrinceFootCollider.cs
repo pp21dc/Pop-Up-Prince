@@ -18,7 +18,7 @@ public class PrinceFootCollider : MonoBehaviour
         {
             contacts++;
 
-            Debug.Log(contacts + " :CONTACTS");
+            //Debug.Log(contacts + " :CONTACTS");
             PM = player.GetComponent<PrinceMovement>();
             friciton = other.GetComponent<Ground>().friction;
             PM.CollisionDetected(true, friciton);
@@ -48,7 +48,7 @@ public class PrinceFootCollider : MonoBehaviour
                 contacts = 0;
             }
 
-            Debug.Log(contacts + " :CONTACTS E");
+            //Debug.Log(contacts + " :CONTACTS E");
             if (other.transform.tag == "ground" & contacts <= 0)
             {
                 PM = player.GetComponent<PrinceMovement>();

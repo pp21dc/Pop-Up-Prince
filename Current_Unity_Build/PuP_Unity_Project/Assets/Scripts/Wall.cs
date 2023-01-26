@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     public PrinceMovement PM;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -13,7 +14,7 @@ public class Wall : MonoBehaviour
             {
                 PM.WallCollisionDetected(PM.isWallLeft, true);
             } 
-            else 
+            else
             {
                 PM.WallCollisionDetected(true, PM.isWallRight);
             }

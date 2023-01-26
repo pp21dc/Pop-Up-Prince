@@ -198,13 +198,13 @@ public class PrinceMovement : MonoBehaviour
         if (!isCollidingGround)
         {
             //pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
-            if (pR.eulerAngles.z > 0 && pR.eulerAngles.z < 180)
+            /*if (pR.eulerAngles.z > 0 && pR.eulerAngles.z < 180)
             {
                 pR.Rotate(new Vector3(0, 0, -1f / FPS*ROTATE_TIME));
             } else if (pR.eulerAngles.z >= 180)
             {
                 pR.Rotate(new Vector3(0, 0, 1f / FPS * ROTATE_TIME));
-            }
+            }*/
             
             
             transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
@@ -221,22 +221,28 @@ public class PrinceMovement : MonoBehaviour
             float totalYMove = 0;
             float angledXMove;
             float angledYMove;
-            if (pR.eulerAngles.z > 90)
+            
+            if (pR.eulerAngles.z >= 270)
             {
-                //Debug.Log(Mathf.Abs(pR.eulerAngles.z - 360f));
-                angledXMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z - 360f));
-                angledYMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z - 360f));
+                Debug.Log("Right Down");
+                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(360 - pR.eulerAngles.z));
+                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(360 - pR.eulerAngles.z));
+                angledXMove *= -1;
+            } 
+            else if (pR.eulerAngles.z != 0)
+            {
+                Debug.Log("Left Down");
+                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
+                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
+                Debug.Log(pR.eulerAngles.z);
+                angledYMove *= -1;
+                //angledXMove *= -1;
             }
             else
             {
                 angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
                 angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
             }
-            
-
-            //Debug.Log(angledXMove + " | " + angledYMove);
-            transform.position += new Vector3(angledXMove / (FPS), angledYMove/FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
-            
 
             current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
             speed_y = 0;
@@ -251,6 +257,13 @@ public class PrinceMovement : MonoBehaviour
                 }
 
             }
+
+
+            Debug.Log(angledXMove + " | " + angledYMove);
+            transform.position += new Vector3(angledXMove / (FPS), angledYMove / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            
+
+            
         }
     }
 
