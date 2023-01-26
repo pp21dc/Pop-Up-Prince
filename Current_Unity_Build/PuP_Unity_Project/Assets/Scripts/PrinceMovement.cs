@@ -65,6 +65,7 @@ public class PrinceMovement : MonoBehaviour
     bool isCollidingGround = false;
     public bool isWallLeft = false;
     public bool isWallRight = false;
+    public bool isFloor = false;
 
     bool jump_start = false;
     bool jumpQueued = false;
@@ -224,17 +225,17 @@ public class PrinceMovement : MonoBehaviour
             
             if (pR.eulerAngles.z >= 270)
             {
-                Debug.Log("Right Down");
+                //Debug.Log("Right Down");
                 angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(360 - pR.eulerAngles.z));
                 angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(360 - pR.eulerAngles.z));
                 angledXMove *= -1;
             } 
             else if (pR.eulerAngles.z != 0)
             {
-                Debug.Log("Left Down");
+                //Debug.Log("Left Down");
                 angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
                 angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
-                Debug.Log(pR.eulerAngles.z);
+                //Debug.Log(pR.eulerAngles.z);
                 angledYMove *= -1;
                 //angledXMove *= -1;
             }
@@ -259,7 +260,7 @@ public class PrinceMovement : MonoBehaviour
             }
 
 
-            Debug.Log(angledXMove + " | " + angledYMove);
+            //Debug.Log(angledXMove + " | " + angledYMove);
             transform.position += new Vector3(angledXMove / (FPS), angledYMove / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             
 
@@ -422,14 +423,14 @@ public class PrinceMovement : MonoBehaviour
         
     }
 
-    public void WallCollisionDetected(bool left, bool right)
+    public void WallCollisionDetected(bool left, bool right, bool floor)
     {
         speed_dashx = 0;
         speed_x = 0;
         current_speed = new Vector3(0, current_speed.y, 0);
         isWallLeft = left;
         isWallRight = right;
-
+        isFloor = floor;
     }
 
 

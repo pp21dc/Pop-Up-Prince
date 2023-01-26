@@ -21,12 +21,16 @@ public class PrinceFootCollider : MonoBehaviour
             //Debug.Log(contacts + " :CONTACTS");
             PM = player.GetComponent<PrinceMovement>();
             friciton = other.GetComponent<Ground>().friction;
-            PM.CollisionDetected(true, friciton);
+            
 
             float gY = other.GetComponent<MeshFilter>().mesh.bounds.extents.y;
             float pY = body.mesh.bounds.extents.y;
-            
-            
+
+            if (other.transform.position.y + gY < player.transform.position.y)
+            {
+                PM.CollisionDetected(true, friciton);
+            }
+
 
             //Debug.Log(other.transform.rotation);
             transform.parent.SetPositionAndRotation(transform.parent.transform.position, new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
