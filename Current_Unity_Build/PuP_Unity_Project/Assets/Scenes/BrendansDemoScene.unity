@@ -7619,7 +7619,6 @@ GameObject:
   - component: {fileID: 1857891036}
   - component: {fileID: 1857891035}
   - component: {fileID: 1857891038}
-  - component: {fileID: 1857891039}
   m_Layer: 0
   m_Name: Grass
   m_TagString: ground
@@ -7719,19 +7718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
---- !u!65 &1857891039
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857891033}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 0.99999994, z: 1.0000002}
-  m_Center: {x: -0.000000014901161, y: 0, z: 0.00000011920929}
 --- !u!1 &1864399556
 GameObject:
   m_ObjectHideFlags: 0

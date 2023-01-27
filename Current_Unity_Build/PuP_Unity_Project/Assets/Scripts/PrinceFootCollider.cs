@@ -26,8 +26,9 @@ public class PrinceFootCollider : MonoBehaviour
             float gY = other.GetComponent<MeshFilter>().mesh.bounds.extents.y;
             float pY = body.mesh.bounds.extents.y;
 
-            if (other.transform.position.y + gY < player.transform.position.y)
+            if (PM.isFloor)
             {
+                Debug.Log(other.transform.position.y + gY < player.transform.position.y);
                 PM.CollisionDetected(true, friciton);
             }
 
