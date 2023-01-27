@@ -7,9 +7,17 @@ public class PrinceFootCollider : MonoBehaviour
     float friciton;
     int contacts = 0;
     PrinceMovement PM;
+    Quaternion camRotation;
 
     public MeshFilter body;
     public GameObject player;
+    public GameObject camera;
+
+    private void Start()
+    {
+        camRotation = new Quaternion(0, 0, 0, 0);
+        camRotation.eulerAngles.Set(15, 0, 0);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,6 +43,9 @@ public class PrinceFootCollider : MonoBehaviour
 
             //Debug.Log(other.transform.rotation);
             transform.parent.SetPositionAndRotation(transform.parent.transform.position, new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            Quaternion pRotation = transform.parent.transform.rotation;
+            pRotation.eulerAngles = new Vector3(15,0,0);
+            camera.transform.SetPositionAndRotation(new Vector3(transform.parent.position.x, transform.parent.transform.position.y + camera.GetComponent<FollowPlayer>().height, camera.transform.position.z), pRotation);
             //player.transform.position = new Vector3(player.transform.position.x, other.transform.position.y, 0);
 
 

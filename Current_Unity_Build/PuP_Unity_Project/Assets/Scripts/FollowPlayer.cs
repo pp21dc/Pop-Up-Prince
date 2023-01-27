@@ -22,7 +22,6 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.eulerAngles = -player.eulerAngles/2;
-        transform.position = new Vector3(player.position.x, transform.position.y, transform.position.z);
+        //transform.rotation = new Quaternion(0, 0, 500, 0);
     }
 }
