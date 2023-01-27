@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!1001 &48609855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1792,26 +1793,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 276325231}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &325660727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5929290169870701890, guid: 1c1dee80c42811545947c10dbf15c515,
-    type: 3}
-  m_PrefabInstance: {fileID: 1251292617}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &325660733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325660727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69d53a0ded7058c4585236d62d6a794f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  friction: 32
-  PM: {fileID: 1939131403}
 --- !u!1001 &365715829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3587,6 +3568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!65 &753528035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5251,6 +5233,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate1
       objectReference: {fileID: 0}
+    - target: {fileID: 9155433413985204946, guid: 1c1dee80c42811545947c10dbf15c515,
+        type: 3}
+      propertyPath: PM
+      value: 
+      objectReference: {fileID: 1939131403}
+    - target: {fileID: 9155433413985204946, guid: 1c1dee80c42811545947c10dbf15c515,
+        type: 3}
+      propertyPath: PlayerGFX
+      value: 
+      objectReference: {fileID: 1685973364}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c1dee80c42811545947c10dbf15c515, type: 3}
 --- !u!1 &1280297032
@@ -5302,6 +5294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!65 &1280297036
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5835,6 +5828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!65 &1386971686
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6988,6 +6982,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1625922140}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1685973364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3878876052228874676, guid: 7a18e997d34a1fc43ba00ce78b896957,
+    type: 3}
+  m_PrefabInstance: {fileID: 3878876052654697426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1706374269
 GameObject:
   m_ObjectHideFlags: 0
@@ -7718,6 +7718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!1 &1864399556
 GameObject:
   m_ObjectHideFlags: 0
@@ -8416,6 +8417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friction: 32
   PM: {fileID: 1939131403}
+  PlayerGFX: {fileID: 1685973364}
 --- !u!1 &2062621156
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,9 @@ public class Ground : MonoBehaviour
 
     public float friction = 32f;
     public PrinceMovement PM;
+    //public GameObject PlayerGFX;
     MeshFilter mF;
+    //MeshFilter pmF;
 
     bool top;
     bool left;
@@ -17,20 +19,23 @@ public class Ground : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //PM.WallCollisionDetected(false, false, false);
-            //Debug.Log(gameObject.name + " ENTERS: TOP-" + top);
-            //Debug.Log(other.name + " | " + other.transform.position.y);
             mF = gameObject.GetComponent<MeshFilter>();
-            //Debug.Log(other.transform.position.y + " | " + transform.position.y + mF.mesh.bounds.extents.y);
-            if (transform.position.x > other.transform.position.x && (transform.position.y + mF.mesh.bounds.extents.y) > other.transform.position.y)
+            //pmF = PlayerGFX.GetComponent<MeshFilter>();
+            float mF_xBounds = transform.position.x + (mF.mesh.bounds.extents.x * transform.localScale.x);
+            float mF_yBounds = transform.position.y + (mF.mesh.bounds.extents.y * transform.localScale.y);
+            //float pmF_xBounds = PlayerGFX.transform.position.x + (pmF.mesh.bounds.extents.x * PlayerGFX.transform.localScale.x);
+            //float pmF_yBounds = PlayerGFX.transform.position.y + (pmF.mesh.bounds.extents.y * PlayerGFX.transform.localScale.y);
+            //Debug.Log("Player is above mesh");
+            //Debug.Log(mF.mesh.bounds.extents.y*transform.localScale.y);
+            if (transform.position.x > other.transform.position.x && (mF_yBounds) > other.transform.position.y)
             {
-                //Debug.Log("Wall Right");
+                Debug.Log("Wall Right");
                 PM.WallCollisionDetected(PM.isWallLeft, true, PM.isFloor);
                 right = true;
             }
-            else if (transform.position.x < other.transform.position.x && (transform.position.y + mF.mesh.bounds.extents.y) > other.transform.position.y)
+            else if (transform.position.x < other.transform.position.x && (mF_yBounds) > other.transform.position.y)
             {
-                //Debug.Log("Wall Left");
+                Debug.Log("Wall Left");
                 PM.WallCollisionDetected(true, PM.isWallRight, PM.isFloor);
                 left = true;
             }
@@ -61,7 +66,7 @@ public class Ground : MonoBehaviour
             }
             else if (transform.position.x<= other.transform.position.x && !top)
             {
-                //Debug.Log("No Wall Left");
+                Debug.Log("No Wall Left");
                 PM.WallCollisionDetected(false, PM.isWallRight, PM.isFloor);
                 left = false;
             }

@@ -28,7 +28,7 @@ public class PrinceFootCollider : MonoBehaviour
 
             if (PM.isFloor)
             {
-                Debug.Log(other.transform.position.y + gY < player.transform.position.y);
+                //Debug.Log(other.transform.position.y + gY < player.transform.position.y);
                 PM.CollisionDetected(true, friciton);
             }
 
