@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 3878876052228874680}
   player: {fileID: 3878876051692293004}
-  camera: {fileID: 0}
+  camera: {fileID: 4397834305858986339}
 --- !u!54 &3878876051621828878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -275,7 +275,6 @@ GameObject:
   - component: {fileID: 4501944167996574886}
   - component: {fileID: 2927068295293746706}
   - component: {fileID: 6353697725767241524}
-  - component: {fileID: 4798387132799305666}
   - component: {fileID: 2247166499860418360}
   - component: {fileID: 2860924381104151685}
   m_Layer: 0
@@ -351,25 +350,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4397834305858986339}
   m_Enabled: 1
---- !u!1818360609 &4798387132799305666
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4397834305858986339}
-  m_Enabled: 1
-  m_Weight: 1
-  m_RotationAtRest: {x: 15.00003, y: 0, z: 0}
-  m_RotationOffset: {x: 15.00003, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 0
 --- !u!114 &2247166499860418360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3878876051692293005}
-  height: 0
+  height: 4.69
   lead: 0
   zoom: 0
   followSpeed: 0
