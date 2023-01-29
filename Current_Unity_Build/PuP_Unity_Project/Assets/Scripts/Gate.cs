@@ -8,18 +8,34 @@ public class Gate : MonoBehaviour
      * Script for unlocking and opening the gates
      */
 
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
+    public float moveTime = 1f;
+    public float counter = 60;
+    public bool rise = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (rise == true)
+        {
+            //move object up
+            transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
+            counter--;
+
+            if (counter == 0)
+            {
+                //rise = false;
+            }
+
+        }
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -27,13 +43,12 @@ public class Gate : MonoBehaviour
         if (collider.gameObject.tag == "Player" && PrinceVariables.hasKey == true)
         {
 
+            // get rid of princes key
             PrinceVariables.hasKey = false;
 
-            Destroy(gameObject);
+            //tell gate to rise
+            rise = true;
 
-          //transform.Translate(0, moveSpeed * Time.deltaTime, 0);
-
-            // need to add code to have key object dissapear if hasKey is false
         }
     }
 }
