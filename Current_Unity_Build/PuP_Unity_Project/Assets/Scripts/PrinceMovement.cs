@@ -44,6 +44,7 @@ public class PrinceMovement : MonoBehaviour
     public float DENSITY = 1.2f;
 
     public Transform pR; //this is the players current rotation
+    public GameObject camera;
 
 
     float speed_x = 0f;
@@ -199,15 +200,18 @@ public class PrinceMovement : MonoBehaviour
         if (!isCollidingGround)
         {
             //pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
-            /*if (pR.eulerAngles.z > 0 && pR.eulerAngles.z < 180)
+            if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
-                pR.Rotate(new Vector3(0, 0, -1f / FPS*ROTATE_TIME));
-            } else if (pR.eulerAngles.z >= 180)
+                gameObject.transform.Rotate(new Vector3(0, 0, -0.5f / FPS*ROTATE_TIME));
+            } else if (gameObject.transform.eulerAngles.z >= 180)
             {
-                pR.Rotate(new Vector3(0, 0, 1f / FPS * ROTATE_TIME));
-            }*/
-            
-            
+                gameObject.transform.Rotate(new Vector3(0, 0, 0.5f / FPS * ROTATE_TIME));
+            }
+            Quaternion pRotation = gameObject.transform.rotation;
+            pRotation.eulerAngles = new Vector3(15, 0, 0);
+            camera.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + camera.GetComponent<FollowPlayer>().height, camera.transform.position.z), pRotation);
+
+
             transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             if (current_speed.y > terminal_vel)
             {

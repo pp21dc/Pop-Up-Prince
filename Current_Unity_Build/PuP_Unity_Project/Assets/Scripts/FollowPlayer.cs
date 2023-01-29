@@ -10,13 +10,13 @@ public class FollowPlayer : MonoBehaviour
     public float lead;
     public float zoom;
     public float followSpeed;
-    public Quaternion rotation;
+    public Vector3 rotation;
     float prevRot;
 
     // Start is called before the first frame update
     void Start()
     {
-        rotation = transform.rotation;
+        //rotation = transform.rotation;
     }
 
     // Update is called once per frame

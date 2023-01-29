@@ -27,6 +27,7 @@ public class Ground : MonoBehaviour
             //float pmF_yBounds = PlayerGFX.transform.position.y + (pmF.mesh.bounds.extents.y * PlayerGFX.transform.localScale.y);
             //Debug.Log("Player is above mesh");
             //Debug.Log(mF.mesh.bounds.extents.y*transform.localScale.y);
+            //Debug.Log(mF_yBounds + " " + other.transform.position.y);
             if (transform.position.x > other.transform.position.x && (mF_yBounds) > other.transform.position.y)
             {
                 Debug.Log("Wall Right");
@@ -42,7 +43,7 @@ public class Ground : MonoBehaviour
 
             if (!left && !right)
             {
-                //Debug.Log("Yes Floor");
+                Debug.Log("Yes Floor");
                 PM.WallCollisionDetected(PM.isWallLeft, PM.isWallRight, true);
                 top = true;
             }
@@ -60,7 +61,7 @@ public class Ground : MonoBehaviour
             mF = gameObject.GetComponent<MeshFilter>();
             if (transform.position.x > other.transform.position.x && !top)
             {
-                //Debug.Log("No Wall Right");
+                Debug.Log("No Wall Right");
                 PM.WallCollisionDetected(PM.isWallLeft, false, PM.isFloor);
                 right = false;
             }
@@ -74,7 +75,7 @@ public class Ground : MonoBehaviour
             if ((other.transform.position.y > transform.position.y + mF.mesh.bounds.extents.y) || (other.transform.position.x > (transform.position.x + mF.mesh.bounds.extents.x) || other.transform.position.x < (transform.position.x + mF.mesh.bounds.extents.x)))
             {
                 
-                //Debug.Log("No Floor");
+                Debug.Log("No Floor");
                 PM.WallCollisionDetected(PM.isWallLeft, PM.isWallRight, false);
                 top = false;
             }

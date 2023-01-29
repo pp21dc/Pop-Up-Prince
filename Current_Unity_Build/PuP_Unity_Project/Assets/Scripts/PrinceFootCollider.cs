@@ -43,9 +43,10 @@ public class PrinceFootCollider : MonoBehaviour
 
             //Debug.Log(other.transform.rotation);
             transform.parent.SetPositionAndRotation(transform.parent.transform.position, new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            FollowPlayer script_followPlayer = camera.GetComponent<FollowPlayer>(); 
             Quaternion pRotation = transform.parent.transform.rotation;
-            pRotation.eulerAngles = new Vector3(15,0,0);
-            camera.transform.SetPositionAndRotation(new Vector3(transform.parent.position.x, transform.parent.transform.position.y + camera.GetComponent<FollowPlayer>().height, camera.transform.position.z), pRotation);
+            pRotation.eulerAngles = new Vector3(script_followPlayer.rotation.x,0,0);
+            camera.transform.SetPositionAndRotation(new Vector3(transform.parent.position.x, transform.parent.transform.position.y + script_followPlayer.height, camera.transform.position.z), pRotation);
             //player.transform.position = new Vector3(player.transform.position.x, other.transform.position.y, 0);
 
 
