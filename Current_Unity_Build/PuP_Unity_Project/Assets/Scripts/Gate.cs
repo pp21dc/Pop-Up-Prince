@@ -10,13 +10,13 @@ public class Gate : MonoBehaviour
 
     public float moveSpeed = 3f;
     public float moveTime = 1f;
-    public float counter = 60;
+    float startPos;
     public bool rise = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        startPos = transform.position.y;
     }
 
     // Update is called once per frame
@@ -27,11 +27,10 @@ public class Gate : MonoBehaviour
         {
             //move object up
             transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
-            counter--;
 
-            if (counter == 0)
+            if (transform.position.y > (startPos*2))
             {
-                //rise = false;
+                rise = false;
             }
 
         }
