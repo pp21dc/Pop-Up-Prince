@@ -26,6 +26,7 @@ public class PrinceFootCollider : MonoBehaviour
     float player_yBounds;
     Transform body_trans;
     Transform ground_trans;
+    Vector3 Checkpoint;
 
     private void Start()
     {
@@ -142,6 +143,11 @@ public class PrinceFootCollider : MonoBehaviour
 
 
         } 
+        else if (other.transform.tag == "checkpoint")
+        {
+            Checkpoint = other.transform.position;
+            PM.Checkpoint = Checkpoint;
+        }
         
     }
 

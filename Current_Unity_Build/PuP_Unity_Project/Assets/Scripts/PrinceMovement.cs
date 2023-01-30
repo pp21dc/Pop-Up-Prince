@@ -26,6 +26,7 @@ public class PrinceMovement : MonoBehaviour
     public float MOVE_ACCEL_X = 0.1f;
     public float MOVE_ACCEL_ACOEF;
     public float ROTATE_TIME = 0.5f;
+    public float ROTATE_SPEED = 0.5f;
 
     [Header("Dash Settings")]
     public float DASH_SPEED = 20f;
@@ -93,6 +94,10 @@ public class PrinceMovement : MonoBehaviour
     float dash_counter = 0f;
     float dash_delayCounter = 0f;
 
+    [HideInInspector]
+    public Vector3 Checkpoint;
+    bool respawn = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +113,7 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Debug.Log(Time.deltaTime + " | " + Time.deltaTime * ROTATE_TIME);
         //Checks
         friction();
         CheckGroundCollisions();
@@ -212,10 +217,10 @@ public class PrinceMovement : MonoBehaviour
         {
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
-                gameObject.transform.Rotate(new Vector3(0, 0, -0.5f / FPS*ROTATE_TIME));
+                gameObject.transform.Rotate(new Vector3(0, 0, (-ROTATE_SPEED) * Time.deltaTime * ROTATE_TIME));
             } else if (gameObject.transform.eulerAngles.z >= 180)
             {
-                gameObject.transform.Rotate(new Vector3(0, 0, 0.5f / FPS * ROTATE_TIME));
+                gameObject.transform.Rotate(new Vector3(0, 0, ROTATE_SPEED * Time.deltaTime * ROTATE_TIME));
             }
             Quaternion pRotation = gameObject.transform.rotation;
             pRotation.eulerAngles = new Vector3(15, 0, 0);
@@ -224,11 +229,11 @@ public class PrinceMovement : MonoBehaviour
             if (isRoof)
             {
                 Debug.Log("FALL: " + current_speed.y);
-                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, current_speed.y / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, current_speed.y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             } 
             else
             {
-                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             }
 
             if (current_speed.y > terminal_vel)
@@ -431,5 +436,14 @@ public class PrinceMovement : MonoBehaviour
 
     }
 
+    public void Respawn()
+    {
+        speed_dashx = 0;
+        speed_dashy = 0;
+        speed_x = 0;
+        speed_y = 0;
+        current_speed = (Vector3.zero);
+        transform.position = Checkpoint;
+    }
 
 }
