@@ -17,9 +17,14 @@ public class RisingInk : MonoBehaviour
     //public float waitTime = 5f;
     public float heightMultiplier = 5f;
 
+    public static GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        //PrinceMovement PM = GameObject.GetComponent<PrinceMovement>();
+
         startPos = transform.position.y;
     }
 
@@ -42,7 +47,7 @@ public class RisingInk : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            //set player position back to respawn point
+            //PM.Respawn();
         }
     }
 
