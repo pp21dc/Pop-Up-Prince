@@ -36,15 +36,20 @@ public class PrinceMovement : MonoBehaviour
     [Tooltip("Helps the player dash upwards")]
     public float DASH_UPWARDRESISTANCE = 1.75f;
 
-    [Header("Prince Attributes [DO NOT ADJUST]")]
+
+    [HideInInspector]
     public float MASS = 75f;
+    [HideInInspector]
     public float GRAVITY = 9.8f;
+    [HideInInspector]
     public float CS_AREA = 0.18f;
+    [HideInInspector]
     public float DRAG = 0.7f;
+    [HideInInspector]
     public float DENSITY = 1.2f;
 
-    public Transform pR; //this is the players current rotation
-    public GameObject camera;
+    //public Transform pR; //this is the players current rotation
+    public GameObject cam;
 
 
     float speed_x = 0f;
@@ -64,11 +69,17 @@ public class PrinceMovement : MonoBehaviour
     float terminal_vel; // this is the max speed the player can fall at
     Vector3 current_speed;// current speed of the player
     bool isCollidingGround = false;
-    public bool isWallLeft = false;
-    public bool isWallRight = false;
-    public bool isFloor = false;
 
-    bool jump_start = false;
+    [HideInInspector]
+    public bool isWallLeft = false;
+    [HideInInspector]
+    public bool isWallRight = false;
+    [HideInInspector]
+    public bool isFloor = false;    
+    [HideInInspector]
+    public bool isRoof = false;
+
+    //bool jump_start = false;
     bool jumpQueued = false;
     float fJump_Counter = 0f; //forget the jump
 
@@ -199,7 +210,6 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!isCollidingGround)
         {
-            //pR.SetPositionAndRotation(pR.position, new Quaternion(0, 0, 0, 1));
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
                 gameObject.transform.Rotate(new Vector3(0, 0, -0.5f / FPS*ROTATE_TIME));
@@ -209,10 +219,18 @@ public class PrinceMovement : MonoBehaviour
             }
             Quaternion pRotation = gameObject.transform.rotation;
             pRotation.eulerAngles = new Vector3(15, 0, 0);
-            camera.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + camera.GetComponent<FollowPlayer>().height, camera.transform.position.z), pRotation);
+            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + cam.GetComponent<FollowPlayer>().height, cam.transform.position.z), pRotation);
 
+            if (isRoof)
+            {
+                Debug.Log("FALL: " + current_speed.y);
+                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, current_speed.y / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            } 
+            else
+            {
+                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            }
 
-            transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) / FPS, (current_speed.y + speed_y + speed_dashy) / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             if (current_speed.y > terminal_vel)
             {
                 current_speed -= new Vector3(0, GRAVITY / FPS, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
@@ -223,31 +241,6 @@ public class PrinceMovement : MonoBehaviour
         else //player is on the ground
         {
             float totalXMove = (current_speed.x + speed_x + speed_dashx);
-            float totalYMove = 0;
-            float angledXMove;
-            float angledYMove;
-            
-            /*if (pR.eulerAngles.z >= 270)
-            {
-                //Debug.Log("Right Down");
-                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(360 - pR.eulerAngles.z));
-                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(360 - pR.eulerAngles.z));
-                angledXMove *= -1;
-            } 
-            else if (pR.eulerAngles.z != 0)
-            {
-                //Debug.Log("Left Down");
-                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
-                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
-                //Debug.Log(pR.eulerAngles.z);
-                angledYMove *= -1;
-                //angledXMove *= -1;
-            }
-            else
-            {
-                angledXMove = totalXMove * Mathf.Cos(Mathf.Abs(pR.eulerAngles.z));
-                angledYMove = totalXMove * Mathf.Sin(Mathf.Abs(pR.eulerAngles.z));
-            }*/
 
             current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
             speed_y = 0;
@@ -264,11 +257,6 @@ public class PrinceMovement : MonoBehaviour
             }
 
             transform.position += transform.TransformDirection((totalXMove) / FPS, 0,0);
-
-            //Debug.Log(angledXMove + " | " + angledYMove);
-            //transform.position += new Vector3(angledXMove / (FPS), angledYMove / FPS, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
-            
-
             
         }
     }
@@ -280,7 +268,7 @@ public class PrinceMovement : MonoBehaviour
             float diag = DASH_SPEED / 2;
             dashing = true;
             dash_ready = false;
-            if (UD > 0)
+            if (UD > 0 && !isRoof)
             {
                 speed_dashy = DASH_SPEED;
             }
@@ -297,46 +285,47 @@ public class PrinceMovement : MonoBehaviour
                 speed_dashx = -DASH_SPEED;
             }
 
-            if (UD > 0 && LR > 0 && !isWallRight)
+            if (UD > 0 && LR > 0 && !isWallRight && !isRoof)
             {
                 //Debug.Log("TopRight");
                 speed_dashy = diag;
                 speed_dashx = diag;
             } 
-            else if (UD > 0 && LR > 0 && isWallRight)
+            else if (UD > 0 && LR > 0 && isWallRight && !isRoof)
             {
                 speed_dashy = diag;
             }
             
-            if (UD > 0 && LR < 0 && !isWallLeft)
+            
+            if (UD > 0 && LR < 0 && !isWallLeft && !isRoof)
             {
                 //Debug.Log("TopLeft");
                 speed_dashy = diag;
                 speed_dashx = -diag;
             }
-            else if (UD > 0 && LR < 0 && isWallLeft)
+            else if (UD > 0 && LR < 0 && isWallLeft && !isRoof)
             {
                 speed_dashy = diag;
             }
 
-            if (UD < 0 && LR < 0 && !isWallLeft)
+            if (UD < 0 && LR < 0 && !isWallLeft && !isRoof)
             {
                 //Debug.Log("BottomLeft");
                 speed_dashy = -diag;
                 speed_dashx = -diag;
             }
-            else if (UD < 0 && LR < 0 && isWallLeft) 
+            else if (UD < 0 && LR < 0 && isWallLeft && !isRoof) 
             {
                 speed_dashy = -diag;
             }
             
-            if (UD < 0 && LR > 0 && !isWallRight)
+            if (UD < 0 && LR > 0 && !isWallRight && !isRoof)
             {
                 //Debug.Log("BottomRight");
                 speed_dashy = -diag;
                 speed_dashx = diag;
             } 
-            else if (UD < 0 && LR > 0 && isWallRight) 
+            else if (UD < 0 && LR > 0 && isWallRight && !isRoof) 
             {
                 speed_dashy = -diag;
             }
@@ -351,7 +340,7 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!dashing)
         {
-            if (dir > 0 && !jump_held)
+            if (dir > 0 && !jump_held && !isRoof)
             {
                 jump_held = true;
                 jumpQueued = true;
@@ -421,21 +410,25 @@ public class PrinceMovement : MonoBehaviour
         }
     }
 
-    public void CollisionDetected(bool colliding, float friction)
-    {
-        isCollidingGround = colliding;
-        friction_current = friction;
-        
-    }
 
-    public void WallCollisionDetected(bool left, bool right, bool floor)
+    public void CollisionDetected(bool left, bool right, bool floor, bool roof, float friction)
     {
         speed_dashx = 0;
         speed_x = 0;
         current_speed = new Vector3(0, current_speed.y, 0);
         isWallLeft = left;
         isWallRight = right;
+        isCollidingGround = floor;
         isFloor = floor;
+        isRoof = roof;
+        friction_current = friction;
+
+        if (isRoof)
+        {
+            speed_dashy = 0;
+            speed_y = 0;
+        }
+
     }
 
 

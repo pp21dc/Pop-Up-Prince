@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3878876051621828875}
   - component: {fileID: 3878876051621828873}
-  - component: {fileID: 3878876051621828878}
   - component: {fileID: 3878876051621828879}
+  - component: {fileID: 326664633728105084}
   m_Layer: 0
   m_Name: GroundCollider
   m_TagString: Player
@@ -46,10 +46,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80d82e757231b74cb81f0262230ed8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 3878876052228874680}
+  player_sinkY: 0.25
+  player_sinkX: 0.5
+  body: {fileID: 3878876052228874676}
   player: {fileID: 3878876051692293004}
-  camera: {fileID: 4397834305858986339}
---- !u!54 &3878876051621828878
+  cam: {fileID: 4397834305858986339}
+--- !u!65 &3878876051621828879
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878876051621828874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.75, z: 0.18}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &326664633728105084
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,19 +80,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 1
---- !u!65 &3878876051621828879
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3878876051621828874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.7791886, z: 0.18855512}
-  m_Center: {x: 0, y: 0.36978793, z: 0.00041015446}
 --- !u!1 &3878876051692293004
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,11 +148,11 @@ MonoBehaviour:
   CS_AREA: 0.18
   DRAG: 0.7
   DENSITY: 1.2
-  pR: {fileID: 0}
-  camera: {fileID: 4397834305858986339}
+  cam: {fileID: 4397834305858986339}
   isWallLeft: 0
   isWallRight: 0
   isFloor: 0
+  isRoof: 0
 --- !u!1818360609 &8103393664427841980
 RotationConstraint:
   m_ObjectHideFlags: 0
