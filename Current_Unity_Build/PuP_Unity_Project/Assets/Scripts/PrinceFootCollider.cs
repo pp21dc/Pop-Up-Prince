@@ -36,26 +36,143 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void SetPlayerY(Collider other, float gY, float pY_bounds, float gX)
     {
+        float px = player.transform.position.x;
+        float py = player.transform.position.y - player_yBounds;
+        float gx = ground_script.trans.position.x;
+        float gy = ground_script.trans.position.y;
+
         if (ground_script.left || ground_script.right && !ground_script.top)
         {
             if (ground_script.left) 
             {
-                Debug.Log("LPort " + ground_script.trans.position.x);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.trans.position.x + (ground_trans.localScale.x / 2) + (player_xBounds) - (player_sinkX/4), player.transform.position.y, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                //Debug.Log("LPort " + ground_script.trans.position.x);
+                player.transform.SetPositionAndRotation(new Vector3(gx + (ground_trans.localScale.x / 2) + (player_xBounds) - (player_sinkX/4), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
 
             if (ground_script.right) {
-                Debug.Log("RPort" + ground_script.trans.position.x);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.trans.position.x - (ground_trans.localScale.x / 2) - (player_xBounds) + (player_sinkX/4), player.transform.position.y, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                //Debug.Log("RPort" + ground_script.trans.position.x);
+                player.transform.SetPositionAndRotation(new Vector3(gx - (ground_trans.localScale.x / 2) - (player_xBounds) + (player_sinkX/4), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
         }
         else if (!ground_script.left && !ground_script.right && !ground_script.roof)
         {
-            player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x, gY + pY_bounds - player_sinkY/4, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            if (ground_trans.eulerAngles == new Vector3(0, 0, 0) || player.transform.position.x == ground_trans.position.x)
+            {
+                Debug.Log("Flat");
+                player.transform.SetPositionAndRotation(new Vector3(px, gY + pY_bounds - player_sinkY / 4, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            }
+            else if (!ground_script.roof)
+            {
+                Debug.Log(ground_trans.eulerAngles.z);
+                float c;
+                float C = 0;
+                float B = 0;
+                float b = 0;
+                if (ground_trans.eulerAngles.z > 0 && ground_trans.eulerAngles.z < 90)
+                {
+                    c = player_xBounds;
+                    B = Mathf.Abs(ground_trans.eulerAngles.z);
+                    C = 90 - B;
+                    b = Mathf.Abs((c * (Mathf.Sin(B))) / (Mathf.Sin(C)));
+                }
+                else if (ground_trans.eulerAngles.z < 0 || ground_trans.eulerAngles.z > 90)
+                {
+                    c = player_xBounds;
+                    B = 360f - Mathf.Abs(ground_trans.eulerAngles.z);
+                    C = 90 - B;
+                    b = Mathf.Abs((c * (Mathf.Sin(B))) / (Mathf.Sin(C)));
+                }
+
+                Debug.Log(C);
+                Debug.Log(B);
+                Debug.Log(b);
+
+
+                player.transform.SetPositionAndRotation(new Vector3(px, py - b + player_yBounds, 0), other.transform.rotation);
+
+                
+
+                /*Debug.Log("Slope");
+                //player.transform.SetPositionAndRotation(new Vector3(px, player.transform.position.y - player_sinkY / 4 , 0), other.transform.rotation);
+                if (py > gy)
+                {
+                    if (px < gx)
+                    {
+                        pythagPosYCalcs("R", other);
+                    }
+                    else if (px > gx)
+                    {
+                        pythagPosYCalcs("L", other);
+                    }
+                }
+                else if (py < gy)
+                {
+                    if (px > gx)
+                    {
+                        pythagPosYCalcs("BR", other);
+                    }
+                    else if (px < gx)
+                    {
+                        pythagPosYCalcs("BL", other);
+                    }
+                }*/
+
+                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
+
+            }
+            
         }
         else if (ground_script.roof)
         {
             player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x, ground_script.trans.position.y - mF_yBounds - pY_bounds + player_sinkY / 4, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+        }
+    }
+
+    private void pythagPosYCalcs(string key, Collider other)
+    {
+        float px = player.transform.position.x;
+        float py = player.transform.position.y - player_yBounds;
+        float gx = ground_script.trans.position.x;
+        float gy = ground_script.trans.position.y;
+
+        if (key == "R")
+        {
+            Debug.Log("R");
+            float x = (gx - px);
+            float z = Mathf.Abs(Vector3.Distance(new Vector3(gx, gy, 0), new Vector3(px, py - player_yBounds, 0)));
+            float y = Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2)));
+            Debug.Log(Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2))) == y);
+            player.transform.SetPositionAndRotation(new Vector3(px, py, 0), other.transform.rotation);
+            
+        }
+        else if (key == "L")
+        {
+            Debug.Log("L");
+            float x = (px - gx);
+            float z = Mathf.Abs((Vector3.Distance(new Vector3(gx, gy, 0), new Vector3(px, py - player_yBounds, 0))));
+            float y = Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2)));
+            Debug.Log(Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2))) == y);
+            player.transform.SetPositionAndRotation(new Vector3(px, gy + y - (player_sinkY) + (player_yBounds * 2), 0), other.transform.rotation);
+        }
+        else if (key == "BR")
+        {
+            Debug.Log("BR");
+            float x = gx - px;
+            float z = Mathf.Abs((Vector3.Distance(new Vector3(gx, gy, 0), new Vector3(px, py - player_yBounds, 0))));
+            float y = Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2)));
+            Debug.Log(Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2))) == y);
+            player.transform.SetPositionAndRotation(new Vector3(px, gy - y - player_sinkY + (player_yBounds * 2), 0), other.transform.rotation);
+
+        }
+        else if (key == "BL")
+        {
+            Debug.Log("BL");
+            float x = gx - px;
+            float z = Mathf.Abs((Vector3.Distance(new Vector3(gx, gy, 0), new Vector3(px, py - player_yBounds, 0))));
+            float y = Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2)));
+            Debug.Log(Mathf.Sqrt((Mathf.Pow(z, 2) - Mathf.Pow(x, 2))) == y);
+            player.transform.SetPositionAndRotation(new Vector3(px, gy - y - player_sinkY + player_yBounds, 0), other.transform.rotation);
+
         }
     }
 
@@ -126,9 +243,12 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
        
         if (other.transform.tag == "ground")
         {
+            
+
             PM = player.GetComponent<PrinceMovement>();
             ground_script = other.GetComponent<Ground>();
             friciton = ground_script.friction;
@@ -179,6 +299,9 @@ public class PrinceFootCollider : MonoBehaviour
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                 ground_script.top = false;
                 Debug.Log("Top Exit");
+                Debug.Log(contacts <= 0);
+                Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds);
+                Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2));
             }
 
             //Nothing Above
@@ -216,8 +339,8 @@ public class PrinceFootCollider : MonoBehaviour
             //Leaving Right Wall
             if (ground_script.right)
             {
-                Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds);
-                Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2));
+                //Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds);
+                //Debug.Log(body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2));
                 if ((body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2)))
                 {
                     PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);

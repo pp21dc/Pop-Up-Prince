@@ -96,7 +96,7 @@ public class PrinceMovement : MonoBehaviour
 
     [HideInInspector]
     public Vector3 Checkpoint;
-    bool respawn = false;
+    //bool respawn = false;
 
 
     // Start is called before the first frame update
@@ -228,7 +228,7 @@ public class PrinceMovement : MonoBehaviour
 
             if (isRoof)
             {
-                Debug.Log("FALL: " + current_speed.y);
+                //Debug.Log("FALL: " + current_speed.y);
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, current_speed.y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             } 
             else
