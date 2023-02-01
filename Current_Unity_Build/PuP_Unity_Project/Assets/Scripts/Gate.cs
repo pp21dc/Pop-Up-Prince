@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     /**
-     * Script for unlocking and opening the gates
+     * Script for unlocking and raising the gates
      */
 
     public float moveSpeed = 3f;
@@ -39,11 +39,11 @@ public class Gate : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player" && PrinceVariables.hasKey == true)
+        if (collider.gameObject.tag == "Player" && PrinceMovement.hasKey == true)
         {
 
             // get rid of princes key
-            PrinceVariables.hasKey = false;
+            PrinceMovement.hasKey = false;
 
             //tell gate to rise
             rise = true;

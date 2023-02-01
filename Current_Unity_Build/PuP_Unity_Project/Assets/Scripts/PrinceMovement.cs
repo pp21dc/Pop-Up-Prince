@@ -1,9 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PrinceMovement : MonoBehaviour
 {
+    // if the player has a key or not
+    public static bool hasKey = false;
+    public static float flowerCount = 0;
+    public GameObject key;
+    public GameObject flower1;
+    public GameObject flower2;
+    public GameObject flower3;
 
     [Header("Jump Settings")]
     [Tooltip("Time Before the Game Forgets the Player Pressed Space. 0.5 would mean half a second | Default: 0.1f")]
@@ -129,6 +137,44 @@ public class PrinceMovement : MonoBehaviour
         //Timers
         timers();
 
+        if (hasKey == true)
+        {
+            showObj(key);
+        }
+        else
+        {
+            hideObj(key);
+        }
+
+        if (flowerCount == 1)
+        {
+            showObj(flower1);
+        }
+        else if (flowerCount == 2)
+        {
+            showObj(flower2);
+        }
+        else if (flowerCount == 3)
+        {
+            showObj(flower3);
+        }
+        else
+        {
+            hideObj(flower1);
+            hideObj(flower2);
+            hideObj(flower3);
+        }
+
+    }
+
+    private void showObj(GameObject obj)
+    {
+        obj.SetActive(true);
+    }
+
+    private void hideObj(GameObject obj)
+    {
+        obj.SetActive(false);
     }
 
     private void friction()
