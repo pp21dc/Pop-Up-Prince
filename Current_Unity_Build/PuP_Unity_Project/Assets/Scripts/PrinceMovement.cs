@@ -79,6 +79,8 @@ public class PrinceMovement : MonoBehaviour
     public bool isFloor = false;    
     [HideInInspector]
     public bool isRoof = false;
+    [HideInInspector]
+    public bool isSlope = false;
 
     //bool jump_start = false;
     bool jumpQueued = false;
@@ -313,24 +315,24 @@ public class PrinceMovement : MonoBehaviour
                 speed_dashy = diag;
             }
 
-            if (UD < 0 && LR < 0 && !isWallLeft && !isRoof)
+            if (UD < 0 && LR < 0 && !isWallLeft && !isRoof && !isSlope)
             {
                 //Debug.Log("BottomLeft");
                 speed_dashy = -diag;
                 speed_dashx = -diag;
             }
-            else if (UD < 0 && LR < 0 && isWallLeft && !isRoof) 
+            else if (UD < 0 && LR < 0 && isWallLeft && !isRoof && !isSlope) 
             {
                 speed_dashy = -diag;
             }
             
-            if (UD < 0 && LR > 0 && !isWallRight && !isRoof)
+            if (UD < 0 && LR > 0 && !isWallRight && !isRoof && !isSlope)
             {
                 //Debug.Log("BottomRight");
                 speed_dashy = -diag;
                 speed_dashx = diag;
             } 
-            else if (UD < 0 && LR > 0 && isWallRight && !isRoof) 
+            else if (UD < 0 && LR > 0 && isWallRight && !isRoof && !isSlope) 
             {
                 speed_dashy = -diag;
             }
@@ -428,7 +430,7 @@ public class PrinceMovement : MonoBehaviour
         isRoof = roof;
         friction_current = friction;
 
-        if (isRoof)
+        if (isRoof || isSlope)
         {
             speed_dashy = 0;
             speed_y = 0;
