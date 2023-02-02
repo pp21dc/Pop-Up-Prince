@@ -123,10 +123,10 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Time.deltaTime + " | " + Time.deltaTime * ROTATE_TIME);
         //Checks
         friction();
-        CheckGroundCollisions();
+        CheckGroundCollisions(); //Manages player movement
+        
 
         //Movement
         HorizontalMovement(Input.GetAxisRaw("Horizontal"));
@@ -137,6 +137,12 @@ public class PrinceMovement : MonoBehaviour
         //Timers
         timers();
 
+        objectController();
+
+    }
+
+    private void objectController()
+    {
         if (hasKey == true)
         {
             showObj(key);
@@ -164,7 +170,6 @@ public class PrinceMovement : MonoBehaviour
             hideObj(flower2);
             hideObj(flower3);
         }
-
     }
 
     private void showObj(GameObject obj)
@@ -261,7 +266,8 @@ public class PrinceMovement : MonoBehaviour
 
     private void CheckGroundCollisions()
     {
-        if (!isCollidingGround)
+        //Debug.Log(current_speed.y + ", " + speed_y + ", " + speed_dashy);
+        if (!isFloor)
         {
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
@@ -286,7 +292,7 @@ public class PrinceMovement : MonoBehaviour
 
             if (current_speed.y > terminal_vel)
             {
-                current_speed -= new Vector3(0, GRAVITY / FPS, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
+                current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
             }
 
 
@@ -295,12 +301,19 @@ public class PrinceMovement : MonoBehaviour
         {
             float totalXMove = (current_speed.x + speed_x + speed_dashx);
 
-            current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
+            if (isFloor && !isRoof)
+            {
+                current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
+            }
+            else if (isRoof)
+            {
+                current_speed = new Vector3(current_speed.x, current_speed.y, 0);
+            }
             speed_y = 0;
             if (jumpQueued) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
             {
                 jumpQueued = false;
-                isCollidingGround = false;
+                isFloor = false;
                 speed_y = JUMP_SPEED;
                 if (current_speed.y > JUMP_SPEED)
                 {
@@ -427,7 +440,6 @@ public class PrinceMovement : MonoBehaviour
                 MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, (1f / MOVE_ACCEL_TIME));
                 current_speed = new Vector3(Mathf.Pow(MOVE_ACCEL_ACOEF, fMove_Counter) + MOVE_ACCEL_X, current_speed.y, 0);
 
-
                 if (current_speed.x >= MOVE_SPEED)
                 {
                     current_speed = new Vector3(MOVE_SPEED, current_speed.y, 0);
@@ -480,6 +492,7 @@ public class PrinceMovement : MonoBehaviour
         {
             speed_dashy = 0;
             speed_y = 0;
+            current_speed = new Vector3(0, -4.9f, 0);
         }
 
     }

@@ -43,7 +43,7 @@ public class PrinceFootCollider : MonoBehaviour
         float gx = ground_script.trans.position.x;
         float gy = ground_script.trans.position.y;
 
-        Debug.Log(PM.isSlope);
+        //Debug.Log(PM.isSlope);
         if ((ground_script.left || ground_script.right) && !ground_script.top && !PM.isSlope)
         {
             if (ground_script.left) 
@@ -67,23 +67,19 @@ public class PrinceFootCollider : MonoBehaviour
             else if (!ground_script.roof)
             {
                 float slopeY = 0;
-                float tanResult = 0;
-                //Debug.Log(ground_trans.eulerAngles.z);
-                //Vector4 cSlope = new Vector4(0, 0, 0, 0); //Angle1 (b, c, B, C)
-                //Vector4 rSlope = new Vector4(0, 0, 0, 0); //Angle2
+                slopeY = (ground_script.slope) * (px - gx);
 
-                if (ground_trans.eulerAngles.z > 0 && ground_trans.eulerAngles.z < 90)
+                if (player.transform.position.y > gy + slopeY)
                 {
-                    tanResult = Mathf.Tan((Mathf.Abs(ground_trans.eulerAngles.z)));
+                    player.transform.SetPositionAndRotation(new Vector3(px, slopeY + gy + player_yBounds + mF_yBounds + player_sinkY, 0), other.transform.rotation);
                 }
-                else if (ground_trans.eulerAngles.z < 0 || ground_trans.eulerAngles.z > 90)
+                else
                 {
-                    tanResult = Mathf.Tan(90f - ((360f - Mathf.Abs(ground_trans.eulerAngles.z))));
+                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
+                    ground_script.roof = true;
+                    player.transform.SetPositionAndRotation(new Vector3(px, slopeY + gy - player_yBounds - mF_yBounds - (player_sinkY * 1.5f), 0), other.transform.rotation);
+                    PM.isSlope = true;
                 }
-                slopeY = (tanResult) * (px - gx);
-
-                Debug.Log(slopeY);
-                player.transform.SetPositionAndRotation(new Vector3(px, slopeY + gy, 0), other.transform.rotation);
 
                 /*if (px > gx && (b-c) > 0.0f)
                 {
@@ -255,7 +251,7 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, friciton);
                 ground_script.top = true;
-                //Debug.Log("Top Enter");
+                Debug.Log("Top Enter");
                 if (player.transform.eulerAngles.z == 0)
                 {
                     //Debug.Log("NO SLOPE");
@@ -350,9 +346,21 @@ public class PrinceFootCollider : MonoBehaviour
                 contacts = 0;
             }
 
-            if (player.transform.eulerAngles.z == 0 || contacts == 0)
+            if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
             {
                 PM.isSlope = false;
+                PM.isRoof = false;
+                ground_script.roof = false;
+                if (contacts == 0)
+                {
+                    PM.isFloor = false;
+                    PM.isWallLeft = false;
+                    PM.isWallRight = false;
+                    
+                    ground_script.left = false;
+                    ground_script.right = false;
+                    ground_script.top = false;
+                }
             }
 
             //Off the ground
