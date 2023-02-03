@@ -89,6 +89,8 @@ public class PrinceMovement : MonoBehaviour
     public bool isRoof = false;
     [HideInInspector]
     public bool isSlope = false;
+    [HideInInspector]
+    public float previousSlope = 0.0f;
 
     //bool jump_start = false;
     bool jumpQueued = false;
