@@ -399,6 +399,13 @@ public class PrinceMovement : MonoBehaviour
             }
             current_speed = new Vector3(0, 0, 0);
             speed_x = 0;
+
+            if (isRoof)
+            {
+                speed_dashy = 0;
+                speed_y = 0;
+            }
+            Debug.Log(isRoof);
             //speed_y /= 2;
             
         }
@@ -494,7 +501,7 @@ public class PrinceMovement : MonoBehaviour
         {
             speed_dashy = 0;
             speed_y = 0;
-            current_speed = new Vector3(0, -4.9f, 0);
+            current_speed = new Vector3(0, -2.45f, 0);
         }
 
     }
