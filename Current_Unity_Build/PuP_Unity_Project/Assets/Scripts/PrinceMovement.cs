@@ -93,6 +93,10 @@ public class PrinceMovement : MonoBehaviour
     public float previousSlope = 0.0f;
     [HideInInspector]
     public float currentSlope = 0.0f;
+    [HideInInspector]
+    public Ground previousGroundScript;
+    [HideInInspector]
+    public Ground currentGroundScript;
 
     //bool jump_start = false;
     bool jumpQueued = false;
