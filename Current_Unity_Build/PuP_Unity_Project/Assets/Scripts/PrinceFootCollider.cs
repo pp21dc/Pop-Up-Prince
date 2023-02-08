@@ -9,6 +9,8 @@ public class PrinceFootCollider : MonoBehaviour
     public float player_sinkY = 0.05f;
     [Tooltip("Default: 1.0f, avoid changing this value")]
     public float player_sinkX = 1.0f;
+    [Tooltip("How much the player can walk on the point of a slope before being affected by the next slope")]
+    public float pointedFallOff = 0.5f;
     int contacts = 0;
     PrinceMovement PM;
     Ground ground_script;
@@ -119,12 +121,12 @@ public class PrinceFootCollider : MonoBehaviour
                     else if (PM.currentSlope != 0 && xBoundDir == 0)
                     {
                         Debug.Log(5.2);
-                        if (PM.currentSlope > 0 && px < ground_script.rightSide.x - 1.5f)
+                        if (PM.currentSlope > 0 && px < ground_script.rightSide.x - pointedFallOff)
                         {
                             Debug.Log(5.23);
                             player.transform.SetPositionAndRotation(new Vector3((px), py, 0), other.transform.rotation);
                         }
-                        else if (PM.currentSlope < 0 && px > ground_script.leftSide.x + 1.5f)
+                        else if (PM.currentSlope < 0 && px > ground_script.leftSide.x + pointedFallOff)
                         {
                             Debug.Log(5.24);
                             player.transform.SetPositionAndRotation(new Vector3((px), py, 0), other.transform.rotation);
