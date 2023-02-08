@@ -295,6 +295,7 @@ public class PrinceMovement : MonoBehaviour
             } 
             else
             {
+                //Debug.Log((current_speed.x + " " + speed_x + " " + speed_dashx) + " " + isWallRight);
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             }
 
@@ -509,6 +510,7 @@ public class PrinceMovement : MonoBehaviour
             speed_y = 0;
             current_speed = new Vector3(0, -2.45f, 0);
         }
+        Debug.Log("Collide");
 
     }
 
