@@ -99,39 +99,44 @@ public class PrinceFootCollider : MonoBehaviour
                 {
                     float xBoundDir = 0;
                     //Debug.Log(PM.transform.rotation.z);
-                    //Debug.Log("Previous Slop: " + PM.previousSlope);
+                    Debug.Log("Previous Slope: " + PM.previousSlope);
+                    Debug.Log("Current Slope: " + PM.currentSlope);
                     if (ground_script.slope > 0)
                     {
-                        if (px < ground_script.rightSide.x && PM.isFloor && PM.isSlope)
+                        if (px < ground_script.rightSide.x && PM.isFloor && PM.isSlope && PM.currentSlope == 0)
                         {
                             Debug.Log(1.20);
-                            xBoundDir = -1;
+                            xBoundDir = -1;//Player is on left side now
                         }
-                        else if (PM.isFloor)
+                        else if (PM.isFloor && PM.currentSlope == 0)
                         {
                             Debug.Log(1.21);
                             xBoundDir = 1;
                         }
-                        else
+                        else if (PM.currentSlope != 0)
                         {
                             Debug.Log(1.22);
+                            xBoundDir = 1;
+                            //Debug.Log("DIR: " + xBoundDir);
                         }
                     }
                     else if (ground_script.slope < 0)
                     {
-                        if (px > ground_script.leftSide.x && PM.isFloor && PM.isSlope)
+                        if (px > ground_script.leftSide.x && PM.isFloor && PM.isSlope && PM.currentSlope == 0)
                         {
                             Debug.Log(1.30);
                             xBoundDir = 1;
                         }
-                        else if (PM.isFloor)
+                        else if (PM.isFloor && PM.currentSlope == 0)
                         {
                             Debug.Log(1.31);
                             xBoundDir = -1;
                         }
-                        else
+                        else if (PM.currentSlope == 0)
                         {
                             Debug.Log(1.32);
+                            xBoundDir = -1;
+                            //Debug.Log("DIR: " + xBoundDir);
                         }
                     }
                     else
@@ -139,12 +144,21 @@ public class PrinceFootCollider : MonoBehaviour
                         //player.transform.SetPositionAndRotation(new Vector3((px), slopeY + gy + player_yBounds + mF_yBounds + player_sinkY / 4, 0), other.transform.rotation);
                         Debug.Log(1.1);
                     }
-                    
-                    Debug.Log(1.32);
-                    Debug.Log(PM.previousSlope);
+
+                    Debug.Log("DIR: " + xBoundDir);
                     slopeY = (ground_script.slope) * ((px + (player_xBounds * 2.5f * xBoundDir)) - gx);
-                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), slopeY + gy + player_yBounds + mF_yBounds + player_sinkY / 3, 0), other.transform.rotation);
+                    if (PM.currentSlope == 0)
+                    {
+                        Debug.Log(999999999999999);
+                        player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), slopeY + gy + player_yBounds + mF_yBounds + player_sinkY / 3, 0), other.transform.rotation);
+                    }
+                    else
+                    {
+                        Debug.Log(222222222222222);
+                        player.transform.SetPositionAndRotation(new Vector3((px), py, 0), player.transform.rotation);
+                    }
                     PM.previousSlope = ground_script.slope;
+                    PM.currentSlope = ground_script.slope;
 
                 }
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
@@ -438,6 +452,7 @@ public class PrinceFootCollider : MonoBehaviour
 
             if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
             {
+                PM.currentSlope = 0;
                 PM.isSlope = false;
                 PM.isRoof = false;
                 ground_script.roof = false;
