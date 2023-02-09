@@ -113,7 +113,7 @@ public class PrinceFootCollider : MonoBehaviour
 
                     Debug.Log("DIR: " + xBoundDir);
                     slopeY = (ground_script.slope) * ((px + (player_xBounds * 2.5f * xBoundDir)) - gx);
-                    if (PM.currentSlope == 0 && py < ground_script.rightSide.y)
+                    if (PM.currentSlope == 0 && py - player_yBounds - (player_sinkY * 1.25) < ground_script.rightSide.y)
                     {
                         Debug.Log(5.1);
                         player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), slopeY + gy + player_yBounds + mF_yBounds + player_sinkY / 3, 0), other.transform.rotation);
