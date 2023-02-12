@@ -106,7 +106,8 @@ public class PrinceMovement : MonoBehaviour
     float jump_held_counter = 0f;
     float jump_ForcePressed = 0f; // the force at which the player hits the jump button
 
-    bool dashing = false;
+    [HideInInspector]
+    public bool dashing = false;
     bool dash_delay_start = false;
     bool dash_ready = true;
     float dash_counter = 0f;
@@ -275,6 +276,7 @@ public class PrinceMovement : MonoBehaviour
     private void CheckGroundCollisions()
     {
         //Debug.Log(current_speed.y + ", " + speed_y + ", " + speed_dashy);
+        //Debug.Log(isFloor);
         if (!isFloor)
         {
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
@@ -309,13 +311,14 @@ public class PrinceMovement : MonoBehaviour
         else //player is on the ground
         {
             float totalXMove = (current_speed.x + speed_x + speed_dashx);
-
+            
             if (isFloor && !isRoof)
             {
                 current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
             }
             else if (isRoof)
             {
+                Debug.Log("ROOF");
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
             speed_y = 0;
@@ -510,7 +513,7 @@ public class PrinceMovement : MonoBehaviour
             speed_y = 0;
             current_speed = new Vector3(0, -2.45f, 0);
         }
-        Debug.Log("Collide");
+        //Debug.Log("Collide");
 
     }
 
