@@ -6,6 +6,7 @@ using UnityEngine;
 public class PrinceMovement : MonoBehaviour
 {
     // if the player has a key or not
+    [Header("Collectables")]
     public static bool hasKey = false;
     public static float flowerCount = 0;
     public GameObject key;
@@ -35,6 +36,8 @@ public class PrinceMovement : MonoBehaviour
     public float MOVE_ACCEL_ACOEF;
     public float ROTATE_TIME = 0.5f;
     public float ROTATE_SPEED = 0.5f;
+    public bool CAN_SLIDE = false;
+    public float SLIDE_SPEED = 2.2f;
 
     [Header("Dash Settings")]
     public float DASH_SPEED = 20f;
@@ -45,6 +48,8 @@ public class PrinceMovement : MonoBehaviour
     [Tooltip("Helps the player dash upwards")]
     public float DASH_UPWARDRESISTANCE = 1.75f;
 
+    [Header("PlayerPieces")]
+    public PrinceFootCollider PFC;
 
     [HideInInspector]
     public float MASS = 75f;
@@ -97,6 +102,8 @@ public class PrinceMovement : MonoBehaviour
     public Ground previousGroundScript;
     [HideInInspector]
     public Ground currentGroundScript;
+    
+    
 
     //bool jump_start = false;
     bool jumpQueued = false;
@@ -310,8 +317,30 @@ public class PrinceMovement : MonoBehaviour
         }
         else //player is on the ground
         {
-            float totalXMove = (current_speed.x + speed_x + speed_dashx);
+            float totalXMove = 0;
             
+
+            if (PFC.current_slope > 0 && CAN_SLIDE)
+            {
+                float RadAngle = (90 - transform.eulerAngles.z) * Mathf.PI / 180;
+                float slide = 0;
+
+                slide = SLIDE_SPEED / Mathf.Cos(RadAngle);
+                totalXMove = (current_speed.x + speed_x + speed_dashx) - slide;
+            }
+            else if (PFC.current_slope < 0 && CAN_SLIDE) 
+            {
+                float RadAngle = Mathf.Abs((270f - transform.eulerAngles.z)) * Mathf.PI / 180;
+                float slide = 0;
+
+                slide = SLIDE_SPEED / Mathf.Cos(RadAngle);
+                totalXMove = (current_speed.x + speed_x + speed_dashx) + slide;
+            } 
+            else
+            {
+                totalXMove = (current_speed.x + speed_x + speed_dashx);
+            }
+
             if (isFloor && !isRoof)
             {
                 current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
