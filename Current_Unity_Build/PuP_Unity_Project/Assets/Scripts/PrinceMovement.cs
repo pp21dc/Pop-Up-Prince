@@ -44,7 +44,7 @@ public class PrinceMovement : MonoBehaviour
     [Tooltip("Time in seconds for the length of the players dash")]
     public float DASH_LENGTH = 2f;
     [Tooltip("Time in seconds for the players dash to recover")]
-    public float DASH_DELAY = 5f;
+    public float DASH_DELAY = 0f;
     [Tooltip("Helps the player dash upwards")]
     public float DASH_UPWARDRESISTANCE = 1.75f;
 
@@ -171,13 +171,19 @@ public class PrinceMovement : MonoBehaviour
         if (flowerCount == 1)
         {
             showObj(flower1);
+            hideObj(flower2);
+            hideObj(flower3);
         }
         else if (flowerCount == 2)
         {
+            showObj(flower1);
             showObj(flower2);
+            hideObj(flower3);
         }
         else if (flowerCount == 3)
         {
+            showObj(flower1);
+            showObj(flower2);
             showObj(flower3);
         }
         else
@@ -370,11 +376,12 @@ public class PrinceMovement : MonoBehaviour
 
     private void DashMovement(float LR, float UD, float dash)
     {
-        if (dash > 0 && !dashing && dash_ready)
+        if (dash > 0 && !dashing && dash_ready && flowerCount >= 1)
         {
             float diag = DASH_SPEED / 2;
             dashing = true;
             dash_ready = false;
+            flowerCount--;
             if (UD > 0 && !isRoof)
             {
                 speed_dashy = DASH_SPEED;
