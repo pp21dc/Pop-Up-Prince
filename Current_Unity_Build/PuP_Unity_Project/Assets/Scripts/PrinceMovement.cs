@@ -289,12 +289,8 @@ public class PrinceMovement : MonoBehaviour
 
     private void CheckGroundCollisions()
     {
-        //Debug.Log(current_speed.y + ", " + speed_y + ", " + speed_dashy);
-        //Debug.Log(isFloor);
         if (!isFloor)
         {
-            Debug.Log("FLOOR: " + isFloor);
-            Debug.Log("JUMP: " + jump_press);
 
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
@@ -317,8 +313,8 @@ public class PrinceMovement : MonoBehaviour
                 //Debug.Log((current_speed.x + " " + speed_x + " " + speed_dashx) + " " + isWallRight);
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             }
-
-            if (current_speed.y > terminal_vel)
+            
+            if (current_speed.y > terminal_vel && (currentGroundScript == null || !currentGroundScript.top))
             {
                 current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
             }
@@ -364,7 +360,15 @@ public class PrinceMovement : MonoBehaviour
             if (jumpQueued) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
             {
                 jumpQueued = false;
-                isFloor = false;
+
+                float slopeY = (currentGroundScript.slope) * ((transform.position.x) - currentGroundScript.trans.position.x) + (currentGroundScript.verticalWidthAP);
+                
+                if (transform.position.y - (transform.localScale.y/2) > currentGroundScript.trans.position.y + slopeY)
+                {
+                    isFloor = false;
+                }
+                
+                
                 speed_y = JUMP_SPEED;
                 if (current_speed.y > JUMP_SPEED)
                 {
@@ -455,8 +459,6 @@ public class PrinceMovement : MonoBehaviour
                 speed_dashy = 0;
                 speed_y = 0;
             }
-            Debug.Log(isRoof);
-            //speed_y /= 2;
             
         }
     }

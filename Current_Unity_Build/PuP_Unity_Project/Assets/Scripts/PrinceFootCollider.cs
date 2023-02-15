@@ -79,22 +79,16 @@ public class PrinceFootCollider : MonoBehaviour
                 if (ground_script.slope != 0 && PM.currentSlope == 0)
                 {
                     Debug.Log(2.1);
-                    Debug.Log(PM.currentSlope);
-                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), gy + slopeY + player_yBounds, 0), other.transform.rotation);
                 }
                 else if (PM.isSlope && xBoundDir == 0)
                 {
                     Debug.Log(2.2);
-                    Debug.Log(PM.currentSlope);
-                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), py, 0), player.transform.rotation);
                 }
                 else if (ground_script.slope == 0)
                 {
                     Debug.Log(2.3);
-                    Debug.Log(PM.currentSlope);
-                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), gy + mF_yBounds + player_yBounds, 0), other.transform.rotation);
                 }
 
@@ -104,19 +98,22 @@ public class PrinceFootCollider : MonoBehaviour
             else if (px > gx && ground_script.slope != 0)
             {
                 Debug.Log(3.1);
-                Debug.Log(PM.currentSlope);
-                Debug.Log(ground_script.slope);
                 PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
                 ground_script.left = true;
             }
             else if (px < gx && ground_script.slope != 0)
             {
                 Debug.Log(3.2);
-                Debug.Log(PM.currentSlope);
-                Debug.Log(ground_script.slope);
                 PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
                 ground_script.right = true;
             }
+
+            if (py < gy + slopeY)
+            {
+                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
+                ground_script.roof = true;
+            }
+
         }
 
     }
@@ -383,19 +380,7 @@ public class PrinceFootCollider : MonoBehaviour
         }
         else
         {
-            /*if (player.transform.position.x - player_xBounds < ground_script.leftSide.x)
-            {
-                PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, friciton);
-                ground_script.right = true;
-                Debug.Log("RIGHT");
-            } 
-            else if (player.transform.position.x + player_xBounds > ground_script.rightSide.x)
-            {
-                
-                PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, friciton);
-                ground_script.left = true;
-                Debug.Log("LEFT");
-            } */
+            
         }
 
         
@@ -518,6 +503,12 @@ public class PrinceFootCollider : MonoBehaviour
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
                 ground_script.roof = false;
                 Debug.Log("No Roof");
+            }
+            float slopeY = (ground_script.slope) * ((player.transform.position.x) - other.transform.position.x) + (ground_script.verticalWidthAP);
+            if (player.transform.position.y < other.transform.position.y + slopeY)
+            {
+                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
+                ground_script.roof = false;
             }
 
 
