@@ -79,32 +79,41 @@ public class PrinceFootCollider : MonoBehaviour
                 if (ground_script.slope != 0 && PM.currentSlope == 0)
                 {
                     Debug.Log(2.1);
+                    Debug.Log(PM.currentSlope);
+                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), gy + slopeY + player_yBounds, 0), other.transform.rotation);
                 }
                 else if (PM.isSlope && xBoundDir == 0)
                 {
                     Debug.Log(2.2);
                     Debug.Log(PM.currentSlope);
+                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), py, 0), player.transform.rotation);
                 }
-                else
+                else if (ground_script.slope == 0)
                 {
                     Debug.Log(2.3);
+                    Debug.Log(PM.currentSlope);
+                    Debug.Log(ground_script.slope);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * 2.5f * xBoundDir), gy + mF_yBounds + player_yBounds, 0), other.transform.rotation);
                 }
 
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
                 ground_script.top = true;
             }
-            else if (px > gx)
+            else if (px > gx && ground_script.slope != 0)
             {
                 Debug.Log(3.1);
+                Debug.Log(PM.currentSlope);
+                Debug.Log(ground_script.slope);
                 PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
                 ground_script.left = true;
             }
-            else if (px < gx)
+            else if (px < gx && ground_script.slope != 0)
             {
                 Debug.Log(3.2);
+                Debug.Log(PM.currentSlope);
+                Debug.Log(ground_script.slope);
                 PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
                 ground_script.right = true;
             }
@@ -163,10 +172,12 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 if (px < PM.currentGroundScript.trans.position.x)
                 {
+                    Debug.Log(8.2);
                     xBoundDir = -1;
                 }
                 else
                 {
+                    Debug.Log(8.3);
                     xBoundDir = 0;
                 }
             } 
@@ -174,10 +185,12 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 if (px > PM.currentGroundScript.trans.position.x)
                 {
+                    Debug.Log(8.4);
                     xBoundDir = 1;
                 }
                 else
                 {
+                    Debug.Log(8.5);
                     xBoundDir = 0;
                 }
             }
@@ -461,7 +474,7 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 contacts = 0;
             }
-
+            //Debug.Log(contacts);
 
             PM.previousSlope = ground_script.slope;
             if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
@@ -492,7 +505,7 @@ public class PrinceFootCollider : MonoBehaviour
                 {
                     PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                     ground_script.top = false;
-                   // Debug.Log("Top Exit");
+                    Debug.Log("Top Exit");
                 }
             }
 
@@ -503,7 +516,7 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
                 ground_script.roof = false;
-                //Debug.Log("No Roof");
+                Debug.Log("No Roof");
             }
 
 
