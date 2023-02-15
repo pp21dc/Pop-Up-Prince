@@ -14,6 +14,8 @@ public class PrinceMovement : MonoBehaviour
     public GameObject flower1;
     public GameObject flower2;
     public GameObject flower3;
+    public GameObject manager;
+    GameManager GM;
 
     [Header("Jump Settings")]
     [Tooltip("Time Before the Game Forgets the Player Pressed Space. 0.5 would mean half a second | Default: 0.1f")]
@@ -134,6 +136,7 @@ public class PrinceMovement : MonoBehaviour
         FPS = Application.targetFrameRate;
         terminal_vel = -Mathf.Sqrt((2*MASS*GRAVITY)/(DENSITY*CS_AREA*DRAG));
         current_speed = new Vector3(0, -GRAVITY, 0);
+        GM = manager.GetComponent<GameManager>();
 
         //MOVE_ACCEL_ACOEF = MOVE_SPEED / Mathf.Log10(MOVE_ACCEL_TIME); //Creates quadratic function to fufil time/speed acceleration requirements
     }
@@ -575,6 +578,10 @@ public class PrinceMovement : MonoBehaviour
         speed_y = 0;
         current_speed = (Vector3.zero);
         transform.position = Checkpoint;
+        GM.resetFlowers();
+        GM.resetKeys();
+        hasKey = false;
+        flowerCount = 0;
     }
 
 }
