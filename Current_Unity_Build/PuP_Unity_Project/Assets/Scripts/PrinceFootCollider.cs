@@ -60,12 +60,12 @@ public class PrinceFootCollider : MonoBehaviour
             if (ground_script.left && !PM.isSlope)
             {
                 Debug.Log(1.1);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + player_xBounds, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + player_xBounds - (player_xBounds / 12), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
             else if (ground_script.right && !PM.isSlope)
             {
                 Debug.Log(1.2);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - player_xBounds, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - player_xBounds + (player_xBounds/12), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
         }
         else if (ground_script.slope != 0 || (ground_script.slope == 0 && PM.isSlope) && (!ground_script.left && !ground_script.right)) // On a slope or leaving a slope to a flat surface
@@ -121,7 +121,7 @@ public class PrinceFootCollider : MonoBehaviour
     private float findDirection(float px)
     {
         float xBoundDir = 0;
-        Debug.Log(PM.currentGroundScript.gameObject.name);
+        //Debug.Log(PM.currentGroundScript.gameObject.name);
         if (ground_script.slope > 0 && PM.currentSlope == 0)
         {
             if ((px + player_xBounds < ground_script.rightSide.x && px > ground_trans.position.x) && contacts != 0)
@@ -478,6 +478,9 @@ public class PrinceFootCollider : MonoBehaviour
                     ground_script.left = false;
                     ground_script.right = false;
                     ground_script.top = false;
+                    PM.previousGroundScript = PM.currentGroundScript;
+                    PM.currentGroundScript = null;
+                    
                 }
             }
 

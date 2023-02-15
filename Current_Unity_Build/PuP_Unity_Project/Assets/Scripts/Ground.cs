@@ -78,7 +78,7 @@ public class Ground : MonoBehaviour
             
             verticalWidthAP = widthY / Mathf.Sin(RadAngle);
         }
-        Debug.Log(gameObject.name + ": " + tanResult);
+        //Debug.Log(gameObject.name + ": " + tanResult);
         slope = tanResult;
     }
 }

@@ -316,7 +316,11 @@ public class PrinceMovement : MonoBehaviour
             
             if (current_speed.y > terminal_vel && (currentGroundScript == null || !currentGroundScript.top))
             {
-                current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
+                if (!isFloor)
+                {
+                    current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
+                }
+                
             }
 
 
@@ -362,11 +366,8 @@ public class PrinceMovement : MonoBehaviour
                 jumpQueued = false;
 
                 float slopeY = (currentGroundScript.slope) * ((transform.position.x) - currentGroundScript.trans.position.x) + (currentGroundScript.verticalWidthAP);
-                
-                if (transform.position.y - (transform.localScale.y/2) > currentGroundScript.trans.position.y + slopeY)
-                {
-                    isFloor = false;
-                }
+
+                isFloor = false;
                 
                 
                 speed_y = JUMP_SPEED;
