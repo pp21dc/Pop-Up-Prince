@@ -77,8 +77,9 @@ public class PrinceFootCollider : MonoBehaviour
             Debug.Log(py);
             Debug.Log(slopeY);
             Debug.Log(gy);
-            if (py < gy + slopeY)
+            if (py > gy + slopeY)
             {
+                Debug.Log(py > gy + slopeY);
                 if (ground_script.slope != 0 && PM.currentSlope == 0)
                 {
                     Debug.Log(2.1);
@@ -98,23 +99,26 @@ public class PrinceFootCollider : MonoBehaviour
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
                 ground_script.top = true;
             }
-            /*else if (px > gx && ground_script.slope != 0)
+
+            if (py < gy + slopeY && py < gy + slopeY)
             {
-                Debug.Log(3.1);
-                PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
-                ground_script.left = true;
-            }
-            else if (px < gx && ground_script.slope != 0)
-            {
-                Debug.Log(3.2);
-                PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
-                ground_script.right = true;
-            }
-            else if (py < gy + slopeY)
-            {
+                Debug.Log(3.3);
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
                 ground_script.roof = true;
-            }*/
+                if (px > gx && ground_script.slope != 0 && py < gy + slopeY)
+                {
+                    Debug.Log(3.1);
+                    PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
+                    ground_script.left = true;
+                }
+                else if (px < gx && ground_script.slope != 0 && py < gy + slopeY)
+                {
+                    Debug.Log(3.2);
+                    PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
+                    ground_script.right = true;
+                }
+            }
+             
 
         }
 
