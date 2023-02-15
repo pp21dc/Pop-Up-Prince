@@ -28,7 +28,7 @@ public class PrinceFootCollider : MonoBehaviour
     float player_yBounds;
     Transform body_trans;
     Transform ground_trans;
-    Vector3 Checkpoint;
+    Vector3 Checkpoint = new Vector3(0,0,0);
 
     public float current_slope;
 
@@ -480,7 +480,7 @@ public class PrinceFootCollider : MonoBehaviour
                     ground_script.top = false;
                     PM.previousGroundScript = PM.currentGroundScript;
                     PM.currentGroundScript = null;
-                    
+                    //PM.isFloor = false;
                 }
             }
 
@@ -495,6 +495,12 @@ public class PrinceFootCollider : MonoBehaviour
                     PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                     ground_script.top = false;
                     Debug.Log("Top Exit");
+                }
+                else
+                {
+                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
+                    ground_script.top = false;
+                    Debug.Log("Top Exit2");
                 }
             }
 

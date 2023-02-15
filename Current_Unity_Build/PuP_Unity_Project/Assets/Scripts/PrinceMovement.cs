@@ -8,7 +8,8 @@ public class PrinceMovement : MonoBehaviour
     // if the player has a key or not
     [Header("Collectables")]
     public static bool hasKey = false;
-    public static float flowerCount = 0;
+    [HideInInspector]
+    public float flowerCount = 0;
     public GameObject key;
     public GameObject flower1;
     public GameObject flower2;
@@ -187,7 +188,7 @@ public class PrinceMovement : MonoBehaviour
             showObj(flower2);
             showObj(flower3);
         }
-        else
+        else if (flowerCount == 0)
         {
             hideObj(flower1);
             hideObj(flower2);

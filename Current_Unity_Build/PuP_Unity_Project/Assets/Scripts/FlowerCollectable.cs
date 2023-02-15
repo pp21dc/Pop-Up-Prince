@@ -10,6 +10,8 @@ public class FlowerCollectable : MonoBehaviour
     * picks up flower and destroys game object
     */
 
+    PrinceMovement PM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +26,15 @@ public class FlowerCollectable : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        
         if (collider.gameObject.tag == "Player")
         {
-            PrinceMovement.flowerCount++;
-            Destroy(gameObject);
+            PM = collider.gameObject.transform.parent.GetComponent<PrinceMovement>();
+            if (PM.flowerCount < 3)
+            {
+                PM.flowerCount++;
+                Destroy(gameObject);
+            }
         }
     }
 
