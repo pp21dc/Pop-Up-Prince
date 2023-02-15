@@ -110,6 +110,7 @@ public class PrinceMovement : MonoBehaviour
     float fJump_Counter = 0f; //forget the jump
 
     bool jump_held = false;
+    bool jump_press;
     float jump_held_counter = 0f;
     float jump_ForcePressed = 0f; // the force at which the player hits the jump button
 
@@ -292,6 +293,9 @@ public class PrinceMovement : MonoBehaviour
         //Debug.Log(isFloor);
         if (!isFloor)
         {
+            Debug.Log("FLOOR: " + isFloor);
+            Debug.Log("JUMP: " + jump_press);
+
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
             {
                 gameObject.transform.Rotate(new Vector3(0, 0, (-ROTATE_SPEED) * Time.deltaTime * ROTATE_TIME));
@@ -324,7 +328,7 @@ public class PrinceMovement : MonoBehaviour
         else //player is on the ground
         {
             float totalXMove = 0;
-            
+            jump_press = false;
 
             if (PFC.current_slope > 0 && CAN_SLIDE)
             {
@@ -533,9 +537,14 @@ public class PrinceMovement : MonoBehaviour
 
     public void CollisionDetected(bool left, bool right, bool floor, bool roof, float friction)
     {
-        speed_dashx = 0;
-        speed_x = 0;
-        current_speed = new Vector3(0, current_speed.y, 0);
+        if (left || right)
+        {
+            speed_dashx = 0;
+            speed_x = 0;
+            current_speed = new Vector3(0, current_speed.y, 0);
+        }
+        
+        
         isWallLeft = left;
         isWallRight = right;
         isCollidingGround = floor;
