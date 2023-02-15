@@ -26,7 +26,7 @@ public class KeyCollectable : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             PrinceMovement.hasKey = true;
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
