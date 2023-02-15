@@ -33,7 +33,7 @@ public class FlowerCollectable : MonoBehaviour
             if (PM.flowerCount < 3)
             {
                 PM.flowerCount++;
-                Destroy(gameObject);
+                this.gameObject.SetActive(false);
             }
         }
     }

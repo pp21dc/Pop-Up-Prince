@@ -568,6 +568,7 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
+        Debug.Log("Respawn");
         speed_dashx = 0;
         speed_dashy = 0;
         speed_x = 0;
