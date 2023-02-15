@@ -48,6 +48,9 @@ public class RisingInk : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             //PM.Respawn();
+            transform.position.y = startPos;
+            canRise = false;
+
         }
     }
 
