@@ -240,6 +240,7 @@ public class PrinceMovement : MonoBehaviour
         {
             dash_delayCounter = 0f;
             dash_ready = true;
+            dash_delay_start = false;
         }
 
         //LENGTH OF DASH
@@ -391,7 +392,7 @@ public class PrinceMovement : MonoBehaviour
     {
         if (dash > 0 && !dashing && dash_ready && flowerCount >= 1)
         {
-            float diag = DASH_SPEED / 2;
+            float diag = DASH_SPEED / 1.5f;
             dashing = true;
             dash_ready = false;
             flowerCount--;
