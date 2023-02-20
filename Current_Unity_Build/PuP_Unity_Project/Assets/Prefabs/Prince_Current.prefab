@@ -190,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 3878876051692293042, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
       propertyPath: DASH_DELAY
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3878876051692293042, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
@@ -201,6 +201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: JUMP_SPEED
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878876051692293042, guid: 7a18e997d34a1fc43ba00ce78b896957,
+        type: 3}
+      propertyPath: DASH_LENGTH
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3878876052228874677, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}

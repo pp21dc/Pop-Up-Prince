@@ -8,18 +8,6 @@ public class GameManager : MonoBehaviour
     public List<GameObject> keys = new List<GameObject>();
     public List<GameObject> flowers = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void resetFlowers()
     {
         foreach (GameObject obj in flowers)
