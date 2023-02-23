@@ -81,37 +81,6 @@ public class Ink_Test_3 : MonoBehaviour
             _HeightCount = _HeightCount - _HeightAndWidthIncrease;
             Ink_Test_2.SetFloat("_Height", _HeightCount);
         }
-        //Height End
-        //Noise Width Start
-        //if (_NoiseScaleWidthCountUp == true)
-        //{
-        //    _NoiseScaleWidthCount = _NoiseScaleWidthCount + _NoiseHeightAndWidthIncrease;
-        //    Ink_Test_2.SetFloat("_Noise_Scale_Width", _NoiseScaleWidthCount);
-        //}
-
-        //if (_NoiseScaleWidthCountUp == false)
-        //{
-        //    _NoiseScaleWidthCount = _NoiseScaleWidthCount - _NoiseHeightAndWidthIncrease;
-        //    Ink_Test_2.SetFloat("_Noise_Scale_Width", _NoiseScaleWidthCount);
-        //}
-        //Noise Width End
-        //Noise Height Start
-        //if (_NoiseScaleHeightCountUp == true)
-        //{
-        //    _NoiseScaleHeightCount = _NoiseScaleHeightCount + _NoiseHeightAndWidthIncrease;
-        //    Ink_Test_2.SetFloat("_Noise_Scale_Height", _NoiseScaleHeightCount);
-        //}
-        //
-        //if (_NoiseScaleHeightCountUp == false)
-        //{
-        //    _NoiseScaleHeightCount = _NoiseScaleHeightCount - _NoiseHeightAndWidthIncrease;
-        //    Ink_Test_2.SetFloat("_Noise_Scale_Height", _NoiseScaleHeightCount);
-        //}
-        //Noise Height End
-
-        //Count Up/Down End
-        
-        //If at Target End
 
         //Width Start
         if(_WidthCountUp == true && _WidthCount > _Width)
@@ -133,29 +102,6 @@ public class Ink_Test_3 : MonoBehaviour
         {
             HeightRand();
         }
-        //Height End
-        //Noise Width Start
-        //if (_NoiseScaleWidthCountUp == true && _NoiseScaleWidthCount > _NoiseScaleWidth)
-        //{
-        //   NoiseScaleWidthRand();
-        //}
-        //if (_NoiseScaleWidthCountUp == false && _NoiseScaleWidthCount < _NoiseScaleWidth)
-        //{
-        //   NoiseScaleWidthRand();
-        //}
-        //Noise Width End
-        //Noise Height Start
-        //if(_NoiseScaleHeightCountUp == true && _NoiseScaleHeightCount > _NoiseScaleHeight)
-        //{
-        //   NoiseScaleHeightRand();
-        //}
-        //if (_NoiseScaleHeightCountUp == false && _NoiseScaleHeightCount <_NoiseScaleHeight)
-        //{
-        //    NoiseScaleHeightRand();
-        //}
-        //Noise Height End
-
-        //If at Target End
     }
 
     void WidthRand()
