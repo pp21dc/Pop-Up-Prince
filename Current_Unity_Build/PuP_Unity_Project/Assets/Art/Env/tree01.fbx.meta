@@ -3,7 +3,22 @@ guid: 7a6e5581995576245937eeea46f5ab40
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cardboar_Back
+    second: {fileID: 2100000, guid: dca3b00f6f449024cad543a737f309f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cardboard_Cross
+    second: {fileID: 2100000, guid: fb6a8dd6e7e78ad4ca75a8eef1a5f363, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_color01
+    second: {fileID: 2100000, guid: a82bf0200fbddb94884ad8f361186b76, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
