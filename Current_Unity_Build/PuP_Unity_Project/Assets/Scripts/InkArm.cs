@@ -6,10 +6,11 @@ public class InkArm : MonoBehaviour
 {
 
     public Transform player;
+    PrinceMovement PM;
     bool move = false;
 
     public Transform ANCHOR;
-    public Collider GRABBER;
+    //public Collider GRABBER;
     public float ARM_SPEED = 5f;
     public float ARM_REACH = 2f;
     public bool RETURN = false;
@@ -17,7 +18,7 @@ public class InkArm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PM = player.gameObject.GetComponent<PrinceMovement>();
     }
 
     // Update is called once per frame
@@ -25,14 +26,14 @@ public class InkArm : MonoBehaviour
     {
         Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
         Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
-        if (move && (!Stretched(moveTo)))
+        if (move && (!Stretched(moveTo)) && !PM.grabbed)
         {
             transform.position = moveTo;
         }
         else
         {
             transform.position = moveToA;
-        }
+        } 
     }
 
 
@@ -61,6 +62,7 @@ public class InkArm : MonoBehaviour
         {
             player = other.transform;
             move = true;
+            //Debug.Log("Enter");
         }
     }
 

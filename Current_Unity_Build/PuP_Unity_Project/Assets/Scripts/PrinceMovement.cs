@@ -105,6 +105,8 @@ public class PrinceMovement : MonoBehaviour
     public Ground previousGroundScript;
     [HideInInspector]
     public Ground currentGroundScript;
+    [HideInInspector]
+    public bool grabbed = false;
     
     
 
@@ -144,16 +146,17 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Checks
-        friction();
-        CheckGroundCollisions(); //Manages player movement
-        
+        if (!grabbed) { 
+            //Checks
+            friction();
+            CheckGroundCollisions(); //Manages player movement
 
-        //Movement
-        HorizontalMovement(Input.GetAxisRaw("Horizontal"));
-        VerticalMovement(Input.GetAxisRaw("Vertical"));
-        DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
 
+            //Movement
+            HorizontalMovement(Input.GetAxisRaw("Horizontal"));
+            VerticalMovement(Input.GetAxisRaw("Vertical"));
+            DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
+        }
 
         //Timers
         timers();
@@ -294,7 +297,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void CheckGroundCollisions()
     {
-        if (!isFloor)
+        if (!isFloor && !grabbed)
         {
 
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
@@ -330,7 +333,7 @@ public class PrinceMovement : MonoBehaviour
 
 
         }
-        else //player is on the ground
+        else if (!grabbed) //player is on the ground
         {
             float totalXMove = 0;
             jump_press = false;
@@ -390,7 +393,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void DashMovement(float LR, float UD, float dash)
     {
-        if (dash > 0 && !dashing && dash_ready && flowerCount >= 1)
+        if (dash > 0 && !dashing && dash_ready && flowerCount >= 1 && !grabbed)
         {
             float diag = DASH_SPEED / 1.5f;
             dashing = true;
@@ -471,7 +474,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void VerticalMovement(float dir)
     {
-        if (!dashing)
+        if (!dashing && !grabbed)
         {
             if (dir > 0 && !jump_held && !isRoof)
             {
@@ -493,7 +496,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void HorizontalMovement(float dir)
     {
-        if (!dashing)
+        if (!dashing && !grabbed)
         {
             speed_x = 0;
             if (dir > 0 && !isWallRight)
@@ -572,7 +575,7 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Respawn");
+        grabbed = false;
         speed_dashx = 0;
         speed_dashy = 0;
         speed_x = 0;
@@ -583,6 +586,8 @@ public class PrinceMovement : MonoBehaviour
         GM.resetKeys();
         hasKey = false;
         flowerCount = 0;
+        Debug.Log("Respawn");
+
     }
 
 }

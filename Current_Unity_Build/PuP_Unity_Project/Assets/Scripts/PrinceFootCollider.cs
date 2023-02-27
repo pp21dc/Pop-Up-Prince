@@ -426,16 +426,18 @@ public class PrinceFootCollider : MonoBehaviour
             float gY = other.GetComponent<MeshFilter>().mesh.bounds.extents.y;
             float pY = body.GetComponent<MeshFilter>().mesh.bounds.extents.y;
 
-
-            isSlope();
-            CheckCollisions(other.gameObject, body);
-            SetPlayerY(other, ground_trans.position.y + mF_yBounds, player_yBounds, mF_yBounds);
-            PM.currentSlope = ground_script.slope;
-            current_slope = ground_script.slope;
-            PM.currentGroundScript = ground_script;
-            contacts++;
-            SetPlayandCamRotandPos();
-            isSlope();
+            if (!PM.grabbed)
+            {
+                isSlope();
+                CheckCollisions(other.gameObject, body);
+                SetPlayerY(other, ground_trans.position.y + mF_yBounds, player_yBounds, mF_yBounds);
+                PM.currentSlope = ground_script.slope;
+                current_slope = ground_script.slope;
+                PM.currentGroundScript = ground_script;
+                contacts++;
+                SetPlayandCamRotandPos();
+                isSlope();
+            }
 
             Debug.Log("===== ENTER END =====");
 
@@ -452,7 +454,7 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "ground")
+        if (other.transform.tag == "ground" && !PM.grabbed)
         {
             
             PM = player.GetComponent<PrinceMovement>();
@@ -466,130 +468,133 @@ public class PrinceFootCollider : MonoBehaviour
             body_trans = body.transform;
             ground_trans = other.gameObject.transform;
 
-
-            contacts--;
-            if (contacts < 0)
+            if (!PM.grabbed)
             {
-                contacts = 0;
-            }
-            Debug.Log("Contacts: " + contacts);
-
-            PM.previousSlope = ground_script.slope;
-            if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
-            {
-                PM.currentSlope = 0;
-                PM.isSlope = false;
-                PM.isRoof = false;
-                ground_script.roof = false;
-                if (contacts == 0)
+                contacts--;
+                if (contacts < 0)
                 {
-                    Debug.Log(-500000);
-                    PM.isFloor = false;
-                    PM.isWallLeft = false;
-                    PM.isWallRight = false;
-                    
-                    ground_script.left = false;
-                    ground_script.right = false;
-                    ground_script.top = false;
-                    PM.previousGroundScript = PM.currentGroundScript;
-                    PM.currentGroundScript = null;
-                    //PM.isFloor = false;
+                    contacts = 0;
                 }
-            }
+                Debug.Log("Contacts: " + contacts);
 
-            
-
-            //Off the ground
-            if (contacts <= 0 || body_trans.position.y - player_yBounds <= ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2))
-            {
-                //Debug.Log("CurrentSlop: " + PM.currentSlope);
-                if (contacts <= 0) //or !PM.isSlope;
+                PM.previousSlope = ground_script.slope;
+                if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
                 {
-                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
-                    ground_script.top = false;
-                    Debug.Log("Top Exit");
-                }
-                else
-                {
-                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
-                    ground_script.top = false;
-                    Debug.Log("Top Exit2");
-                }
-            }
+                    PM.currentSlope = 0;
+                    PM.isSlope = false;
+                    PM.isRoof = false;
+                    ground_script.roof = false;
+                    if (contacts == 0)
+                    {
+                        Debug.Log(-500000);
+                        PM.isFloor = false;
+                        PM.isWallLeft = false;
+                        PM.isWallRight = false;
 
-            
-
-            //Nothing Above
-            if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
-            {
-                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
-                ground_script.roof = false;
-                Debug.Log("No Roof");
-            }
-            float slopeY = (ground_script.slope) * ((player.transform.position.x) - other.transform.position.x) + (ground_script.verticalWidthAP);
-            if (player.transform.position.y < other.transform.position.y + slopeY)
-            {
-                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
-                ground_script.roof = false;
-            }
-
-
-            //Leaving Left Wall
-            if (ground_script.left)
-            {
-                if (ground_script.slope > 0)
-                {
-                    PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
-                    ground_script.left = false;
+                        ground_script.left = false;
+                        ground_script.right = false;
+                        ground_script.top = false;
+                        PM.previousGroundScript = PM.currentGroundScript;
+                        PM.currentGroundScript = null;
+                        //PM.isFloor = false;
+                    }
                 }
 
-                if ((body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2)))
+
+
+
+                //Off the ground
+                if (contacts <= 0 || body_trans.position.y - player_yBounds <= ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2))
                 {
-                    PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.left = false;
-                    //Debug.Log("Left Exit, Height");
-                }
-                else if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2)) 
-                {
-                    PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.left = false;
-                    //Debug.Log("Left Exit, Height");
-                } 
-                else if (body_trans.position.x - player_xBounds > ground_trans.position.x + (ground_script.trans.localScale.x / 2) && body_trans.position.x - player_xBounds > ground_trans.position.x + (ground_script.trans.localScale.x / 2) - (player_sinkX * 2))
-                {
-                    PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.left = false;
-                    //Debug.Log("Left Exit");
+                    //Debug.Log("CurrentSlop: " + PM.currentSlope);
+                    if (contacts <= 0) //or !PM.isSlope;
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
+                        ground_script.top = false;
+                        Debug.Log("Top Exit");
+                    }
+                    else
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
+                        ground_script.top = false;
+                        Debug.Log("Top Exit2");
+                    }
                 }
 
-            }
 
-            //Leaving Right Wall
-            if (ground_script.right)
-            {
-                if (ground_script.slope < 0)
+
+                //Nothing Above
+                if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
                 {
-                    PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_current);
-                    ground_script.right = false;
+                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
+                    ground_script.roof = false;
+                    Debug.Log("No Roof");
+                }
+                float slopeY = (ground_script.slope) * ((player.transform.position.x) - other.transform.position.x) + (ground_script.verticalWidthAP);
+                if (player.transform.position.y < other.transform.position.y + slopeY)
+                {
+                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
+                    ground_script.roof = false;
                 }
 
-                if ((body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2)))
+
+                //Leaving Left Wall
+                if (ground_script.left)
                 {
-                    PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.right = false;
-                    //Debug.Log("Right Exit, Height");
+                    if (ground_script.slope > 0)
+                    {
+                        PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
+                        ground_script.left = false;
+                    }
+
+                    if ((body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2)))
+                    {
+                        PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.left = false;
+                        //Debug.Log("Left Exit, Height");
+                    }
+                    else if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
+                    {
+                        PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.left = false;
+                        //Debug.Log("Left Exit, Height");
+                    }
+                    else if (body_trans.position.x - player_xBounds > ground_trans.position.x + (ground_script.trans.localScale.x / 2) && body_trans.position.x - player_xBounds > ground_trans.position.x + (ground_script.trans.localScale.x / 2) - (player_sinkX * 2))
+                    {
+                        PM.CollisionDetected(false, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.left = false;
+                        //Debug.Log("Left Exit");
+                    }
+
                 }
-                else if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
+
+                //Leaving Right Wall
+                if (ground_script.right)
                 {
-                    PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.right = false;
-                    //Debug.Log("Right Exit");
-                }
-                else if (body_trans.position.x + player_xBounds < ground_trans.position.x - (ground_script.trans.localScale.x/2) && body_trans.position.x + player_xBounds < ground_trans.position.x - (ground_script.trans.localScale.x/2) + (player_sinkX * 2))
-                {
-                    PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
-                    ground_script.right = false;
-                    //Debug.Log("Right Exit");
+                    if (ground_script.slope < 0)
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_current);
+                        ground_script.right = false;
+                    }
+
+                    if ((body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2)))
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.right = false;
+                        //Debug.Log("Right Exit, Height");
+                    }
+                    else if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.right = false;
+                        //Debug.Log("Right Exit");
+                    }
+                    else if (body_trans.position.x + player_xBounds < ground_trans.position.x - (ground_script.trans.localScale.x / 2) && body_trans.position.x + player_xBounds < ground_trans.position.x - (ground_script.trans.localScale.x / 2) + (player_sinkX * 2))
+                    {
+                        PM.CollisionDetected(PM.isWallLeft, false, PM.isFloor, PM.isRoof, PM.friction_air);
+                        ground_script.right = false;
+                        //Debug.Log("Right Exit");
+                    }
                 }
             }
         }
