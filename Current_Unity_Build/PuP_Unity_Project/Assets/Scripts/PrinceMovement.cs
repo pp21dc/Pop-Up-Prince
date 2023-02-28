@@ -67,7 +67,7 @@ public class PrinceMovement : MonoBehaviour
 
     //public Transform pR; //this is the players current rotation
     public GameObject cam;
-    public FollowPlayer FP;
+    FollowPlayer FP;
 
 
     float speed_x = 0f;
