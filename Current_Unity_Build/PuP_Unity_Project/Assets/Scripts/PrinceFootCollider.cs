@@ -281,8 +281,8 @@ public class PrinceFootCollider : MonoBehaviour
     {
         FollowPlayer script_followPlayer = cam.GetComponent<FollowPlayer>();
         Quaternion pRotation = player.transform.rotation;
-        pRotation.eulerAngles = new Vector3(script_followPlayer.rotation.x, 0, 0);
-        cam.transform.SetPositionAndRotation(new Vector3(player.transform.position.x, player.transform.position.y + script_followPlayer.height, cam.transform.position.z), pRotation);
+        pRotation.eulerAngles = new Vector3(script_followPlayer.rotation.x, script_followPlayer.rotation.y, script_followPlayer.rotation.z);
+        cam.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + script_followPlayer.lead, player.transform.position.y + script_followPlayer.height, player.transform.position.z + script_followPlayer.zoom), pRotation);
     }
 
     private void CheckCollisions(GameObject groundObject, GameObject playerBody)

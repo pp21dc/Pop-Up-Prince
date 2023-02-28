@@ -67,7 +67,7 @@ public class PrinceMovement : MonoBehaviour
 
     //public Transform pR; //this is the players current rotation
     public GameObject cam;
-    FollowPlayer FP;
+    public FollowPlayer FP;
 
 
     float speed_x = 0f;
@@ -311,7 +311,7 @@ public class PrinceMovement : MonoBehaviour
             }
             Quaternion pRotation = gameObject.transform.rotation;
             pRotation.eulerAngles = new Vector3(FP.rotation.x, FP.rotation.y, FP.rotation.z);
-            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, cam.transform.position.z - FP.zoom), pRotation);
+            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom), pRotation);
 
             if (isRoof)
             {
