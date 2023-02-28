@@ -67,6 +67,7 @@ public class PrinceMovement : MonoBehaviour
 
     //public Transform pR; //this is the players current rotation
     public GameObject cam;
+    public FollowPlayer FP;
 
 
     float speed_x = 0f;
@@ -139,6 +140,7 @@ public class PrinceMovement : MonoBehaviour
         terminal_vel = -Mathf.Sqrt((2*MASS*GRAVITY)/(DENSITY*CS_AREA*DRAG));
         current_speed = new Vector3(0, -GRAVITY, 0);
         GM = manager.GetComponent<GameManager>();
+        FP = cam.GetComponent<FollowPlayer>();
 
         //MOVE_ACCEL_ACOEF = MOVE_SPEED / Mathf.Log10(MOVE_ACCEL_TIME); //Creates quadratic function to fufil time/speed acceleration requirements
     }
@@ -308,8 +310,8 @@ public class PrinceMovement : MonoBehaviour
                 gameObject.transform.Rotate(new Vector3(0, 0, ROTATE_SPEED * Time.deltaTime * ROTATE_TIME));
             }
             Quaternion pRotation = gameObject.transform.rotation;
-            pRotation.eulerAngles = new Vector3(15, 0, 0);
-            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + cam.GetComponent<FollowPlayer>().height, cam.transform.position.z), pRotation);
+            pRotation.eulerAngles = new Vector3(FP.rotation.x, FP.rotation.y, FP.rotation.z);
+            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, cam.transform.position.z - FP.zoom), pRotation);
 
             if (isRoof)
             {

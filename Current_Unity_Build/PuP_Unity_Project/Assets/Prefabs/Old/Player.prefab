@@ -339,9 +339,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_sinkY: 0.25
   player_sinkX: 0.5
+  pointedFallOff: 0
   body: {fileID: 3878876052228874676}
   player: {fileID: 3878876051692293004}
   cam: {fileID: 4397834305858986339}
+  current_slope: 0
 --- !u!65 &3878876051621828879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -423,10 +425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba45603c135e2448a46a50676d3764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowerCount: 0
   key: {fileID: 0}
   flower1: {fileID: 0}
   flower2: {fileID: 0}
   flower3: {fileID: 0}
+  manager: {fileID: 0}
   ForgetJump: 0.2
   JUMP_SPEED: 9
   JUMP_ACCEL_TIME: 0.8
@@ -439,10 +443,13 @@ MonoBehaviour:
   MOVE_ACCEL_ACOEF: 0
   ROTATE_TIME: 50
   ROTATE_SPEED: 0.5
+  CAN_SLIDE: 0
+  SLIDE_SPEED: 2.2
   DASH_SPEED: 36
   DASH_LENGTH: 0.2
   DASH_DELAY: 3
   DASH_UPWARDRESISTANCE: 1
+  PFC: {fileID: 0}
   MASS: 75
   GRAVITY: 12
   CS_AREA: 0.18
@@ -454,6 +461,12 @@ MonoBehaviour:
   isFloor: 0
   isRoof: 0
   isSlope: 0
+  previousSlope: 0
+  currentSlope: 0
+  previousGroundScript: {fileID: 0}
+  currentGroundScript: {fileID: 0}
+  grabbed: 0
+  dashing: 0
   Checkpoint: {x: 0, y: 0, z: 0}
 --- !u!1818360609 &8103393664427841980
 RotationConstraint:
