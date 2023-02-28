@@ -324,7 +324,7 @@ public class PrinceMovement : MonoBehaviour
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             }
             
-            if (current_speed.y > terminal_vel && (currentGroundScript == null || !currentGroundScript.top))
+            if (current_speed.y > terminal_vel && (currentGroundScript == null || !isFloor))
             {
                 if (!isFloor)
                 {
@@ -371,7 +371,7 @@ public class PrinceMovement : MonoBehaviour
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
             speed_y = 0;
-            if (jumpQueued) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
+            if (jumpQueued && isFloor) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
             {
                 jumpQueued = false;
 

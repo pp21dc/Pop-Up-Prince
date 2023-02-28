@@ -373,13 +373,16 @@ public class PrinceFootCollider : MonoBehaviour
             }
             else if (body_trans.position.y - player_yBounds <= ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds >= ground_trans.position.y + mF_yBounds - (player_sinkY * 2))
             {
-                PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, friciton);
-                ground_script.top = true;
-                Debug.Log("Top Enter 2");
-                if (player.transform.eulerAngles.z == 0)
+                if (!ground_script.left && !ground_script.right && !ground_script.roof)
                 {
-                    //Debug.Log("NO SLOPE 2");
-                    PM.isSlope = false;
+                    PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, friciton);
+                    ground_script.top = true;
+                    Debug.Log("Top Enter 2");
+                    if (player.transform.eulerAngles.z == 0)
+                    {
+                        //Debug.Log("NO SLOPE 2");
+                        PM.isSlope = false;
+                    }
                 }
             }
 
@@ -476,6 +479,7 @@ public class PrinceFootCollider : MonoBehaviour
                     contacts = 0;
                 }
                 Debug.Log("Contacts: " + contacts);
+                Debug.Log(PM.isFloor);
 
                 PM.previousSlope = ground_script.slope;
                 if (player.transform.eulerAngles.z == 0 || contacts == 0) //RECENT CHANGE
@@ -513,12 +517,12 @@ public class PrinceFootCollider : MonoBehaviour
                         ground_script.top = false;
                         Debug.Log("Top Exit");
                     }
-                    else
+                    /*else
                     {
                         PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                         ground_script.top = false;
                         Debug.Log("Top Exit2");
-                    }
+                    }*/
                 }
 
 

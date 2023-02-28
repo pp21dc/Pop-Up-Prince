@@ -9,23 +9,23 @@ public class GrabScript : MonoBehaviour
     PrinceMovement PM;
     void Update()
     {
-        if (grabbed)
+        /*if (grabbed)
         {
             Debug.Log("Grabbed");
             player.transform.position = transform.position;
-        }
+        }*/
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        /*if (other.tag == "Player")
         {
             grabbed = true;
             player = other.gameObject;
             PM = other.transform.parent.GetComponent<PrinceMovement>();
             PM.grabbed = true;
             
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)

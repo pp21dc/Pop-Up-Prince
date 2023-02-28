@@ -26,7 +26,7 @@ public class InkArm : MonoBehaviour
     {
         Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
         Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
-        if (move && (!Stretched(moveTo)) && !PM.grabbed)
+        if (move && (!Stretched(moveTo)))
         {
             transform.position = moveTo;
         }
@@ -60,7 +60,7 @@ public class InkArm : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player = other.transform;
+            //player = other.transform;
             move = true;
             //Debug.Log("Enter");
         }
