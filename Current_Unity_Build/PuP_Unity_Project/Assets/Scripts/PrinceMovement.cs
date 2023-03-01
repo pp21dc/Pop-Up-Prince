@@ -85,7 +85,8 @@ public class PrinceMovement : MonoBehaviour
 
 
     float terminal_vel; // this is the max speed the player can fall at
-    Vector3 current_speed;// current speed of the player
+    [HideInInspector]
+    public Vector3 current_speed;// current speed of the player
     bool isCollidingGround = false;
 
     [HideInInspector]
@@ -586,8 +587,8 @@ public class PrinceMovement : MonoBehaviour
         transform.position = Checkpoint;
         GM.resetFlowers();
         GM.resetKeys();
-        hasKey = false;
-        flowerCount = 0;
+        //hasKey = false;
+        //flowerCount = 0;
         Debug.Log("Respawn");
 
     }
