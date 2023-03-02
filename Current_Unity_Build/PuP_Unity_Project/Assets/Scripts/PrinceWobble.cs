@@ -70,6 +70,17 @@ public class PrinceWobble : MonoBehaviour
             jump = false;
             dash = false;
         }
+        else
+        {
+            idle = true;
+            jump = false;
+            dash = false;
+        }
+
+        idle_model.SetActive(idle);
+        jump_model.SetActive(jump);
+        dash_model.SetActive(dash);
+
     }
 
     private void bob()
