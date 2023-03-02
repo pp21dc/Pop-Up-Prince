@@ -27,7 +27,7 @@ public class PrinceWobble : MonoBehaviour
     private void Start()
     {
         keypos1 = key_model.transform.localPosition.x;
-        keypos2 = key_model.transform.localPosition.x + 0.15f;
+        keypos2 = key_model.transform.localPosition.x + 0.32f;
     }
 
     // Update is called once per frame
@@ -37,10 +37,11 @@ public class PrinceWobble : MonoBehaviour
 
         if (idle)
         {
+            key_model.transform.localPosition = new Vector3(keypos1, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             idle_model.SetActive(true);
             jump_model.SetActive(false);
             dash_model.SetActive(false);
-            key_model.transform.localPosition.Set(keypos1, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
+            
             rotate();
             if (PM.isFloor)
             {
@@ -49,14 +50,14 @@ public class PrinceWobble : MonoBehaviour
         }
         else if (jump)
         {
-            key_model.transform.localPosition.Set(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
+            key_model.transform.localPosition = new Vector3(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             idle_model.SetActive(false);
             jump_model.SetActive(true);
             dash_model.SetActive(false);
         }
         else if (dash)
         {
-            key_model.transform.localPosition.Set(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
+            key_model.transform.localPosition = new Vector3(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             idle_model.SetActive(false);
             jump_model.SetActive(false);
             dash_model.SetActive(true);
@@ -99,12 +100,12 @@ public class PrinceWobble : MonoBehaviour
     private void bob()
     {
         float height = transform.parent.transform.position.y;
-        Debug.Log("Local:" + transform.localPosition.y);
-        Debug.Log("Height:" + bob_height);
+        //Debug.Log("Local:" + transform.localPosition.y);
+        //Debug.Log("Height:" + bob_height);
         
         if (bob_dir == 1 && transform.localPosition.y < bob_height)
         {
-            Debug.Log(2.1);
+            //Debug.Log(2.1);
             transform.localPosition += new Vector3(0, bob_speed * Time.deltaTime, 0);
             if (transform.localPosition.y > bob_height)
             {
@@ -113,7 +114,7 @@ public class PrinceWobble : MonoBehaviour
         }
         else if (bob_dir == -1 && transform.localPosition.y > 0)
         {
-            Debug.Log(2.2);
+            //Debug.Log(2.2);
             transform.localPosition += new Vector3(0, -(bob_speed * Time.deltaTime), 0);
             if (transform.localPosition.y < 0)
             {
@@ -131,13 +132,13 @@ public class PrinceWobble : MonoBehaviour
             //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
             if (transform.rotation.eulerAngles.z >= rotate_max && transform.rotation.eulerAngles.z < 180)
             {
-                Debug.Log("Flip to Left");
+                //Debug.Log("Flip to Left");
                 dir = -1;
 
             }
             else
             {
-                Debug.Log("Rotate RIGHT");
+                //Debug.Log("Rotate RIGHT");
                 transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
             }
 
@@ -147,19 +148,19 @@ public class PrinceWobble : MonoBehaviour
             //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
             if (transform.rotation.eulerAngles.z <= 360 - rotate_max && transform.rotation.eulerAngles.z > 180)
             {
-                Debug.Log("Flip to Right");
+                //Debug.Log("Flip to Right");
                 dir = 1;
             }
             else
             {
-                Debug.Log("Rotate LEFT");
+                //Debug.Log("Rotate LEFT");
                 transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
             }
 
         }
         else
         {
-            Debug.Log("RESET");
+            //Debug.Log("RESET");
             transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }

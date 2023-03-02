@@ -378,19 +378,17 @@ public class PrinceMovement : MonoBehaviour
 
                 float slopeY = (currentGroundScript.slope) * ((transform.position.x) - currentGroundScript.trans.position.x) + (currentGroundScript.verticalWidthAP);
 
-                isFloor = false;
-                
-                
                 speed_y = JUMP_SPEED;
                 if (current_speed.y > JUMP_SPEED)
                 {
                     speed_y = JUMP_SPEED;
+                    
                 }
 
             }
 
             transform.position += transform.TransformDirection((totalXMove) / FPS, 0,0);
-            
+            transform.position += new Vector3(0, speed_y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
     }
 

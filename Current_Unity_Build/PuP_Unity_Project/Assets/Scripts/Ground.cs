@@ -80,5 +80,6 @@ public class Ground : MonoBehaviour
         }
         //Debug.Log(gameObject.name + ": " + tanResult);
         slope = tanResult;
+        
     }
 }
