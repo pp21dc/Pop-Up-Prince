@@ -15,10 +15,20 @@ public class PrinceWobble : MonoBehaviour
     public GameObject idle_model;
     public GameObject jump_model;
     public GameObject dash_model;
+    public GameObject key_model;
 
     bool idle = false;
     bool jump = false;
     bool dash = false;
+
+    float keypos1;
+    float keypos2;
+
+    private void Start()
+    {
+        keypos1 = key_model.transform.localPosition.x;
+        keypos2 = key_model.transform.localPosition.x + 0.15f;
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,6 +40,7 @@ public class PrinceWobble : MonoBehaviour
             idle_model.SetActive(true);
             jump_model.SetActive(false);
             dash_model.SetActive(false);
+            key_model.transform.localPosition.Set(keypos1, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             rotate();
             if (PM.isFloor)
             {
@@ -38,12 +49,14 @@ public class PrinceWobble : MonoBehaviour
         }
         else if (jump)
         {
+            key_model.transform.localPosition.Set(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             idle_model.SetActive(false);
             jump_model.SetActive(true);
             dash_model.SetActive(false);
         }
         else if (dash)
         {
+            key_model.transform.localPosition.Set(keypos2, key_model.transform.localPosition.y, key_model.transform.localPosition.z);
             idle_model.SetActive(false);
             jump_model.SetActive(false);
             dash_model.SetActive(true);
