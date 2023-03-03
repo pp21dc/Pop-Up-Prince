@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-
+    public bool CameraSettingsBasedOnWorldPosition = true;
     public Transform player;
     public float height;
     public float lead;
@@ -16,12 +16,25 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //rotation = transform.rotation;
+        if (CameraSettingsBasedOnWorldPosition)
+        {
+            height = transform.localPosition.y;
+            lead = transform.localPosition.x;
+            zoom = transform.localPosition.z;
+            rotation = transform.rotation.eulerAngles;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //transform.rotation = new Quaternion(0, 0, 500, 0);
+        if (CameraSettingsBasedOnWorldPosition)
+        {
+            CameraSettingsBasedOnWorldPosition = false;
+            height = transform.localPosition.y;
+            lead = transform.localPosition.x;
+            zoom = transform.localPosition.z;
+            rotation = transform.rotation.eulerAngles;
+        }
     }
 }

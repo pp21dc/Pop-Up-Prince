@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba45603c135e2448a46a50676d3764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasKey2: 0
   flowerCount: 0
   key: {fileID: 4962017152408625351}
   flower1: {fileID: 8315522228842340977}
@@ -304,8 +305,6 @@ MonoBehaviour:
   DASH_DELAY: 0.25
   DASH_UPWARDRESISTANCE: 1
   PFC: {fileID: 3878876051621828873}
-  collider: {fileID: 0}
-  RB: {fileID: 0}
   MASS: 75
   GRAVITY: 12
   CS_AREA: 0.18
@@ -554,17 +553,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4397834305858986339}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 594ea4ee728c53745beb79294b0efe13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraSettingsBasedOnWorldPosition: 1
   player: {fileID: 3878876051692293005}
-  height: 3.9
+  height: 0
   lead: 0
-  zoom: -8.77
+  zoom: 0
   followSpeed: 0
-  rotation: {x: 7.97, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &8433888845928969156
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PrinceMovement : MonoBehaviour
     // if the player has a key or not
     [Header("Collectables")]
     public static bool hasKey = false;
+    public  bool hasKey2 = false;
     [HideInInspector]
     public float flowerCount = 0;
     public GameObject key;
@@ -149,6 +150,7 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hasKey2 = hasKey;
         if (!grabbed) { 
             //Checks
             friction();
