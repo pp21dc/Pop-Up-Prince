@@ -371,7 +371,7 @@ public class PrinceMovement : MonoBehaviour
                 Debug.Log("ROOF");
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
-            speed_y = 0;
+            //speed_y = 0;
             if (jumpQueued && isFloor) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
             {
                 jumpQueued = false;
@@ -386,7 +386,7 @@ public class PrinceMovement : MonoBehaviour
                 }
 
             }
-
+            //Debug.Log(isFloor);
             transform.position += transform.TransformDirection((totalXMove) / FPS, 0,0);
             transform.position += new Vector3(0, speed_y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
@@ -570,7 +570,13 @@ public class PrinceMovement : MonoBehaviour
             speed_y = 0;
             current_speed = new Vector3(0, -2.45f, 0);
         }
-        //Debug.Log("Collide");
+
+        if (isFloor)
+        {
+            speed_y = 0;
+        }
+
+        Debug.Log("Collide");
 
     }
 
