@@ -25,6 +25,7 @@ public class OpenGate : MonoBehaviour
                 RB.isKinematic = false;
                 DCL.gameObject.SetActive(false);
                 PM.isWallRight = false;
+                PrinceMovement.hasKey = false;
             }
         }
     }
