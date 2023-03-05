@@ -126,36 +126,73 @@ public class PrinceWobble : MonoBehaviour
 
     private void rotate()
     {
-        float rotation = transform.parent.transform.rotation.eulerAngles.z;
+        
         if (dir == 1 && PM.current_speed.x != 0)
         {
             //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
-            if (transform.rotation.eulerAngles.z >= rotate_max && transform.rotation.eulerAngles.z < 180)
+            if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
             {
-                //Debug.Log("Flip to Left");
-                dir = -1;
+                if (transform.localEulerAngles.z >= rotate_max)
+                {
+                    Debug.Log("1l");
+                    dir = -1;
 
+                }
+                else
+                {
+                    
+                    transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                }
             }
             else
             {
-                //Debug.Log("Rotate RIGHT");
-                transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                if (360 - transform.localEulerAngles.z <= -rotate_max)
+                {
+                    Debug.Log("2l");
+                    dir = -1;
+
+                }
+                else
+                {
+                    
+                    transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                }
             }
+
 
         }
         else if (dir == -1 && PM.current_speed.x != 0)
         {
             //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
-            if (transform.rotation.eulerAngles.z <= 360 - rotate_max && transform.rotation.eulerAngles.z > 180)
+            if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
             {
-                //Debug.Log("Flip to Right");
-                dir = 1;
+                if (transform.localEulerAngles.z <= -rotate_max)
+                {
+                    //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
+                    Debug.Log("1r");
+                    dir = 1;
+                }
+                else
+                {
+
+                    transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
+                }
             }
             else
             {
-                //Debug.Log("Rotate LEFT");
-                transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
+                if (360 - transform.localEulerAngles.z >= rotate_max)
+                {
+                    //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
+                    Debug.Log("2r");
+                    dir = 1;
+                }
+                else
+                {
+
+                    transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
+                }
             }
+            
 
         }
         else
