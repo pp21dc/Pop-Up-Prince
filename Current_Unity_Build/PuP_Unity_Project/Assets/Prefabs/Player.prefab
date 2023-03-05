@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 3878876051621828873}
   - component: {fileID: 3878876051621828879}
   - component: {fileID: 326664633728105084}
+  - component: {fileID: 7234622571482451196}
   m_Layer: 0
   m_Name: GroundCollider
   m_TagString: Player
@@ -228,6 +229,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 1
+--- !u!65 &7234622571482451196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878876051621828874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.23490664, z: 0}
 --- !u!1 &3878876051692293004
 GameObject:
   m_ObjectHideFlags: 0
