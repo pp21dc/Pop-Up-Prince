@@ -75,12 +75,12 @@ public class PrinceFootCollider : MonoBehaviour
             if (ground_script.left && !PM.isSlope)
             {
                 Debug.Log(1.1);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + c_xb, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + c_xb - player_sinkX*1.25f, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
             else if (ground_script.right && !PM.isSlope)
             {
                 Debug.Log(1.2);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - c_xb, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - c_xb - player_sinkX, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
             
         }
