@@ -77,7 +77,7 @@ public class PrinceFootCollider : MonoBehaviour
             else if (ground_script.right && !PM.isSlope)
             {
                 Debug.Log(1.2);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - c_xb + (c_xb / 2), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - c_xb - (c_xb / 2), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
         }
         else if (ground_script.slope != 0 || (ground_script.slope == 0 && PM.isSlope) && (!ground_script.left && !ground_script.right)) // On a slope or leaving a slope to a flat surface
@@ -357,7 +357,7 @@ public class PrinceFootCollider : MonoBehaviour
                 {
                     Debug.Log("LEFT SKIP");
                 }
-                else if (body_trans.position.y - player_yBounds - player_sinkY/2 < ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds < ground_trans.position.y + mF_yBounds - (player_sinkY))
+                else if (BL.transform.position.x < ground_script.rightSide.x)
                 {
                     PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
                     ground_script.left = true;
@@ -380,7 +380,7 @@ public class PrinceFootCollider : MonoBehaviour
                 {
                     Debug.Log("RIGHT SKIP");
                 }
-                else if (body_trans.position.y - player_yBounds - player_sinkY/2 < ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds < ground_trans.position.y + mF_yBounds - (player_sinkY))
+                else if (BR.transform.position.x > ground_script.leftSide.x)
                 {
                     
                     PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
