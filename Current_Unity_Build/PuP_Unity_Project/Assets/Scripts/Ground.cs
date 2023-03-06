@@ -31,6 +31,9 @@ public class Ground : MonoBehaviour
     public float widthY;
     [HideInInspector]
     public float verticalWidthAP;//Vertical width at anypoint in the objects slope
+    [HideInInspector]
+    //public GameObject test;
+    //public bool test_activate;
 
     private void Start()
     {
@@ -41,7 +44,7 @@ public class Ground : MonoBehaviour
         leftSide = transform.position;
         rightSide = transform.position;
         
-        transform.SetPositionAndRotation(transform.position, new Quaternion());
+        transform.SetPositionAndRotation(transform.position, new Quaternion(0,0,0,0));
 
         Collider mF = GetComponent<Collider>();
         widthY = mF.bounds.extents.y;
@@ -58,7 +61,10 @@ public class Ground : MonoBehaviour
         leftSide = tempLeft.transform.position;
         rightSide = tempRight.transform.position;
 
-
+        /*if (test_activate)
+        {
+            test = transform.GetChild(2).gameObject;
+        }*/
 
 
         if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 90)
@@ -85,7 +91,7 @@ public class Ground : MonoBehaviour
 
             verticalWidthAP = widthY / Mathf.Sin(RadAngle);
         }
-        else
+        else if (transform.eulerAngles.z == 0)
         {
             verticalWidthAP = widthY;
         }
