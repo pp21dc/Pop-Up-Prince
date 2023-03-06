@@ -134,7 +134,7 @@ public class PrinceWobble : MonoBehaviour
             {
                 if (transform.localEulerAngles.z >= rotate_max)
                 {
-                    Debug.Log("1l");
+                    //Debug.Log("1l");
                     dir = -1;
 
                 }
@@ -148,7 +148,7 @@ public class PrinceWobble : MonoBehaviour
             {
                 if (360 - transform.localEulerAngles.z <= -rotate_max)
                 {
-                    Debug.Log("2l");
+                    //Debug.Log("2l");
                     dir = -1;
 
                 }
@@ -169,7 +169,7 @@ public class PrinceWobble : MonoBehaviour
                 if (transform.localEulerAngles.z <= -rotate_max)
                 {
                     //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
-                    Debug.Log("1r");
+                    //Debug.Log("1r");
                     dir = 1;
                 }
                 else
@@ -183,7 +183,7 @@ public class PrinceWobble : MonoBehaviour
                 if (360 - transform.localEulerAngles.z >= rotate_max)
                 {
                     //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
-                    Debug.Log("2r");
+                    //Debug.Log("2r");
                     dir = 1;
                 }
                 else

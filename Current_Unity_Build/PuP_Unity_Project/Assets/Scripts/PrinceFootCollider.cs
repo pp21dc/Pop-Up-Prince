@@ -25,6 +25,8 @@ public class PrinceFootCollider : MonoBehaviour
     public GameObject cam;
     public GameObject BL;
     public GameObject BR;
+    public GameObject TL;
+    public GameObject TR;
 
     float mF_xBounds;
     float mF_yBounds;
@@ -54,11 +56,12 @@ public class PrinceFootCollider : MonoBehaviour
         //Debug.Log(c_yb);
         BL.transform.localPosition = new Vector3(-c_xb, -((pc_cnt.y/100)/(pc_scl.y)) + pc_pos.y, 0);
         BR.transform.localPosition = new Vector3(c_xb, -((pc_cnt.y / 100) / (pc_scl.y)) + pc_pos.y, 0);
+        //TR.transform.localPosition = new Vector3(0, player_collider.bounds.max.y/10, 0);
     }
 
     private void Update()
     {
-        transform.localPosition = new Vector3(store_csposx, transform.localPosition.y, transform.localPosition.z);
+        //transform.localPosition = new Vector3(store_csposx, transform.localPosition.y, transform.localPosition.z);
     }
 
     private void SetPlayerY(Collider other, float gY, float pY_bounds, float gX)
@@ -419,11 +422,11 @@ public class PrinceFootCollider : MonoBehaviour
             }
 
             //Roof
-            if (body_trans.position.y + player_yBounds > ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 4))
+            if (TR.transform.position.y >= FindPositionOnSlope(ground_script, -1) && BR.transform.position.y < FindPositionOnSlope(ground_script, -1))
             {
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
                 ground_script.roof = true;
-                //Debug.Log("Roof");
+                Debug.Log("Roof");
                 if (player.transform.eulerAngles.z != 0)
                 {
                     PM.isSlope = true;
@@ -486,6 +489,24 @@ public class PrinceFootCollider : MonoBehaviour
         {
             PM.isSlope = true;
         }
+    }
+
+    /**
+     * Current Groundscript and direction (top or bottom) 1, -1
+     */
+    private float FindPositionOnSlope(Ground gs, int TB)
+    { 
+        float slopeY;
+        if (gs.slope != 0)
+        {
+            slopeY = (gs.slope) * ((player.transform.position.x) - gs.transform.position.x) + (gs.verticalWidthAP * TB);
+        }
+        else
+        {
+            slopeY = gs.transform.position.y - gs.verticalWidthAP;
+        }
+        
+        return (slopeY);
     }
 
     private void OnTriggerEnter(Collider other)

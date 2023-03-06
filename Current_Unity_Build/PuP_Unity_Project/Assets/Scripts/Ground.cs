@@ -24,6 +24,12 @@ public class Ground : MonoBehaviour
     [HideInInspector]
     public Vector3 rightSide;
     [HideInInspector]
+    public Vector3 bottom;
+    [HideInInspector]
+    public float widthX;
+    [HideInInspector]
+    public float widthY;
+    [HideInInspector]
     public float verticalWidthAP;//Vertical width at anypoint in the objects slope
 
     private void Start()
@@ -37,9 +43,9 @@ public class Ground : MonoBehaviour
         
         transform.SetPositionAndRotation(transform.position, new Quaternion());
 
-        MeshFilter mF = GetComponent<MeshFilter>();
-        float widthY = mF.mesh.bounds.extents.y * transform.localScale.y;
-        float widthX = mF.mesh.bounds.extents.x * transform.localScale.x;
+        Collider mF = GetComponent<Collider>();
+        widthY = mF.bounds.extents.y;
+        widthX = mF.bounds.extents.x;
         GameObject tempLeft = transform.GetChild(0).gameObject;
         GameObject tempRight = transform.GetChild(1).gameObject;
         tempLeft.transform.position -= new Vector3(widthX,-widthY);
@@ -48,6 +54,7 @@ public class Ground : MonoBehaviour
 
         transform.SetPositionAndRotation(transform.position, rot);
 
+        
         leftSide = tempLeft.transform.position;
         rightSide = tempRight.transform.position;
 
