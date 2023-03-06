@@ -58,8 +58,8 @@ public class Ground : MonoBehaviour
         leftSide = tempLeft.transform.position;
         rightSide = tempRight.transform.position;
 
-        
-        
+
+
 
         if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 90)
         {
@@ -82,8 +82,12 @@ public class Ground : MonoBehaviour
             leftSide = new Vector3(leftSide.x, leftSideY, 0);
 
             float RadAngle = Mathf.Abs((270f - transform.eulerAngles.z)) * Mathf.PI / 180;
-            
+
             verticalWidthAP = widthY / Mathf.Sin(RadAngle);
+        }
+        else
+        {
+            verticalWidthAP = widthY;
         }
         //Debug.Log(gameObject.name + ": " + tanResult);
         slope = tanResult;

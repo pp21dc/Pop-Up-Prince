@@ -9,6 +9,8 @@ public class PrinceFootCollider : MonoBehaviour
     public float player_sinkY = 0.05f;
     [Tooltip("Default: 1.0f, avoid changing this value")]
     public float player_sinkX = 1.0f;
+    [Tooltip("How much player sinks into ground | Default: 0.6")]
+    public float player_groundSinkY = 1.0f;
     [Tooltip("How much the player can walk on the point of a slope before being affected by the next slope")]
     public float pointedFallOff = 0.5f;
     public float slope_tpmultiplyer = 1.5f;
@@ -49,34 +51,39 @@ public class PrinceFootCollider : MonoBehaviour
         c_yb = player_collider.bounds.extents.y;
         c_xb = player_collider.bounds.extents.x;
         Vector3 pc_pos = player_collider.transform.localPosition;
+        Vector3 pc_posG = player_collider.transform.position;
         Vector3 pc_scl = player_collider.bounds.size;
         Vector3 pc_cnt = player_collider.bounds.center;
         camRotation = new Quaternion(0, 0, 0, 0);
         camRotation.eulerAngles.Set(15, 0, 0);
         //Debug.Log(c_yb);
-        BL.transform.localPosition = new Vector3(-c_xb, -((pc_cnt.y/100)/(pc_scl.y)) + pc_pos.y, 0);
-        BR.transform.localPosition = new Vector3(c_xb, -((pc_cnt.y / 100) / (pc_scl.y)) + pc_pos.y, 0);
+        //BL.transform.position = new Vector3(pc_posG.x-c_xb, pc_posG.y - c_yb, 0);
+        //BR.transform.position = new Vector3(pc_posG.x+c_xb, pc_posG.y - c_yb, 0);
         //TR.transform.localPosition = new Vector3(0, player_collider.bounds.max.y/10, 0);
+        Debug.Log(c_xb);
     }
 
     private void Update()
     {
-        //transform.localPosition = new Vector3(store_csposx, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(0,0,0);
     }
 
     private void SetPlayerY(Collider other, float gY, float pY_bounds, float gX)
     {
         float px = player.transform.position.x;
         float py = player.transform.position.y; //Changed, removed bound minus
-        c_yb = player_collider.bounds.extents.y * player_collider.transform.parent.transform.localScale.y;
+        c_yb = player_collider.bounds.extents.y;
         float gx = ground_script.trans.position.x;
         float gy = ground_script.trans.position.y;
         float slopeY = (ground_script.slope) * ((px) - gx) + gy;
 
+        float clDif = BL.transform.position.x;
+        float crDif = BR.transform.position.x;
+
         if (ground_script.top && (!ground_script.left && !ground_script.right) && ground_script.slope == 0 && !PM.isSlope) //hitting flat ground
         {
             Debug.Log(0);
-            player.transform.SetPositionAndRotation(new Vector3(px, gy + mF_yBounds + c_yb - 0.2f, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            player.transform.SetPositionAndRotation(new Vector3(px, gy + mF_yBounds + c_yb - player_groundSinkY, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
         }
         else if (ground_script.left || ground_script.right && ground_script.slope == 0 && !PM.isSlope) // Hitting a wall and player is not currently on a slope
         {
@@ -85,12 +92,12 @@ public class PrinceFootCollider : MonoBehaviour
             if (ground_script.left && !PM.isSlope)
             {
                 Debug.Log(1.1);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + c_xb - player_sinkX*1.25f, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + Mathf.Abs(clDif), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
             else if (ground_script.right && !PM.isSlope)
             {
                 Debug.Log(1.2);
-                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - c_xb - player_sinkX, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - Mathf.Abs(crDif), py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
             }
             
         }
@@ -350,11 +357,11 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void CheckCollisions(GameObject groundObject, GameObject playerBody)
     {
-        mF_xBounds = (groundObject.transform.localScale.x/2);
-        mF_yBounds = (groundObject.transform.localScale.y/2);
-        player_xBounds = (playerBody.transform.localScale.x/2);
-        player_yBounds = (playerBody.transform.localScale.y/2);
-        
+        mF_xBounds = groundObject.GetComponent<Collider>().bounds.extents.x;
+        mF_yBounds = groundObject.GetComponent<Collider>().bounds.extents.y;
+        player_xBounds = player_collider.bounds.extents.x;
+        player_yBounds = player_collider.bounds.extents.y;
+
         body_trans = playerBody.transform;
         ground_trans = groundObject.transform;
 
