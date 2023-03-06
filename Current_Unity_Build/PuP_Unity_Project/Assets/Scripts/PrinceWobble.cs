@@ -23,11 +23,12 @@ public class PrinceWobble : MonoBehaviour
 
     float keypos1;
     float keypos2;
+    public float key_moveMod = 0.2f;
 
     private void Start()
     {
         keypos1 = key_model.transform.localPosition.x;
-        keypos2 = key_model.transform.localPosition.x + 0.32f;
+        keypos2 = key_model.transform.localPosition.x + key_moveMod;
     }
 
     // Update is called once per frame
