@@ -370,7 +370,7 @@ public class PrinceMovement : MonoBehaviour
             }
             else if (isRoof)
             {
-                Debug.Log("ROOF");
+                //Debug.Log("ROOF");
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
             //speed_y = 0;
