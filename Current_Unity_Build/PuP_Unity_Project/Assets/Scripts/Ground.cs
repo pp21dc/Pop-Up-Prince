@@ -39,25 +39,25 @@ public class Ground : MonoBehaviour
     {
         RectTransform rt;
         trans = gameObject.transform;
-        Quaternion rot = gameObject.transform.rotation;
+        Vector3 rot = gameObject.transform.eulerAngles;
         float tanResult = 0;
         leftSide = transform.position;
         rightSide = transform.position;
-        
-        transform.SetPositionAndRotation(transform.position, new Quaternion(0,0,0,0));
+
+        transform.eulerAngles = new Vector3(0, 0, 0);
 
         Collider mF = GetComponent<Collider>();
-        widthY = mF.bounds.extents.y;
-        widthX = mF.bounds.extents.x;
+        widthY = 0.5f * transform.localScale.y;
+        widthX = 0.5f * transform.localScale.x;
+
         GameObject tempLeft = transform.GetChild(0).gameObject;
         GameObject tempRight = transform.GetChild(1).gameObject;
-        tempLeft.transform.position -= new Vector3(widthX,-widthY);
-        tempRight.transform.position += new Vector3(widthX,widthY);
+        tempLeft.transform.localPosition = new Vector3(-0.5f,0.5f);
+        tempRight.transform.localPosition = new Vector3(0.5f,0.5f);
+
+        transform.eulerAngles = new Vector3(0, 0, rot.z);
 
 
-        transform.SetPositionAndRotation(transform.position, rot);
-
-        
         leftSide = tempLeft.transform.position;
         rightSide = tempRight.transform.position;
 
@@ -95,7 +95,7 @@ public class Ground : MonoBehaviour
         {
             verticalWidthAP = widthY;
         }
-        //Debug.Log(gameObject.name + ": " + tanResult);
+
         slope = tanResult;
         
     }

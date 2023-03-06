@@ -21,6 +21,7 @@ public class PrinceFootCollider : MonoBehaviour
     [Tooltip("How much the player can walk on the point of a slope before being affected by the next slope")]
     public float pointedFallOff = 0.5f;
     public float slope_tpmultiplyer = 1.5f;
+    public float slope_edgeDetector = 1.0f;
     int contacts = 0;
     PrinceMovement PM;
     Ground ground_script;
@@ -88,7 +89,7 @@ public class PrinceFootCollider : MonoBehaviour
         float crDif = BR.transform.localPosition.x;
         float cryDif = BR.transform.localPosition.y;
 
-        if (ground_script.top && (!ground_script.left && !ground_script.right) && ground_script.slope == 0 && !PM.isSlope) //hitting flat ground
+        if (ground_script.top && (!ground_script.left && !ground_script.right) && ground_script.slope == 0 && PM.previousSlope == 0 && !PM.isSlope) //hitting flat ground
         {
             Debug.Log(0);
             player.transform.SetPositionAndRotation(new Vector3(px, gy + mF_yBounds + c_yb - player_groundSinkY, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
@@ -114,7 +115,7 @@ public class PrinceFootCollider : MonoBehaviour
             
 
             float xBoundDir = findDirection(px);
-            slopeY = (ground_script.slope) * ((px + (player_xBounds * slope_tpmultiplyer * xBoundDir)) - gx);
+            slopeY = (ground_script.slope) * ((px + (player_xBounds * slope_tpmultiplyer * xBoundDir)) - gx) + ground_script.verticalWidthAP;
             
 
             if (py + player_groundSinkY_slope >= gy + slopeY)
@@ -132,7 +133,7 @@ public class PrinceFootCollider : MonoBehaviour
                 else if (ground_script.slope == 0)
                 {
                     Debug.Log(2.3);
-                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * slope_tpmultiplyer * xBoundDir), gy + mF_yBounds + c_yb - player_groundSinkY, 0), other.transform.rotation);
+                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * slope_tpmultiplyer * xBoundDir), ground_script.leftSide.y, 0), other.transform.rotation);
                 }
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
                 ground_script.top = true;
@@ -220,21 +221,37 @@ public class PrinceFootCollider : MonoBehaviour
                     xBoundDir = 0;
                 }
             }
-            else if (PM.currentGroundScript.slope == 0 && PM.currentSlope == 0)
+            else if (PM.currentGroundScript.slope == 0)
             {
-                if (BR.transform.position.x > ground_script.leftSide.x && BR.transform.position.x < ground_script.rightSide.x)
+                if (PM.previousGroundScript.slope > 0)
                 {
-                    Debug.Log(20.1);
-                    xBoundDir = 1;
+                    if (BL.transform.position.x - slope_edgeDetector < PM.previousGroundScript.transform.position.x)
+                    {
+                        Debug.Log(20.1);
+                        xBoundDir = -1;
+                    }
+                    else
+                    {
+                        Debug.Log(20.11);
+                        xBoundDir = 0;
+                    }
                 }
-                else if (BL.transform.position.x < ground_script.rightSide.x && BL.transform.position.x > ground_script.leftSide.x)
+                else if (PM.previousGroundScript.slope < 0)
                 {
-                    Debug.Log(20.2);
-                    xBoundDir = -1;
+                    if (BR.transform.position.x + slope_edgeDetector > PM.previousGroundScript.transform.position.x)
+                    {
+                        Debug.Log(20.2);
+                        xBoundDir = 1;
+                    }
+                    else
+                    {
+                        Debug.Log(20.21);
+                        xBoundDir = 0;
+                    }
                 }
                 else
                 {
-                    xBoundDir = 0;
+                    Debug.Log("SHLOPEL: " + PM.previousGroundScript.slope);
                 }
             }
 
@@ -455,7 +472,7 @@ public class PrinceFootCollider : MonoBehaviour
                 Debug.Log("Top Enter");
                 if (player.transform.eulerAngles.z == 0 || contacts == 0)
                 {
-                    //Debug.Log("NO SLOPE");
+                    Debug.Log("NO SLOPE");
                     PM.isSlope = false;
                 }
                 else if (contacts == 0)
@@ -472,7 +489,7 @@ public class PrinceFootCollider : MonoBehaviour
                     Debug.Log("Top Enter 2");
                     if (player.transform.eulerAngles.z == 0)
                     {
-                        //Debug.Log("NO SLOPE 2");
+                        Debug.Log("NO SLOPE 2");
                         PM.isSlope = false;
                     }
                 }
