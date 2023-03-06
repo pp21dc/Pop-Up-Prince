@@ -163,9 +163,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_sinkY: 0.15
   player_sinkX: 0.25
-  player_groundSinkY: 0.95
-  player_groundSinkX_right: 0.1
-  player_groundSinkX_left: 0.3
+  player_groundSinkY: 0.8
+  player_groundSinkX_right: 0.07
+  player_groundSinkX_left: 0.2
+  player_groundSinkY_slope: 0.1
   pointedFallOff: 0
   slope_tpmultiplyer: 1.5
   body: {fileID: 3878876052228874676}
@@ -246,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 3878876051692293004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.01, y: 5.74, z: 0}
-  m_LocalScale: {x: 1.562229, y: 1.562229, z: 1.562229}
+  m_LocalScale: {x: 1.3689188, y: 1.3689188, z: 1.3689188}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3878876052228874677}
