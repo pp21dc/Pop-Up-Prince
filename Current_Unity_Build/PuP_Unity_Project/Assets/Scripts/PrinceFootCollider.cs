@@ -505,9 +505,9 @@ public class PrinceFootCollider : MonoBehaviour
             }
 
             friciton = ground_script.friction;
-            mF = other.GetComponent<MeshFilter>();
+            //mF = other.GetComponent<MeshFilter>();
             bmF = body.GetComponent<MeshFilter>();
-            float gY = other.GetComponent<MeshFilter>().mesh.bounds.extents.y;
+            //float gY = other.GetComponent<MeshFilter>().mesh.bounds.extents.y;
             float pY = body.GetComponent<MeshFilter>().mesh.bounds.extents.y;
             c_yb = player_collider.bounds.extents.y;
 
@@ -546,7 +546,7 @@ public class PrinceFootCollider : MonoBehaviour
             
             PM = player.GetComponent<PrinceMovement>();
             ground_script = other.GetComponent<Ground>();
-            mF = other.GetComponent<MeshFilter>();
+            //mF = other.GetComponent<MeshFilter>();
             bmF = body.GetComponent<MeshFilter>();
             mF_xBounds = (other.transform.localScale.x / 2);
             mF_yBounds = (other.transform.localScale.y / 2);
