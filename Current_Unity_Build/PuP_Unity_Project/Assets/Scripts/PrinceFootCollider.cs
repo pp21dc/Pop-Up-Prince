@@ -453,7 +453,7 @@ public class PrinceFootCollider : MonoBehaviour
             }
 
             //Roof
-            if (TR.transform.position.y >= FindPositionOnSlope(ground_script, -1) && BR.transform.position.y + player_groundSinkY_slope < FindPositionOnSlope(ground_script, -1))
+            if (TR.transform.position.y >= FindPositionOnSlope(ground_script, -1) && BR.transform.position.y + player_groundSinkY_slope < FindPositionOnSlope(ground_script, -1) && !PM.isWallLeft && !PM.isWallRight)
             {
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
                 ground_script.roof = true;
@@ -465,7 +465,7 @@ public class PrinceFootCollider : MonoBehaviour
             }
 
             //Top Detection
-            if (!ground_script.left && !ground_script.right && !ground_script.roof)
+            if (!ground_script.left && !ground_script.right && !ground_script.roof && TR.transform.position.y > ground_script.leftSide.y)
             {
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, friciton);
                 ground_script.top = true;
