@@ -159,7 +159,7 @@ public class PrinceMovement : MonoBehaviour
 
             //Movement
             HorizontalMovement(Input.GetAxisRaw("Horizontal"));
-            VerticalMovement(Input.GetAxisRaw("Vertical"));
+            VerticalMovement(Input.GetAxisRaw("Jump"));
             DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
         }
 
@@ -402,75 +402,10 @@ public class PrinceMovement : MonoBehaviour
             dashing = true;
             dash_ready = false;
             flowerCount--;
-            if (UD > 0 && !isRoof)
-            {
-                speed_dashy = DASH_SPEED;
-            }
-            else if (UD < 0)
-            {
-                speed_dashy = -DASH_SPEED;
-            }
-            if (LR > 0 && !isWallRight)
-            {
-                speed_dashx = DASH_SPEED;
-            }
-            else if (LR < 0 && !isWallLeft)
-            {
-                speed_dashx = -DASH_SPEED;
-            }
 
-            if (UD > 0 && LR > 0 && !isWallRight && !isRoof)
-            {
-                //Debug.Log("TopRight");
-                speed_dashy = diag;
-                speed_dashx = diag;
-            } 
-            else if (UD > 0 && LR > 0 && isWallRight && !isRoof)
-            {
-                speed_dashy = diag;
-            }
-            
-            
-            if (UD > 0 && LR < 0 && !isWallLeft && !isRoof)
-            {
-                //Debug.Log("TopLeft");
-                speed_dashy = diag;
-                speed_dashx = -diag;
-            }
-            else if (UD > 0 && LR < 0 && isWallLeft && !isRoof)
-            {
-                speed_dashy = diag;
-            }
-
-            if (UD < 0 && LR < 0 && !isWallLeft && !isRoof && !isSlope)
-            {
-                //Debug.Log("BottomLeft");
-                speed_dashy = -diag;
-                speed_dashx = -diag;
-            }
-            else if (UD < 0 && LR < 0 && isWallLeft && !isRoof && !isSlope) 
-            {
-                speed_dashy = -diag;
-            }
-            
-            if (UD < 0 && LR > 0 && !isWallRight && !isRoof && !isSlope)
-            {
-                //Debug.Log("BottomRight");
-                speed_dashy = -diag;
-                speed_dashx = diag;
-            } 
-            else if (UD < 0 && LR > 0 && isWallRight && !isRoof && !isSlope) 
-            {
-                speed_dashy = -diag;
-            }
-            current_speed = new Vector3(0, 0, 0);
-            speed_x = 0;
-
-            if (isRoof)
-            {
-                speed_dashy = 0;
-                speed_y = 0;
-            }
+            speed_dashy = UD * DASH_SPEED;
+            speed_dashx = LR * DASH_SPEED;
+            Debug.Log(UD + " :?: " + LR);
             
         }
     }

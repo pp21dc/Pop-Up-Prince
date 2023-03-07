@@ -5,6 +5,7 @@ using UnityEngine;
 public class PrinceWobble : MonoBehaviour
 {
     public PrinceMovement PM;
+    public bool acclerationRotation = true;
     public float rotate_max = 30f;
     public float bob_height = 5f;
     public float bob_speed = 5f;
@@ -127,79 +128,85 @@ public class PrinceWobble : MonoBehaviour
 
     private void rotate()
     {
-        
-        if (dir == 1 && PM.current_speed.x != 0)
+        if (true)
         {
-            //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
-            if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
+            if (dir == 1 && ((PM.current_speed.x > 0 && acclerationRotation) || (PM.current_speed.x != 0 && !acclerationRotation)))
             {
-                if (transform.localEulerAngles.z >= rotate_max)
+                //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
+                if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
                 {
-                    //Debug.Log("1l");
-                    dir = -1;
+                    if (transform.localEulerAngles.z >= rotate_max)
+                    {
+                        
+                        dir = -1;
 
+                    }
+                    else
+                    {
+
+                        transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                    }
                 }
                 else
                 {
-                    
-                    transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
-                }
-            }
-            else
-            {
-                if (360 - transform.localEulerAngles.z <= -rotate_max)
-                {
-                    //Debug.Log("2l");
-                    dir = -1;
+                    if (360 - transform.localEulerAngles.z <= -rotate_max)
+                    {
+                        //Debug.Log("2l");
+                        dir = -1;
 
+                    }
+                    else
+                    {
+
+                        transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                    }
+                }
+
+
+            }
+            else if (dir == -1 && ((PM.current_speed.x > 0 && acclerationRotation) || (PM.current_speed.x != 0 && !acclerationRotation)))
+            {
+                //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
+                if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
+                {
+                    if (transform.localEulerAngles.z <= -rotate_max)
+                    {
+                        //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
+                        //Debug.Log("1r");
+                        dir = 1;
+                    }
+                    else
+                    {
+
+                        transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
+                    }
                 }
                 else
                 {
-                    
-                    transform.Rotate(new Vector3(0, 0, rotate_speed * Time.deltaTime));
+                    if (360 - transform.localEulerAngles.z >= rotate_max)
+                    {
+                        //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
+                        //Debug.Log("2r");
+                        dir = 1;
+                    }
+                    else
+                    {
+
+                        transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
+                    }
                 }
+
+
             }
-
-
-        }
-        else if (dir == -1 && PM.current_speed.x != 0)
-        {
-            //Debug.Log(transform.rotation.eulerAngles.z + " " + rotate_max);
-            if (transform.localEulerAngles.z >= 0 && transform.localEulerAngles.z <= 180)
+            else if (PM.current_speed.x == 0)
             {
-                if (transform.localEulerAngles.z <= -rotate_max)
-                {
-                    //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
-                    //Debug.Log("1r");
-                    dir = 1;
-                }
-                else
-                {
-
-                    transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
-                }
+                //Debug.Log("RESET");
+                transform.rotation = new Quaternion(0, 0, 0, 0);
             }
-            else
-            {
-                if (360 - transform.localEulerAngles.z >= rotate_max)
-                {
-                    //Debug.Log(360 - transform.localEulerAngles.z + " | " + -rotate_max);
-                    //Debug.Log("2r");
-                    dir = 1;
-                }
-                else
-                {
-
-                    transform.Rotate(new Vector3(0, 0, -rotate_speed * Time.deltaTime));
-                }
-            }
-            
-
         }
         else
         {
-            //Debug.Log("RESET");
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+            
         }
     }
 
