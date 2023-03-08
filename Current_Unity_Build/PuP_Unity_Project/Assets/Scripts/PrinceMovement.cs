@@ -314,7 +314,7 @@ public class PrinceMovement : MonoBehaviour
             }
             Quaternion pRotation = gameObject.transform.rotation;
             pRotation.eulerAngles = new Vector3(FP.rotation.x, FP.rotation.y, FP.rotation.z);
-            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom), pRotation);
+            //cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom), pRotation);
 
             if (isRoof)
             {

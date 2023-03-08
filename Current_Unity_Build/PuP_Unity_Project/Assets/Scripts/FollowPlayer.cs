@@ -28,13 +28,13 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CameraSettingsBasedOnWorldPosition)
+        /*if (CameraSettingsBasedOnWorldPosition)
         {
             //CameraSettingsBasedOnWorldPosition = false;
             height = transform.localPosition.y;
             lead = transform.localPosition.x;
             zoom = transform.localPosition.z;
             rotation = transform.rotation.eulerAngles;
-        }
+        }*/
     }
 }
