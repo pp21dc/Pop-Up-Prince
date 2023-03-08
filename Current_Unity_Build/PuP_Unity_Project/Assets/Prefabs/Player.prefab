@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PM: {fileID: 3878876051692293042}
+  acclerationRotation: 0
   rotate_max: 8
   bob_height: 0.05
   bob_speed: 0.08
@@ -201,7 +202,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3878876051621828874}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -279,8 +280,8 @@ MonoBehaviour:
   ROTATE_SPEED: 0.5
   CAN_SLIDE: 0
   SLIDE_SPEED: 2.2
-  DASH_SPEED: 32
-  DASH_LENGTH: 0.25
+  DASH_SPEED: 36
+  DASH_LENGTH: 0.16
   DASH_DELAY: 0.25
   DASH_UPWARDRESISTANCE: 1
   PFC: {fileID: 3878876051621828873}
@@ -599,7 +600,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8950531996253465682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32, y: 0.007, z: 0}
+  m_LocalPosition: {x: -0.333, y: -0.008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -630,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9004512532187354310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.286, y: 0.009, z: 0}
+  m_LocalPosition: {x: 0.314, y: -0.012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
