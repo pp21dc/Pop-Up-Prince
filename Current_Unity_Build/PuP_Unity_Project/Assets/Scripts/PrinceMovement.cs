@@ -16,6 +16,7 @@ public class PrinceMovement : MonoBehaviour
     public GameObject flower2;
     public GameObject flower3;
     public GameObject manager;
+    public GameObject dashEffect;
     GameManager GM;
 
     [Header("Jump Settings")]
@@ -406,7 +407,8 @@ public class PrinceMovement : MonoBehaviour
             speed_dashy = UD * DASH_SPEED;
             speed_dashx = LR * DASH_SPEED;
             //Debug.Log(UD + " :?: " + LR);
-            
+
+            dashEffect.GetComponent<ParticleSystem>().Play();
         }
     }
 
