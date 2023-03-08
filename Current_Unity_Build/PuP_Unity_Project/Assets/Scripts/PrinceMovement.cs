@@ -405,7 +405,7 @@ public class PrinceMovement : MonoBehaviour
 
             speed_dashy = UD * DASH_SPEED;
             speed_dashx = LR * DASH_SPEED;
-            Debug.Log(UD + " :?: " + LR);
+            //Debug.Log(UD + " :?: " + LR);
             
         }
     }
