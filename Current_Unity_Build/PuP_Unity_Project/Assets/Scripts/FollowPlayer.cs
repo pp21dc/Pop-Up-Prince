@@ -30,7 +30,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if (CameraSettingsBasedOnWorldPosition)
         {
-            CameraSettingsBasedOnWorldPosition = false;
+            //CameraSettingsBasedOnWorldPosition = false;
             height = transform.localPosition.y;
             lead = transform.localPosition.x;
             zoom = transform.localPosition.z;

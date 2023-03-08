@@ -159,7 +159,7 @@ public class PrinceMovement : MonoBehaviour
 
             //Movement
             HorizontalMovement(Input.GetAxisRaw("Horizontal"));
-            VerticalMovement(Input.GetAxisRaw("Jump"));
+            VerticalMovement(Input.GetAxisRaw("Vertical"));
             DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
         }
 
@@ -329,7 +329,7 @@ public class PrinceMovement : MonoBehaviour
             
             if (current_speed.y > terminal_vel && (currentGroundScript == null || !isFloor))
             {
-                if (!isFloor)
+                if (!isFloor & !dashing)
                 {
                     current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
                 }
