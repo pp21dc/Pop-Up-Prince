@@ -74,6 +74,7 @@ public class PrinceMovement : MonoBehaviour
 
     float speed_x = 0f;
     float speed_y = 0f;
+    [HideInInspector]
     public float speed_dashx = 0f;
     float speed_dashy = 0f;
 
