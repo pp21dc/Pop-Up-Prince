@@ -390,7 +390,7 @@ public class PrinceMovement : MonoBehaviour
 
             }
             //Debug.Log(isFloor);
-            transform.position += transform.TransformDirection((totalXMove) / FPS, 0,0);
+            transform.position += transform.TransformDirection((totalXMove + speed_dashx) * Time.deltaTime, 0,0);
             transform.position += new Vector3(0, (speed_y + speed_dashy )* Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
     }
@@ -425,6 +425,10 @@ public class PrinceMovement : MonoBehaviour
             {
                 jump_held = false;
                 speed_y /= JUMP_CANCEL;
+            }
+            if (dir > 0 && jump_held && isFloor)
+            {
+                jump_held = false;
             }
             if (dir < 0)
             {
