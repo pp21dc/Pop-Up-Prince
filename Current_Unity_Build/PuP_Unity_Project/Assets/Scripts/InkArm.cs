@@ -24,16 +24,19 @@ public class InkArm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
-        Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
-        if (move && (!Stretched(moveTo)))
+        if (player != null)
         {
-            transform.position = moveTo;
+            Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
+            Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
+            if (move && (!Stretched(moveTo)))
+            {
+                transform.position = moveTo;
+            }
+            else
+            {
+                transform.position = moveToA;
+            }
         }
-        else
-        {
-            transform.position = moveToA;
-        } 
     }
 
 
