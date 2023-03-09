@@ -34,6 +34,7 @@ Transform:
   - {fileID: 935529069058694434}
   - {fileID: 5735176774766459517}
   - {fileID: 1192296030736935844}
+  - {fileID: 2053211705868659539}
   - {fileID: 125451820200407143}
   - {fileID: 7722210749988496844}
   m_Father: {fileID: 3878876051692293005}
@@ -61,6 +62,7 @@ MonoBehaviour:
   idle_model: {fileID: 6944864466239766390}
   jump_model: {fileID: 789925886400457437}
   dash_model: {fileID: 1999653488662851870}
+  dashAlt_model: {fileID: 1672429236378005993}
   key_model: {fileID: 4962017152408625351}
   key_moveMod: 0.2
 --- !u!1 &2972653673577375252
@@ -267,7 +269,7 @@ MonoBehaviour:
   flower2: {fileID: 7740482976077290271}
   flower3: {fileID: 554076996942677912}
   manager: {fileID: 0}
-  dashEffect: {fileID: 0}
+  dashEffect: {fileID: 4547990856751956454}
   ForgetJump: 0.2
   JUMP_SPEED: 6.66
   JUMP_ACCEL_TIME: 0.8
@@ -294,6 +296,7 @@ MonoBehaviour:
   DENSITY: 1.2
   cam: {fileID: 4397834305858986339}
   FP: {fileID: 2860924381104151685}
+  speed_dashx: 0
   current_speed: {x: 0, y: 0, z: 0}
   isWallLeft: 0
   isWallRight: 0
@@ -650,7 +653,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 25930d0cf2513fe4497856b44443abd1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 25930d0cf2513fe4497856b44443abd1,
         type: 3}
@@ -721,6 +724,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: princeJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 25930d0cf2513fe4497856b44443abd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25930d0cf2513fe4497856b44443abd1, type: 3}
@@ -933,6 +941,102 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1657706817210518607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2014446410925395128
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2477622790779702681}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 51.03982
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 51.03982
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 51.03982
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.203
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.079
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000005338508
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000053385076
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+        type: 3}
+      propertyPath: m_Name
+      value: princeDashAlt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a630d8e862180a4fb775bcbc4139ab5, type: 3}
+--- !u!1 &1672429236378005993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2014446410925395128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2053211705868659539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a630d8e862180a4fb775bcbc4139ab5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2014446410925395128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3070421437095642557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1020,6 +1124,12 @@ PrefabInstance:
 --- !u!4 &4547990856751956453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1549767763952157784, guid: 66503f9d5630d5b4780a7008589606f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3070421437095642557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4547990856751956454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1549767763952157787, guid: 66503f9d5630d5b4780a7008589606f6,
     type: 3}
   m_PrefabInstance: {fileID: 3070421437095642557}
   m_PrefabAsset: {fileID: 0}
@@ -1235,7 +1345,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c79c5871a524c1a4b821a56fb340b4ca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c79c5871a524c1a4b821a56fb340b4ca,
         type: 3}
@@ -1306,6 +1416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: princeIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c79c5871a524c1a4b821a56fb340b4ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c79c5871a524c1a4b821a56fb340b4ca, type: 3}

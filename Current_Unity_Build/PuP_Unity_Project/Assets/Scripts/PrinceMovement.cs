@@ -74,7 +74,7 @@ public class PrinceMovement : MonoBehaviour
 
     float speed_x = 0f;
     float speed_y = 0f;
-    float speed_dashx = 0f;
+    public float speed_dashx = 0f;
     float speed_dashy = 0f;
 
     
@@ -391,7 +391,7 @@ public class PrinceMovement : MonoBehaviour
             }
             //Debug.Log(isFloor);
             transform.position += transform.TransformDirection((totalXMove) / FPS, 0,0);
-            transform.position += new Vector3(0, speed_y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            transform.position += new Vector3(0, (speed_y + speed_dashy )* Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
     }
 
