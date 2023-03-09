@@ -5,7 +5,7 @@ using UnityEngine;
 public class InkArm : MonoBehaviour
 {
 
-    public Transform player;
+    Transform player;
     PrinceMovement PM;
     bool move = false;
 
@@ -18,7 +18,7 @@ public class InkArm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PM = player.gameObject.GetComponent<PrinceMovement>();
+        
     }
 
     // Update is called once per frame
@@ -60,6 +60,8 @@ public class InkArm : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            PM = other.gameObject.GetComponent<PrinceMovement>();
+            player = other.transform;
             //player = other.transform;
             move = true;
             //Debug.Log("Enter");
@@ -70,6 +72,8 @@ public class InkArm : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            PM = other.gameObject.GetComponent<PrinceMovement>();
+            player = other.transform;
             move = false;
         }
     }
