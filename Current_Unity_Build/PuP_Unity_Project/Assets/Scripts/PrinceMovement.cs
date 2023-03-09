@@ -20,6 +20,7 @@ public class PrinceMovement : MonoBehaviour
     GameManager GM;
 
     [Header("Jump Settings")]
+    public bool stick_jumpControl = false;
     [Tooltip("Time Before the Game Forgets the Player Pressed Space. 0.5 would mean half a second | Default: 0.1f")]
     public float ForgetJump = 0.1f;
     [Tooltip("Default: 9f")]
@@ -45,6 +46,7 @@ public class PrinceMovement : MonoBehaviour
     public float SLIDE_SPEED = 2.2f;
 
     [Header("Dash Settings")]
+    
     public float DASH_SPEED = 20f;
     [Tooltip("Time in seconds for the length of the players dash")]
     public float DASH_LENGTH = 2f;
@@ -52,6 +54,7 @@ public class PrinceMovement : MonoBehaviour
     public float DASH_DELAY = 0f;
     [Tooltip("Helps the player dash upwards")]
     public float DASH_UPWARDRESISTANCE = 1.75f;
+    
 
     [Header("PlayerPieces")]
     public PrinceFootCollider PFC;
@@ -161,7 +164,13 @@ public class PrinceMovement : MonoBehaviour
 
             //Movement
             HorizontalMovement(Input.GetAxisRaw("Horizontal"));
-            VerticalMovement(Input.GetAxisRaw("Vertical"));
+            if (stick_jumpControl) {
+                VerticalMovement(Input.GetAxisRaw("Vertical"));
+            }
+            else
+            {
+                VerticalMovement(Input.GetAxisRaw("Jump"));
+            }
             DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
         }
 
@@ -169,7 +178,7 @@ public class PrinceMovement : MonoBehaviour
         timers();
 
         objectController();
-
+        //Debug.Log(current_speed.y);
     }
 
     private void objectController()
@@ -407,6 +416,7 @@ public class PrinceMovement : MonoBehaviour
 
             speed_dashy = UD * DASH_SPEED;
             speed_dashx = LR * DASH_SPEED;
+            current_speed.y = current_speed.y/3;
             //Debug.Log(UD + " :?: " + LR);
 
             dashEffect.GetComponent<ParticleSystem>().Play();

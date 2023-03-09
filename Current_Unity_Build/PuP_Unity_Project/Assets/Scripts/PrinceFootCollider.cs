@@ -400,10 +400,10 @@ public class PrinceFootCollider : MonoBehaviour
                 if (BR.transform.position.x > ground_script.rightSide.x)
                 {
                     Debug.Log("LEFTPRE");
-                    if (BL.transform.position.y - player_sinkY < ground_script.rightSide.y)
+                    if (BR.transform.position.y - player_sinkY < ground_script.rightSide.y)
                     {
                         Debug.Log("LEFT");
-                        if (BL.transform.position.y + player_sinkY/2 > ground_script.rightSide.y)
+                        if (BR.transform.position.y + player_sinkY/2 > ground_script.rightSide.y)
                         {
                             Debug.Log("LEFT SKIP");
                         }
@@ -480,7 +480,7 @@ public class PrinceFootCollider : MonoBehaviour
                     PM.isSlope = true;
                 }
             }
-            if (body_trans.position.y - player_yBounds <= ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds >= ground_trans.position.y + mF_yBounds - (player_sinkY * 2))
+            if (BR.transform.position.y <= ground_script.rightSide.y && BR.transform.position.y >= ground_script.rightSide.y - (player_sinkY * 2))
             {
                 if (!ground_script.left && !ground_script.right && !ground_script.roof)
                 {
