@@ -305,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690662563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.95, y: 9.81, z: 1.32}
+  m_LocalPosition: {x: -1.95, y: 14.04, z: 1.32}
   m_LocalScale: {x: 5.54112, y: 2.3168643, z: 0.16942}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -326,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   moveTime: 1
+  lower: 0
   rise: 0
 --- !u!65 &1690662566
 BoxCollider:

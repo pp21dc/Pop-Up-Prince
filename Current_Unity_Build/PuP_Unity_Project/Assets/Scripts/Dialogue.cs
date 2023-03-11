@@ -11,6 +11,7 @@ public class Dialogue : MonoBehaviour
     public float moveSpeed = 3f;
     public float moveTime = 1f;
     float startPos;
+    public bool lower = false;
     public bool rise = false;
 
     // Start is called before the first frame update
@@ -23,32 +24,31 @@ public class Dialogue : MonoBehaviour
     void Update()
     {
 
-        if (rise == true)
+        if (lower == true)
         {
             //move object up
             transform.Translate(Vector3.down * (moveSpeed * Time.deltaTime), Space.World);
 
             if (transform.position.y < (startPos / 2))
             {
-                rise = false;
+                lower = false;
             }
 
         }
 
-        if (rise == false)
+        if (rise == true)
         {
-
             //move object up
             transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
 
-            if (transform.position.y > (startPos * 2))
+            if (transform.position.y > (startPos))
             {
                 rise = false;
             }
 
-
-
         }
+
+
 
     }
 
@@ -57,7 +57,14 @@ public class Dialogue : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             //tell gate to rise
-            rise = true;
+            lower = true;
+            rise = false;
         }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        rise = true;
+        lower = false;
     }
 }
