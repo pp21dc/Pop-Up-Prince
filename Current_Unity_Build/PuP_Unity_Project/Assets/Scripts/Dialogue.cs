@@ -13,11 +13,14 @@ public class Dialogue : MonoBehaviour
     float startPos;
     public bool lower = false;
     public bool rise = false;
+    pulic MeshRenderer text;
 
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position.y;
+
+        text.enabled = false;
     }
 
     // Update is called once per frame
