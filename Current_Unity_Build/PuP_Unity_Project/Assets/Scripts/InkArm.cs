@@ -6,33 +6,36 @@ public class InkArm : MonoBehaviour
 {
 
     Transform player;
-    PrinceMovement PM;
+    PrinceFootCollider PFC;
     bool move = false;
+    Vector3 player_position = new Vector3(0,0,0);
 
     public Transform ANCHOR;
     //public Collider GRABBER;
     public float ARM_SPEED = 5f;
     public float ARM_REACH = 2f;
     public bool RETURN = false;
+    GrabScript GS;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GS = gameObject.GetComponentInChildren<GrabScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (player != null && PFC != null)
         {
-            Vector3 moveTo = Vector3.MoveTowards(transform.position, player.position, ARM_SPEED * Time.deltaTime);
+            player_position = new Vector3(player.transform.position.x, player.transform.position.y + PFC.TR.transform.localPosition.y / 2, player.transform.position.z);
+            Vector3 moveTo = Vector3.MoveTowards(transform.position, player_position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
-            if (move && (!Stretched(moveTo)))
+            if (move && (!Stretched(moveTo)) && !GS.grabbed)
             {
                 transform.position = moveTo;
             }
-            else
+            else if (!move || GS.grabbed)
             {
                 transform.position = moveToA;
             }
@@ -48,8 +51,9 @@ public class InkArm : MonoBehaviour
         float mX = Mathf.Abs(mT.x - ANCHOR.position.x);
         float mY = Mathf.Abs(mT.y - ANCHOR.position.y);
 
+        
 
-        if (Mathf.Pow(x, 2) + Mathf.Pow(y, 2) < Mathf.Pow(ARM_REACH, 2))
+        if (Mathf.Pow(mX, 2) + Mathf.Pow(mY, 2) < Mathf.Pow(ARM_REACH, 2))
         {
             return false;
         }
@@ -63,7 +67,7 @@ public class InkArm : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PM = other.gameObject.GetComponent<PrinceMovement>();
+            PFC = other.gameObject.GetComponent<PrinceFootCollider>();
             player = other.transform;
             //player = other.transform;
             move = true;
@@ -71,11 +75,16 @@ public class InkArm : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        move = true;    
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            PM = other.gameObject.GetComponent<PrinceMovement>();
+            PFC = other.gameObject.GetComponent<PrinceFootCollider>();
             player = other.transform;
             move = false;
         }

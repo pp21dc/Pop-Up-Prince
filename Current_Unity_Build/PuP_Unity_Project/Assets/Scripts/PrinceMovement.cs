@@ -136,6 +136,8 @@ public class PrinceMovement : MonoBehaviour
 
     [HideInInspector]
     public Vector3 Checkpoint;
+    [HideInInspector]
+    public GrabScript current_grab;
     //bool respawn = false;
 
 
@@ -148,6 +150,7 @@ public class PrinceMovement : MonoBehaviour
         current_speed = new Vector3(0, -GRAVITY, 0);
         GM = manager.GetComponent<GameManager>();
         FP = cam.GetComponent<FollowPlayer>();
+        Checkpoint = transform.position;
 
         //MOVE_ACCEL_ACOEF = MOVE_SPEED / Mathf.Log10(MOVE_ACCEL_TIME); //Creates quadratic function to fufil time/speed acceleration requirements
     }
@@ -536,6 +539,10 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
+        if (current_grab != null)
+        {
+            current_grab.grabbed = false;
+        }
         grabbed = false;
         speed_dashx = 0;
         speed_dashy = 0;

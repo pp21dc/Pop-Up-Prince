@@ -23,7 +23,8 @@ public class PrinceFootCollider : MonoBehaviour
     public float slope_tpmultiplyer = 1.5f;
     public float slope_edgeDetector = 1.0f;
     int contacts = 0;
-    PrinceMovement PM;
+    
+    public PrinceMovement PM;
     Ground ground_script;
     MeshFilter mF;
     MeshFilter bmF;
@@ -64,6 +65,7 @@ public class PrinceFootCollider : MonoBehaviour
         Vector3 pc_cnt = player_collider.bounds.center;
         camRotation = new Quaternion(0, 0, 0, 0);
         camRotation.eulerAngles.Set(15, 0, 0);
+        
         //Debug.Log(c_yb);
         //BL.transform.position = new Vector3(pc_posG.x-c_xb, pc_posG.y - c_yb, 0);
         //BR.transform.position = new Vector3(pc_posG.x+c_xb, pc_posG.y - c_yb, 0);
@@ -391,7 +393,7 @@ public class PrinceFootCollider : MonoBehaviour
 
 
 
-        if (groundObject.transform.eulerAngles.z == 0)
+        if (groundObject.transform.eulerAngles.z == 0 )
         {
             //Debug.Log("Collide with Non Anlge" + groundObject.name);
             //Left Wall Detection
