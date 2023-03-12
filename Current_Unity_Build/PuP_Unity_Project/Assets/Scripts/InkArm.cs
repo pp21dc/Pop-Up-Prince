@@ -10,6 +10,7 @@ public class InkArm : MonoBehaviour
     bool move = false;
     Vector3 player_position = new Vector3(0,0,0);
 
+    public bool Disable = false;
     public Transform ANCHOR;
     //public Collider GRABBER;
     public float ARM_SPEED = 5f;
@@ -26,7 +27,7 @@ public class InkArm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null && PFC != null)
+        if (player != null && PFC != null && !Disable)
         {
             player_position = new Vector3(player.transform.position.x, player.transform.position.y + PFC.TR.transform.localPosition.y / 2, player.transform.position.z);
             Vector3 moveTo = Vector3.MoveTowards(transform.position, player_position, ARM_SPEED * Time.deltaTime);
