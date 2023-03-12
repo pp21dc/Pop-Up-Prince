@@ -174,7 +174,7 @@ MonoBehaviour:
   pointedFallOff: 0
   slope_tpmultiplyer: 4.5
   slope_edgeDetector: 1
-  PM: {fileID: 3878876051692293042}
+  PM: {fileID: 0}
   body: {fileID: 3878876052228874676}
   player: {fileID: 3878876051692293004}
   player_collider: {fileID: 3878876051621828879}
@@ -312,6 +312,7 @@ MonoBehaviour:
   grabbed: 0
   dashing: 0
   Checkpoint: {x: 0, y: 0, z: 0}
+  current_grab: {fileID: 0}
 --- !u!1818360609 &8103393664427841980
 RotationConstraint:
   m_ObjectHideFlags: 0

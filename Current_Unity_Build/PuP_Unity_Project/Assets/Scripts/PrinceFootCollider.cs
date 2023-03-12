@@ -82,6 +82,7 @@ public class PrinceFootCollider : MonoBehaviour
     {
         float px = player.transform.position.x;
         float py = player.transform.position.y; //Changed, removed bound minus
+        float pz = player.transform.position.z;
         c_yb = player_collider.bounds.extents.y;
         float gx = ground_script.transform.position.x;
         float gy = ground_script.transform.position.y;
