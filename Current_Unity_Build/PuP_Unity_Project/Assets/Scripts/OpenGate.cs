@@ -8,10 +8,9 @@ public class OpenGate : MonoBehaviour
     PrinceMovement PM;
     Rigidbody RB;
     public Collider DCL;
-    public GameObject confettiMasterRightFront; //Empty object containing all 6 confetti particle systems.
-    public GameObject confettiMasterLeftFront;
-    public GameObject confettiMasterLeftBack;
-    public GameObject confettiMasterRightBack;
+    public GameObject confettiMaster; //Empty object containing all 6 confetti particle systems.
+    public GameObject confettiMaster2;
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(111);
@@ -28,10 +27,8 @@ public class OpenGate : MonoBehaviour
                 DCL.gameObject.SetActive(false);
                 PM.isWallRight = false;
                 PrinceMovement.hasKey = false;
-                confettiMasterRightFront.gameObject.GetComponent<playConfetii>().playAllConfetti();
-                confettiMasterLeftFront.gameObject.GetComponent<playConfetii>().playAllConfetti();
-                confettiMasterLeftBack.gameObject.GetComponent<playConfetii>().playAllConfetti();
-                confettiMasterRightBack.gameObject.GetComponent<playConfetii>().playAllConfetti();
+                confettiMaster.gameObject.GetComponent<playConfetii>().playAllConfetti();
+                confettiMaster2.gameObject.GetComponent<playConfetii>().playAllConfetti();
             }
         }
     }
