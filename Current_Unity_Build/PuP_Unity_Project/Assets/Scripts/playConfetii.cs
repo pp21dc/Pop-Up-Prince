@@ -11,7 +11,6 @@ public class playConfetii : MonoBehaviour
     public ParticleSystem yellow;
     public ParticleSystem orange;
     public ParticleSystem purple;
-    // Start is called before the first frame update
     public void playAllConfetti()
     {
         red.Play();
