@@ -552,8 +552,9 @@ public class PrinceMovement : MonoBehaviour
         transform.position = Checkpoint;
         GM.resetFlowers();
         GM.resetKeys();
-        //hasKey = false;
-        //flowerCount = 0;
+
+        CollisionDetected(false, false, false, false, 30);
+
         Debug.Log("Respawn");
 
     }
