@@ -34,10 +34,13 @@ public class InkArm : MonoBehaviour
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
             if (move && (!Stretched(moveTo)) && !GS.grabbed)
             {
+                //Debug.Log(move);
+                //Debug.Log(GS.grabbed);
                 transform.position = moveTo;
             }
-            else if (!move || GS.grabbed)
+            else if (!move | GS.grabbed)
             {
+                //Debug.Log("ANCHOR");
                 transform.position = moveToA;
             }
         }
@@ -72,19 +75,23 @@ public class InkArm : MonoBehaviour
             player = other.transform;
             //player = other.transform;
             move = true;
-            //Debug.Log("Enter");
+            //Debug.Log("player entererererererer");
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        move = true;    
+        if (other.gameObject.tag == "Player")
+        {
+            move = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+           // Debug.Log("PLAYER EXIT MANNNNNN");
             PFC = other.gameObject.GetComponent<PrinceFootCollider>();
             player = other.transform;
             move = false;
