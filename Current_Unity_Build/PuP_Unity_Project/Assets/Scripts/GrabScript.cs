@@ -9,6 +9,9 @@ public class GrabScript : MonoBehaviour
     GameObject player;
     PrinceFootCollider PFC;
 
+    float xOffset;
+    float yOffset;
+
     void Update()
     {
         if (PFC != null && grabbed)
@@ -27,6 +30,8 @@ public class GrabScript : MonoBehaviour
             PFC.PM.grabbed = true;
             PFC.PM.current_grab = gameObject.GetComponent<GrabScript>();
             other.transform.parent.transform.position = transform.position;
+            xOffset = (transform.position.x - player.transform.position.x);
+            yOffset = (transform.position.y - player.transform.position.y);
         }
     }
 

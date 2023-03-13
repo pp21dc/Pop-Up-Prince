@@ -22,7 +22,8 @@ public class PrinceFootCollider : MonoBehaviour
     public float pointedFallOff = 0.5f;
     public float slope_tpmultiplyer = 1.5f;
     public float slope_edgeDetector = 1.0f;
-    int contacts = 0;
+    [HideInInspector]
+    public int contacts = 0;
     
     public PrinceMovement PM;
     Ground ground_script;

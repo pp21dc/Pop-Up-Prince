@@ -554,6 +554,7 @@ public class PrinceMovement : MonoBehaviour
         GM.resetKeys();
 
         CollisionDetected(false, false, false, false, 30);
+        PFC.contacts = 0;
 
         Debug.Log("Respawn");
 
