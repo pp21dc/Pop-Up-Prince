@@ -168,11 +168,11 @@ public class PrinceMovement : MonoBehaviour
             //Movement
             HorizontalMovement(Input.GetAxisRaw("Horizontal"));
             if (stick_jumpControl) {
-                VerticalMovement(Input.GetAxisRaw("Vertical"));
+                VerticalMovement(Input.GetAxisRaw("Vertical"), 0);
             }
             else
             {
-                VerticalMovement(Input.GetAxisRaw("Jump"));
+                VerticalMovement(Input.GetAxisRaw("Jump"), Input.GetAxisRaw("Vertical"));
             }
             DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
         }
@@ -426,7 +426,7 @@ public class PrinceMovement : MonoBehaviour
         }
     }
 
-    private void VerticalMovement(float dir)
+    private void VerticalMovement(float dir, float stickDir)
     {
         if (!dashing && !grabbed)
         {
@@ -444,7 +444,7 @@ public class PrinceMovement : MonoBehaviour
             {
                 jump_held = false;
             }
-            if (dir < 0)
+            if (dir < 0 || stickDir < 0)
             {
                 speed_y = 0;
             }
