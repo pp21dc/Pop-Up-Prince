@@ -694,9 +694,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e8601b9229ce24baa81c96dd762273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disable: 0
   ANCHOR: {fileID: 2439223715313425472}
   ARM_SPEED: 5
-  ARM_REACH: 4.1
+  ARM_REACH: 4.3
   RETURN: 0
 --- !u!1001 &4327641778412560937
 PrefabInstance:
@@ -998,12 +999,12 @@ PrefabInstance:
     - target: {fileID: 8779683029772350342, guid: af71d28921dc57c41a0ceac54519f4f2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8779683029772350342, guid: af71d28921dc57c41a0ceac54519f4f2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12
+      value: 0.219
       objectReference: {fileID: 0}
     - target: {fileID: 8779683029772350342, guid: af71d28921dc57c41a0ceac54519f4f2,
         type: 3}
@@ -1050,7 +1051,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: KillBox
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8779683029772350345, guid: af71d28921dc57c41a0ceac54519f4f2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af71d28921dc57c41a0ceac54519f4f2, type: 3}
 --- !u!4 &3436128010619048084 stripped
 Transform:
@@ -1058,3 +1060,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6230773010612937490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3436128010619048089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8779683029772350347, guid: af71d28921dc57c41a0ceac54519f4f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6230773010612937490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &8249483454778088097
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436128010619048089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000002
+  m_Center: {x: 0, y: 0, z: 0}
