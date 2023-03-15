@@ -81,7 +81,14 @@ public class PrinceWobble : MonoBehaviour
 
     private void state()
     {
-        if (PM.dashing && PM.speed_dashx < 0)
+        if (PM.onCurve)
+        {
+            idle = true;
+            jump = false;
+            dash = false;
+            dashAlt = false;
+        }
+        else if (PM.dashing && PM.speed_dashx < 0)
         {
             idle = false;
             jump = false;

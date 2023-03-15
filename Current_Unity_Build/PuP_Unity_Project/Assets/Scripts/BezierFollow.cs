@@ -37,7 +37,7 @@ public class BezierFollow : MonoBehaviour
 
     private void Update()
     {
-        if (coroutineAllowed && isActive)
+        if (coroutineAllowed)
         {
             StartCoroutine(GoByTheRoute(routeToGo));
             PM.onCurve = false;
@@ -52,22 +52,44 @@ public class BezierFollow : MonoBehaviour
         Vector3 p2 = routes[routeNumber].GetChild(2).position;
         Vector3 p3 = routes[routeNumber].GetChild(3).position;
         float posX = PM.transform.position.x;
+        float relativePos;
 
         posX = PM.transform.position.x;
-        if (posX > p3.x - 0.5f)
+        
+        if (posX > routes[routeNumber].position.x)
         {
-            tParam = 0.99f;
+            relativePos = (Mathf.Abs(posX - routes[routeNumber].position.x));
+            relativePos = (relativePos + (p3.x - routes[routeNumber].position.x)) / (p3.x - p0.x);
         }
-        else if (posX < p1.x + 0.5f)
+        else if (posX > p0.x)
         {
-            tParam = 0f;
+            relativePos = (Mathf.Abs(posX - p0.x));
+            relativePos = (relativePos) / (p3.x - p0.x);
         }
         else
         {
-            tParam = 0f;
+            relativePos = Mathf.Abs(posX - routes[routeNumber].position.x);
+            relativePos = (relativePos - (p3.x - routes[routeNumber].position.x)) / (p3.x - p0.x);
         }
-        while (tParam < 1 && posX > p0.x && posX < p3.x)
+
+        tParam = relativePos;
+
+        //Debug.Log(tParam);
+
+        playerPosition = Mathf.Pow(1 - tParam, 3) * p0 +
+                3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 +
+                3 * (1 - tParam) * Mathf.Pow(tParam, 2) * p2 +
+                Mathf.Pow(tParam, 3) * p3;
+
+
+        while ((tParam < 1 && posX > p0.x && posX < p3.x && PM.transform.position.y - 0.5f <= playerPosition.y))
         {
+            Debug.Log(PM.speed_y);
+            if (PM.speed_y > 0 && (PM.transform.position.y > playerPosition.y))
+            {
+                Debug.Log("BREAK");
+                break;
+            }
             PM.onCurve = true;
             posX = PM.transform.position.x;
 
@@ -76,7 +98,7 @@ public class BezierFollow : MonoBehaviour
             
             
             
-            Debug.Log(tParam);
+            //Debug.Log(tParam);
            
             playerPosition = Mathf.Pow(1 - tParam, 3) * p0 +
                 3 * Mathf.Pow(1 - tParam, 2) * tParam * p1 +

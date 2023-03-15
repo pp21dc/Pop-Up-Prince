@@ -76,7 +76,8 @@ public class PrinceMovement : MonoBehaviour
 
 
     float speed_x = 0f;
-    float speed_y = 0f;
+    [HideInInspector]
+    public float speed_y = 0f;
     [HideInInspector]
     public float speed_dashx = 0f;
     float speed_dashy = 0f;
@@ -354,7 +355,7 @@ public class PrinceMovement : MonoBehaviour
 
 
         }
-        else if (!grabbed && !onCurve) //player is on the ground
+        else if (!grabbed) //player is on the ground
         {
             float totalXMove = 0;
             jump_press = false;
@@ -380,9 +381,10 @@ public class PrinceMovement : MonoBehaviour
                 totalXMove = (current_speed.x + speed_x + speed_dashx);
             }
 
-            if (isFloor && !isRoof)
+            if ((isFloor || onCurve) && !isRoof)
             {
                 current_speed = new Vector3(current_speed.x, 0, 0); //Stop player from falling once they hit the ground
+                speed_y = 0;
             }
             else if (isRoof)
             {
@@ -390,11 +392,11 @@ public class PrinceMovement : MonoBehaviour
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
             //speed_y = 0;
-            if (jumpQueued && isFloor) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
+            if (jumpQueued && (isFloor || onCurve)) //IF JUMP QUEUED AND ON GROUND, THEN JUMP
             {
                 jumpQueued = false;
 
-                float slopeY = (currentGroundScript.slope) * ((transform.position.x) - currentGroundScript.trans.position.x) + (currentGroundScript.verticalWidthAP);
+                //float slopeY = (currentGroundScript.slope) * ((transform.position.x) - currentGroundScript.trans.position.x) + (currentGroundScript.verticalWidthAP);
 
                 speed_y = JUMP_SPEED;
                 if (current_speed.y > JUMP_SPEED)
@@ -405,8 +407,16 @@ public class PrinceMovement : MonoBehaviour
 
             }
             //Debug.Log(isFloor);
-            transform.position += transform.TransformDirection((totalXMove + speed_dashx) * Time.deltaTime, 0,0);
-            transform.position += new Vector3(0, (speed_y + speed_dashy )* Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            if (!onCurve || speed_y > 0)
+            {
+                transform.position += new Vector3(0, (speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+            }
+            if (!onCurve)
+            {
+                Debug.Log("Shift");
+                transform.position += transform.TransformDirection((totalXMove + speed_dashx) * Time.deltaTime, 0, 0);
+            }
+
         }
     }
 

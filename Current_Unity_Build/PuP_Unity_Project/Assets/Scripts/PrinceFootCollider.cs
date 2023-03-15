@@ -590,6 +590,11 @@ public class PrinceFootCollider : MonoBehaviour
             PM.Checkpoint = Checkpoint;
             Debug.Log("Checkpoint Hit");
         }
+        else if (other.transform.tag == "curve")
+        {
+            PM.onCurve = true;
+            Debug.Log("CurveHit");
+        }
         
     }
 

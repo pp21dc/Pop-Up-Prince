@@ -4416,7 +4416,7 @@ PrefabInstance:
     - target: {fileID: 3878876051692293005, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 266.97
+      value: 266.22
       objectReference: {fileID: 0}
     - target: {fileID: 3878876051692293005, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
@@ -5941,40 +5941,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 613597427808798302, guid: e41821780b8072c499d75b95ecbbaaee,
+    - target: {fileID: 181409499207409598, guid: e41821780b8072c499d75b95ecbbaaee,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.345
-      objectReference: {fileID: 0}
-    - target: {fileID: 768643901648527366, guid: e41821780b8072c499d75b95ecbbaaee,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.345
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2355596837060778746, guid: e41821780b8072c499d75b95ecbbaaee,
         type: 3}
       propertyPath: m_Name
       value: Bridge_With_Colliders
-      objectReference: {fileID: 0}
-    - target: {fileID: 6102431620932417447, guid: e41821780b8072c499d75b95ecbbaaee,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.946
-      objectReference: {fileID: 0}
-    - target: {fileID: 6102431620932417447, guid: e41821780b8072c499d75b95ecbbaaee,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.3699999
-      objectReference: {fileID: 0}
-    - target: {fileID: 7250646451773077837, guid: e41821780b8072c499d75b95ecbbaaee,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.946
-      objectReference: {fileID: 0}
-    - target: {fileID: 7250646451773077837, guid: e41821780b8072c499d75b95ecbbaaee,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 7482078477784099645, guid: e41821780b8072c499d75b95ecbbaaee,
         type: 3}
@@ -9677,25 +9652,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 825fd98f58d8e2d43b8a6ba709c07b02, type: 3}
---- !u!1 &1056493452 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5579284970540021815, guid: e41821780b8072c499d75b95ecbbaaee,
-    type: 3}
-  m_PrefabInstance: {fileID: 644285460}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1056493454
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056493452}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 9.095551, y: 2.7792177, z: 3.2037027}
-  m_Center: {x: 0.24876404, y: -1.1145024, z: -1.1018513}
 --- !u!1 &1066260626
 GameObject:
   m_ObjectHideFlags: 0
