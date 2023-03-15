@@ -680,6 +680,7 @@ public class PrinceFootCollider : MonoBehaviour
                         if ((true)) { 
                             PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                             ground_script.top = false;
+                            Debug.Log(other.name);
                             Debug.Log("Top Exit2");
                         }
                     }
