@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 3878876051692293005}
   - component: {fileID: 3878876051692293042}
   - component: {fileID: 8103393664427841980}
+  - component: {fileID: 1453601213}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -299,6 +300,7 @@ MonoBehaviour:
   DENSITY: 1.2
   cam: {fileID: 4397834305858986339}
   FP: {fileID: 2860924381104151685}
+  speed_y: 0
   speed_dashx: 0
   current_speed: {x: 0, y: 0, z: 0}
   isWallLeft: 0
@@ -311,6 +313,7 @@ MonoBehaviour:
   previousGroundScript: {fileID: 0}
   currentGroundScript: {fileID: 0}
   grabbed: 0
+  onCurve: 0
   dashing: 0
   Checkpoint: {x: 0, y: 0, z: 0}
   current_grab: {fileID: 0}
@@ -333,6 +336,25 @@ RotationConstraint:
   m_Sources:
   - sourceTransform: {fileID: 4501944167996574886}
     weight: 1
+--- !u!114 &1453601213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878876051692293004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241a697ebe6acb94ab5534b5d039e7ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routes:
+  - {fileID: 0}
+  routeToGo: 0
+  playerPosition: {x: 0, y: 0, z: 0}
+  isActive: 1
+  PM: {fileID: 3878876051692293042}
+  speedMod: 0.069
 --- !u!1 &3878876052228874676
 GameObject:
   m_ObjectHideFlags: 0
