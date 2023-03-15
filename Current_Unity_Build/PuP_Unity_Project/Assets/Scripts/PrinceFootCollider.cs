@@ -142,25 +142,27 @@ public class PrinceFootCollider : MonoBehaviour
                 ground_script.top = true;
             }
 
-            if (py + player_groundSinkY_slope < gy + slopeY)
+            if (py + player_groundSinkY_slope < gy + slopeY && BL.transform.position.y < ground_script.bottom.y)
             {
                 Debug.Log(3.3);
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
                 ground_script.roof = true;
-                if (px > gx && ground_script.slope != 0 && py < gy + slopeY)
-                {
-                    Debug.Log(3.1);
-                    PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
-                    ground_script.left = true;
-                }
-                else if (px < gx && ground_script.slope != 0 && py < gy + slopeY)
-                {
-                    Debug.Log(3.2);
-                    PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
-                    ground_script.right = true;
-                }
+                
             }
-             
+
+            if (px > gx && ground_script.slope != 0 && py < gy + slopeY)
+            {
+                Debug.Log(3.1);
+                PM.CollisionDetected(true, PM.isWallRight, PM.isFloor, PM.isRoof, PM.friction_current);
+                ground_script.left = true;
+            }
+            else if (px < gx && ground_script.slope != 0 && py < gy + slopeY)
+            {
+                Debug.Log(3.2);
+                PM.CollisionDetected(PM.isWallLeft, true, PM.isFloor, PM.isRoof, PM.friction_current);
+                ground_script.right = true;
+            }
+
 
         }
 
@@ -593,6 +595,7 @@ public class PrinceFootCollider : MonoBehaviour
         else if (other.transform.tag == "curve")
         {
             PM.onCurve = true;
+            PM.BzF.routeToGo = other.GetComponent<curve>().route;
             Debug.Log("CurveHit");
         }
         

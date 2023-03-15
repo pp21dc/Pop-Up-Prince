@@ -6,6 +6,7 @@ using UnityEngine;
 public class PrinceMovement : MonoBehaviour
 {
     // if the player has a key or not
+    
     [Header("Collectables")]
     public static bool hasKey = false;
     public  bool hasKey2 = false;
@@ -58,6 +59,7 @@ public class PrinceMovement : MonoBehaviour
 
     [Header("PlayerPieces")]
     public PrinceFootCollider PFC;
+    public BezierFollow BzF;
 
     [HideInInspector]
     public float MASS = 75f;
@@ -388,7 +390,7 @@ public class PrinceMovement : MonoBehaviour
             }
             else if (isRoof)
             {
-                //Debug.Log("ROOF");
+                Debug.Log("ROOF");
                 current_speed = new Vector3(current_speed.x, current_speed.y, 0);
             }
             //speed_y = 0;

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 2.5
   top: 0
   left: 0
   right: 0
@@ -367,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 2.5
   top: 0
   left: 0
   right: 0
@@ -554,6 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 2.5
   top: 0
   left: 0
   right: 0
@@ -621,7 +624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6661960646446009517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 489.7, y: 7.7499995, z: -10.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -774,6 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 2.5
   top: 0
   left: 0
   right: 0
@@ -992,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 2.5
   top: 0
   left: 0
   right: 0
@@ -1084,7 +1089,12 @@ PrefabInstance:
     - target: {fileID: 3674351400436541539, guid: 175daa82f108a364f810c57b5fe95b89,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.52
+      value: 10.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674351401284639992, guid: 175daa82f108a364f810c57b5fe95b89,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.646999
       objectReference: {fileID: 0}
     - target: {fileID: 3674351402196975379, guid: 175daa82f108a364f810c57b5fe95b89,
         type: 3}
