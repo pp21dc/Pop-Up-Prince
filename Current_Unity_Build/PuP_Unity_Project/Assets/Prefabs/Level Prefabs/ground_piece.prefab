@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 1.5
   top: 0
   left: 0
   right: 0
@@ -183,4 +184,7 @@ MonoBehaviour:
   slope: 0
   leftSide: {x: 0, y: 0, z: 0}
   rightSide: {x: 0, y: 0, z: 0}
+  bottom: {x: 0, y: 0, z: 0}
+  widthX: 0
+  widthY: 0
   verticalWidthAP: 0

@@ -115,6 +115,8 @@ public class PrinceMovement : MonoBehaviour
     public Ground currentGroundScript;
     [HideInInspector]
     public bool grabbed = false;
+    [HideInInspector]
+    public bool onCurve = false;
     
     
 
@@ -316,7 +318,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void CheckGroundCollisions()
     {
-        if (!isFloor && !grabbed)
+        if (!isFloor && !grabbed && !onCurve)
         {
 
             if (gameObject.transform.eulerAngles.z > 0 && gameObject.transform.eulerAngles.z < 180)
@@ -352,7 +354,7 @@ public class PrinceMovement : MonoBehaviour
 
 
         }
-        else if (!grabbed) //player is on the ground
+        else if (!grabbed && !onCurve) //player is on the ground
         {
             float totalXMove = 0;
             jump_press = false;

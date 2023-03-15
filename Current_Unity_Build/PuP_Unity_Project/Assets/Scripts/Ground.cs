@@ -6,6 +6,7 @@ public class Ground : MonoBehaviour
 {
 
     public float friction = 32f;
+    public float snap_multiplyer = 1.5f;
 
     [HideInInspector]
     public bool top;

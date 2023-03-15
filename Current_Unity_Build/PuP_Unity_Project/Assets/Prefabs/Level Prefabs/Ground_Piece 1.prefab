@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1220105519932462473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.51423323, y: 0.51423323, z: 0.51423323}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1685497435002371367}
@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friction: 32
+  snap_multiplyer: 3
   top: 0
   left: 0
   right: 0
