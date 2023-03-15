@@ -40,16 +40,16 @@ public class InkArm : MonoBehaviour
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
             if (move && (!Stretched(moveTo)) && !GS.grabbed && !reachLock)
             {
-                Debug.Log("TARGET: PLAYER");
+                //Debug.Log("TARGET: PLAYER");
                 transform.position = moveTo;
             }
             if ((!move | GS.grabbed) || reachLock)
             {
-                Debug.Log("TARGET: ANCHOR");
+                //Debug.Log("TARGET: ANCHOR");
                 transform.position = moveToA;
                 if (reachLock && timerx < 10 && timerOn) 
                 {
-                    Debug.Log("COUNTING");
+                    //Debug.Log("COUNTING");
                     timerx += 0.1f; 
                 }
                 else 
@@ -61,7 +61,7 @@ public class InkArm : MonoBehaviour
             }
             if ((Stretched(moveTo)) && !GS.grabbed && timerOn)
             {
-                Debug.Log("LOCK");
+                //Debug.Log("LOCK");
                 reachLock = true;
             }
             //Debug.Log("MOVE: " + move);

@@ -547,7 +547,7 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log("CURRRENT CONTACTS: " + contacts);
        
         if (other.transform.tag == "ground")
         {
