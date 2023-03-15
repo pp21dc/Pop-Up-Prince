@@ -6,6 +6,7 @@ public class Ground : MonoBehaviour
 {
 
     public float friction = 32f;
+    public float snap_multiplyer = 1.5f;
 
     [HideInInspector]
     public bool top;
@@ -50,10 +51,17 @@ public class Ground : MonoBehaviour
         widthY = 0.5f * transform.localScale.y;
         widthX = 0.5f * transform.localScale.x;
 
-        GameObject tempLeft = transform.GetChild(0).gameObject;
-        GameObject tempRight = transform.GetChild(1).gameObject;
+        //GameObject tempLeft = transform.GetChild(0).gameObject;
+        //GameObject tempRight = transform.GetChild(1).gameObject;
+        GameObject tempBottom = new GameObject("tempBottom");
+        GameObject tempLeft = new GameObject("tempLeft");
+        GameObject tempRight = new GameObject("tempRight");
+        tempBottom.transform.parent = transform;
+        tempLeft.transform.parent = transform;
+        tempRight.transform.parent = transform;
         tempLeft.transform.localPosition = new Vector3(-0.5f,0.5f);
         tempRight.transform.localPosition = new Vector3(0.5f,0.5f);
+        tempBottom.transform.localPosition = new Vector3(0.0f,-0.5f);
 
         transform.eulerAngles = new Vector3(0, 0, rot.z);
 
