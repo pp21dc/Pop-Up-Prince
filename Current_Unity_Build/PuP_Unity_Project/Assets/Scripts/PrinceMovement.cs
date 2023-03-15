@@ -413,7 +413,7 @@ public class PrinceMovement : MonoBehaviour
             }
             if (!onCurve)
             {
-                Debug.Log("Shift");
+                //Debug.Log("Shift");
                 transform.position += transform.TransformDirection((totalXMove + speed_dashx) * Time.deltaTime, 0, 0);
             }
 
