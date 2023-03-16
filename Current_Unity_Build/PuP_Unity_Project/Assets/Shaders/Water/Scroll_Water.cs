@@ -13,6 +13,7 @@ public class Scroll_Water : MonoBehaviour
     Vector3 waterStartLocation;
     public float spawnTimeGap;
     public float Timer;
+    public bool enabled;
     Vector3 objectScale;
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class Scroll_Water : MonoBehaviour
     {
         Timer = Timer + Time.deltaTime;
 
-        if (Timer > 4)
+        if (Timer > 4 && enabled == true)
         {
             GameObject water = Instantiate(WaterTile, transform.position, transform.rotation);
             Timer = 0;
