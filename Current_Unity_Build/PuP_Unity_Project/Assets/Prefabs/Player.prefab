@@ -193,7 +193,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3878876051621828874}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.671563, y: 2.2619572, z: 0.0748159}
@@ -273,6 +273,7 @@ MonoBehaviour:
   flower3: {fileID: 554076996942677912}
   manager: {fileID: 0}
   dashEffect: {fileID: 4547990856751956454}
+  GM: {fileID: 0}
   stick_jumpControl: 0
   ForgetJump: 0.2
   JUMP_SPEED: 6.66

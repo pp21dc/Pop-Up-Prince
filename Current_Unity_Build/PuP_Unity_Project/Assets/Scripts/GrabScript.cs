@@ -8,15 +8,28 @@ public class GrabScript : MonoBehaviour
     public bool grabbed;
     GameObject player;
     PrinceFootCollider PFC;
+    PrinceMovement PM;
 
     float xOffset;
     float yOffset;
 
     void Update()
     {
+        
         if (PFC != null && grabbed)
         {
+            Debug.Log(PM.dashing);
+            if (PM.dashing)
+            {
+                //
+                grabbed = false;
+                PM.grabbed = false;
+            }
             player.transform.parent.transform.position = new Vector3(transform.position.x, transform.position.y - PFC.TR.transform.localPosition.y, player.transform.position.z);
+        }
+        else
+        {
+            //Debug.Log(PM.dashing);
         }
     }
 
@@ -24,15 +37,27 @@ public class GrabScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            grabbed = true;
             player = other.gameObject;
             PFC = other.transform.GetComponent<PrinceFootCollider>();
-            PFC.PM.grabbed = true;
+            PM = other.transform.parent.GetComponent<PrinceMovement>();
+
             PFC.PM.current_grab = gameObject.GetComponent<GrabScript>();
             other.transform.parent.transform.position = transform.position;
             xOffset = (transform.position.x - player.transform.position.x);
             yOffset = (transform.position.y - player.transform.position.y);
+
+            Debug.Log("PUSH: " + PM.dashing);
+
+            if (!PM.dashing)
+            {
+                grabbed = true;
+                PFC.PM.grabbed = true;
+            }
+            
+            
         }
+        
+        
     }
 
     private void OnTriggerExit(Collider other)

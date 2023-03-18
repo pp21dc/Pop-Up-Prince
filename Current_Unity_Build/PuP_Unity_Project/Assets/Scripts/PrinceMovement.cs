@@ -179,8 +179,11 @@ public class PrinceMovement : MonoBehaviour
             {
                 VerticalMovement(Input.GetAxisRaw("Jump"), Input.GetAxisRaw("Vertical"));
             }
-            DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
+            //DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
         }
+
+        DashMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Dash"));
+        
 
         //Timers
         timers();
@@ -339,20 +342,20 @@ public class PrinceMovement : MonoBehaviour
             {
                 //Debug.Log("FALL: " + current_speed.y);
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, current_speed.y * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
-            } 
+            }
             else
             {
                 //Debug.Log((current_speed.x + " " + speed_x + " " + speed_dashx) + " " + isWallRight);
                 transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
             }
-            
+
             if (current_speed.y > terminal_vel && (currentGroundScript == null || !isFloor))
             {
                 if (!isFloor & !dashing)
                 {
                     current_speed -= new Vector3(0, GRAVITY * Time.deltaTime, 0); //INCREASES GRAVITY IN SMALL SECTIONS TO EQUATE TO 1 SECOND [FALLING]
                 }
-                
+
             }
 
 
@@ -370,14 +373,14 @@ public class PrinceMovement : MonoBehaviour
                 slide = SLIDE_SPEED / Mathf.Cos(RadAngle);
                 totalXMove = (current_speed.x + speed_x + speed_dashx) - slide;
             }
-            else if (PFC.current_slope < 0 && CAN_SLIDE) 
+            else if (PFC.current_slope < 0 && CAN_SLIDE)
             {
                 float RadAngle = Mathf.Abs((270f - transform.eulerAngles.z)) * Mathf.PI / 180;
                 float slide = 0;
 
                 slide = SLIDE_SPEED / Mathf.Cos(RadAngle);
                 totalXMove = (current_speed.x + speed_x + speed_dashx) + slide;
-            } 
+            }
             else
             {
                 totalXMove = (current_speed.x + speed_x + speed_dashx);
@@ -404,7 +407,7 @@ public class PrinceMovement : MonoBehaviour
                 if (current_speed.y > JUMP_SPEED)
                 {
                     speed_y = JUMP_SPEED;
-                    
+
                 }
 
             }
@@ -420,11 +423,16 @@ public class PrinceMovement : MonoBehaviour
             }
 
         }
+        else if (grabbed && dashing) 
+        {
+
+            transform.position += new Vector3((speed_dashx) *Time.deltaTime, (speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+        }
     }
 
     private void DashMovement(float LR, float UD, float dash)
     {
-        if (dash > 0 && !dashing && dash_ready && flowerCount >= 1 && !grabbed)
+        if (dash > 0 && !dashing && dash_ready && flowerCount >= 1)
         {
             float diag = DASH_SPEED / 1.5f;
             dashing = true;
