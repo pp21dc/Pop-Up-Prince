@@ -19,8 +19,8 @@ public class PopUp : MonoBehaviour
     {
         if (transform.rotation.x < 0 && pop)
         {
-            //Debug.Log(FPS);
-            transform.Rotate((POP_SPEED / (FPS*POP_TIME)), 0, 0);
+            //Debug.Log(transform.rotation.x);
+            transform.Rotate((POP_SPEED * Time.deltaTime), 0, 0);
         }
     }
 
