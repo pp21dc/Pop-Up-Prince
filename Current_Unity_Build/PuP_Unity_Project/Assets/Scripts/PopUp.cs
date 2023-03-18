@@ -6,7 +6,7 @@ public class PopUp : MonoBehaviour
 {
     bool pop = false;
     float FPS = 60;
-    public float POP_SPEED = 1f;
+    public float POP_SPEED = 64f;
     public float POP_TIME = 1f;
 
     private void Start()
