@@ -599,7 +599,7 @@ public class PrinceFootCollider : MonoBehaviour
         else if (other.transform.tag == "curve")
         {
             PM.onCurve = true;
-            PM.BzF.routeToGo = other.GetComponent<curve>().route;
+            PM.BzF.routeToGo = other.GetComponent<curve>().Route;
             Debug.Log("CurveHit");
         }
         
