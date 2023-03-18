@@ -18,7 +18,7 @@ public class PrinceMovement : MonoBehaviour
     public GameObject flower3;
     public GameObject manager;
     public GameObject dashEffect;
-    GameManager GM;
+    public GameManager GM;
 
     [Header("Jump Settings")]
     public bool stick_jumpControl = false;
