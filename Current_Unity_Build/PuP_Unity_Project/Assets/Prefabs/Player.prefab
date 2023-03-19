@@ -226,8 +226,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.671563, y: 2.2619572, z: 0.0748159}
+  m_Center: {x: -0.015247394, y: 1.1129581, z: 0.048760273}
 --- !u!1 &3878876051692293004
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   SLIDE_SPEED: 2.2
   DASH_SPEED: 30
   DASH_LENGTH: 0.15
-  DASH_DELAY: 0.5
+  DASH_DELAY: 0.4
   DASH_UPWARDRESISTANCE: 1
   PFC: {fileID: 3878876051621828873}
   BzF: {fileID: 1453601213}

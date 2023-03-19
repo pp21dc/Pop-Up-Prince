@@ -608,6 +608,7 @@ public class PrinceFootCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("==== EXIT START CONTACTS: " + contacts);
         if (other.transform.tag == "ground" && !PM.grabbed)
         {
             
@@ -675,7 +676,7 @@ public class PrinceFootCollider : MonoBehaviour
                         Debug.Log("Top Exit2");
                     }*/
                 }
-                if (BR.transform.position.y >= ground_script.leftSide.y && ground_script.slope == 0 && PM.currentSlope == 0)
+                if (BR.transform.position.y >= ground_script.leftSide.y + player_groundSinkY && ground_script.slope == 0 && PM.currentSlope == 0)
                 {
                     Debug.Log("TopExit2 Start");
                     if (PM.currentGroundScript != null && PM.previousGroundScript != null)
@@ -774,7 +775,7 @@ public class PrinceFootCollider : MonoBehaviour
             }
         }
 
-        Debug.Log("===== EXIT END =====");
+        Debug.Log("===== EXIT END [ " + other.name + " CONTACTS: " + contacts + " ] =====");
 
     }
 
