@@ -132,7 +132,7 @@ public class PrinceFootCollider : MonoBehaviour
                     Debug.Log(2.1);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY), 0 ), other.transform.rotation);
                 }
-                else if (PM.isSlope && xBoundDir == 0)
+                else if (PM.isSlope && xBoundDir == 0 && ground_script.slope != 0)
                 {
                     Debug.Log(2.2);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY), 0), player.transform.rotation);
@@ -464,6 +464,7 @@ public class PrinceFootCollider : MonoBehaviour
             //Roof
             if (TR.transform.position.y >= ground_script.leftSide.y && BR.transform.position.y < ground_script.bottom.y && !PM.isWallLeft && !PM.isWallRight)
             {
+               
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, true, PM.friction_current);
                 ground_script.roof = true;
                 Debug.Log("Roof");
