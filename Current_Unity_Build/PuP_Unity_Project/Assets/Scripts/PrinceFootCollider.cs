@@ -23,7 +23,7 @@ public class PrinceFootCollider : MonoBehaviour
     public float slope_tpmultiplyer = 1.5f;
     public float slope_edgeDetector = 1.0f;
     [HideInInspector]
-    public int contacts = 0;
+    public int contacts = -1;
     
     public PrinceMovement PM;
     Ground ground_script;
@@ -626,6 +626,7 @@ public class PrinceFootCollider : MonoBehaviour
             float slopeY = (ground_script.slope) * ((player.transform.position.x) - other.transform.position.x) + (ground_script.verticalWidthAP);
             if (!PM.grabbed)
             {
+                
                 contacts--;
                 if (contacts < 0)
                 {
@@ -661,22 +662,7 @@ public class PrinceFootCollider : MonoBehaviour
 
 
                 //Off the ground
-                if (contacts <= 0 || body_trans.position.y - player_yBounds <= ground_trans.position.y + mF_yBounds && body_trans.position.y - player_yBounds > ground_trans.position.y + mF_yBounds - (player_sinkY * 2))
-                {
-                    Debug.Log("TopExit Start");
-                    if (contacts <= 0) //or !PM.isSlope;
-                    {
-                        PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
-                        ground_script.top = false;
-                        Debug.Log("Top Exit");
-                    }
-                    /*else
-                    {
-                        PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
-                        ground_script.top = false;
-                        Debug.Log("Top Exit2");
-                    }*/
-                }
+                
                 if (BR.transform.position.y >= ground_script.leftSide.y + 0.05f && ground_script.slope == 0 && PM.currentSlope == 0)
                 {
                     Debug.Log("TopExit2 Start");

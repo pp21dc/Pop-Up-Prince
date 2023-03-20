@@ -329,19 +329,19 @@ public class PrinceMovement : MonoBehaviour
         float totalXMove = 0;
         if ((isWallLeft || isWallRight) && current_speed.x == 0 && speed_dashx == 0) //Player is not moving next to a wall... duh
         {
-            Debug.Log(801);
+            //Debug.Log(801);
             totalXMove = 0;
         }
         else if (isWallLeft || isWallRight) //hitting a wall and moving
         {
             if (isWallLeft && current_speed.x >= 0 && speed_dashx >= 0)//leaving right wall
             {
-                Debug.Log(901);
+                //Debug.Log(901);
                 totalXMove = (current_speed.x + speed_x + speed_dashx);
             }
             else if (isWallRight && current_speed.x <= 0 && speed_dashx <= 0)//leaving left wall
             {
-                Debug.Log(902);
+                //Debug.Log(902);
                 totalXMove = (current_speed.x + speed_x + speed_dashx);
             }
         }
@@ -461,7 +461,7 @@ public class PrinceMovement : MonoBehaviour
             }
             if (!onCurve)
             {
-                Debug.Log("SPEED: " + totalXMove);
+                //Debug.Log("SPEED: " + totalXMove);
                 //Debug.Log(isWallLeft + " : " + isWallRight);
                 transform.position += transform.TransformDirection((totalXMove) * Time.deltaTime, 0, 0);
             }
