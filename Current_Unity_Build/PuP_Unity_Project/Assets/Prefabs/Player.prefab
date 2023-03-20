@@ -304,7 +304,7 @@ MonoBehaviour:
   CAN_SLIDE: 0
   SLIDE_SPEED: 2.2
   DASH_SPEED: 40
-  DASH_LENGTH: 0.18
+  DASH_LENGTH: 0.32
   DASH_DELAY: 0.4
   DASH_UPWARDRESISTANCE: 1
   PFC: {fileID: 3878876051621828873}
@@ -318,6 +318,8 @@ MonoBehaviour:
   FP: {fileID: 2860924381104151685}
   speed_y: 0
   speed_dashx: 0
+  heightFactor: 0
+  scrollFactor: 0
   current_speed: {x: 0, y: 0, z: 0}
   isWallLeft: 0
   isWallRight: 0
