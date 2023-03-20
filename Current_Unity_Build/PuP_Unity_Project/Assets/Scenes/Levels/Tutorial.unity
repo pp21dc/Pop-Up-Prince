@@ -19485,6 +19485,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da90c6572f77ca745a8909d964117a7b, type: 3}
+--- !u!1 &716909467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4351069222728587825, guid: da90c6572f77ca745a8909d964117a7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 716909466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &716957033
 GameObject:
   m_ObjectHideFlags: 0
@@ -37873,7 +37879,7 @@ MonoBehaviour:
   keys:
   - {fileID: 1084129269}
   flowers:
-  - {fileID: 0}
+  - {fileID: 716909467}
   - {fileID: 172111860}
   - {fileID: 1165849631}
   - {fileID: 1468343158}

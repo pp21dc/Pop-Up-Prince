@@ -164,7 +164,16 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        heightFactor = transform.position.y / -2;
+        if (transform.position.y >= -11)
+        {
+            heightFactor = transform.position.y / -2;
+        }
+        else
+        {
+            heightFactor = -10 / -2;
+        }
+        Debug.Log(transform.position.y);
+        
         
         hasKey2 = hasKey;
         if (!grabbed) { 

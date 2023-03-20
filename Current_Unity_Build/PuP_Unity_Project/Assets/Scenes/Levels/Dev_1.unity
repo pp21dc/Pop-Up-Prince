@@ -675,12 +675,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79dc6b3e363e7943887048796156023, type: 3}
---- !u!4 &31186687 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -5579236541963867632, guid: 01e8e3853b91b2147849bba05327bd4b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1980956763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &35802651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6346,7 +6340,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 825fd98f58d8e2d43b8a6ba709c07b02,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 825fd98f58d8e2d43b8a6ba709c07b02,
         type: 3}
@@ -16104,16 +16098,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795056122}
-  m_LocalRotation: {x: 0.51381737, y: -0.48578998, z: -0.48578787, w: -0.51381904}
-  m_LocalPosition: {x: -0.0011600002, y: 7.2311164e-11, z: -0.0024800056}
-  m_LocalScale: {x: 0.016920898, y: 0.0032189616, z: 0.0029307525}
+  m_LocalRotation: {x: -0, y: -0, z: -0.090819634, w: 0.9958674}
+  m_LocalPosition: {x: 65.70663, y: 4.989384, z: -0.9760008}
+  m_LocalScale: {x: 2.9801915, y: 0.6633314, z: 1.0928563}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1605067758}
   - {fileID: 855911372}
-  m_Father: {fileID: 31186687}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 86.787}
+  m_Father: {fileID: 2133168274}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.422}
 --- !u!114 &1795056124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17979,7 +17973,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 01e8e3853b91b2147849bba05327bd4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01e8e3853b91b2147849bba05327bd4b,
         type: 3}
@@ -19401,6 +19395,7 @@ Transform:
   - {fileID: 990322403}
   - {fileID: 657502570}
   - {fileID: 416810718}
+  - {fileID: 1795056123}
   - {fileID: 1980956764}
   - {fileID: 618183933}
   m_Father: {fileID: 0}
