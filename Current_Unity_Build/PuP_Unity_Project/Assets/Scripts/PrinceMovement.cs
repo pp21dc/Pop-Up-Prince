@@ -464,7 +464,7 @@ public class PrinceMovement : MonoBehaviour
             }
             if (!onCurve)
             {
-                Debug.Log("SPEED: " + totalXMove);
+                //Debug.Log("SPEED: " + totalXMove);
                 //Debug.Log(isWallLeft + " : " + isWallRight);
                 transform.position += transform.TransformDirection((totalXMove) * Time.deltaTime, 0, 0);
             }
