@@ -150,8 +150,8 @@ public class PrinceMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
-        FPS = Application.targetFrameRate;
+        //Application.targetFrameRate = 60;
+        //FPS = Application.targetFrameRate;
         terminal_vel = -Mathf.Sqrt((2*MASS*GRAVITY)/(DENSITY*CS_AREA*DRAG));
         current_speed = new Vector3(0, -GRAVITY, 0);
         GM = manager.GetComponent<GameManager>();
@@ -246,7 +246,7 @@ public class PrinceMovement : MonoBehaviour
     {
         if (current_speed.x > 0)//FRICTION
         {
-            current_speed -= new Vector3(friction_current / FPS, 0, 0);
+            current_speed -= new Vector3(friction_current * Time.deltaTime, 0, 0);
             if (current_speed.x <= 0)
             {
                 current_speed = new Vector3(0, current_speed.y, 0);
@@ -254,7 +254,7 @@ public class PrinceMovement : MonoBehaviour
         }
         else if (current_speed.x < 0)
         {
-            current_speed += new Vector3(friction_current / FPS, 0, 0);
+            current_speed += new Vector3(friction_current * Time.deltaTime, 0, 0);
             if (current_speed.x >= 0)
             {
                 current_speed = new Vector3(0, current_speed.y, 0);
@@ -267,7 +267,7 @@ public class PrinceMovement : MonoBehaviour
         //DELAY UNTIL NEXT DASH
         if (dash_delay_start && dash_delayCounter < DASH_DELAY)
         {
-            dash_delayCounter += 1f / FPS;
+            dash_delayCounter += 1f * Time.deltaTime;
         }
         else if (dash_delayCounter >= DASH_DELAY)
         {
@@ -279,7 +279,7 @@ public class PrinceMovement : MonoBehaviour
         //LENGTH OF DASH
         if (dashing && dash_counter < DASH_LENGTH)
         {
-            dash_counter += 1f / FPS;
+            dash_counter += 1f * Time.deltaTime;
         }
         else if (dash_counter >= DASH_LENGTH)
         {
@@ -293,7 +293,7 @@ public class PrinceMovement : MonoBehaviour
         //HOLDING THE JUMP BUTTON COUNTER
         if (jump_held)
         {
-            jump_held_counter += 1f / FPS;
+            jump_held_counter += 1f * Time.deltaTime;
             jump_ForcePressed = jump_held_counter;
         }
         else
@@ -303,7 +303,7 @@ public class PrinceMovement : MonoBehaviour
 
         if (jumpQueued && fJump_Counter < ForgetJump) //forget jump
         {
-            fJump_Counter += 1f / FPS;
+            fJump_Counter += 1f * Time.deltaTime;
         }
         else
         {
@@ -313,7 +313,7 @@ public class PrinceMovement : MonoBehaviour
 
         if (frame < 1f)
         {
-            frame += 1f / FPS; //Counts each frame until enough are counted that take up 1 second
+            frame += 1f * Time.deltaTime; //Counts each frame until enough are counted that take up 1 second
             //Debug.Log(current_speed.x / (FPS * MOVE_ACCEL_TIME) + " | ");
 
         }
@@ -347,10 +347,12 @@ public class PrinceMovement : MonoBehaviour
         }
         else if (!isWallLeft && !isWallRight)//not touching anywalls
         {
+            //Debug.Log(802);
             totalXMove = (current_speed.x + speed_x + speed_dashx);
         }
         else
         {
+            //Debug.Log(803);
             totalXMove = 0;
         }
         return totalXMove;
@@ -380,6 +382,7 @@ public class PrinceMovement : MonoBehaviour
             else
             {
                 float totalXMove = CalculateTotalXMove();
+                
                 transform.position += new Vector3(totalXMove * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND
 
             }
@@ -461,7 +464,7 @@ public class PrinceMovement : MonoBehaviour
             }
             if (!onCurve)
             {
-                //Debug.Log("SPEED: " + totalXMove);
+                Debug.Log("SPEED: " + totalXMove);
                 //Debug.Log(isWallLeft + " : " + isWallRight);
                 transform.position += transform.TransformDirection((totalXMove) * Time.deltaTime, 0, 0);
             }
@@ -469,9 +472,10 @@ public class PrinceMovement : MonoBehaviour
         }
         else if (grabbed && dashing && !isWallLeft && !isWallLeft && !isFloor && !isRoof) 
         {
-            
+           
             transform.position += new Vector3((speed_dashx) *Time.deltaTime, (speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
+       
     }
 
     private void DashMovement(float LR, float UD, float dash)
@@ -530,9 +534,13 @@ public class PrinceMovement : MonoBehaviour
                     fMove_Counter = 0;
                 }
 
-                fMove_Counter += 1f / (FPS * MOVE_ACCEL_TIME);
+                /*fMove_Counter += 1f / (Time.deltaTime * MOVE_ACCEL_TIME);
                 MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, (1f / MOVE_ACCEL_TIME));
-                current_speed = new Vector3(Mathf.Pow(MOVE_ACCEL_ACOEF, fMove_Counter) + MOVE_ACCEL_X, current_speed.y, 0);
+                current_speed = new Vector3(Mathf.Pow(MOVE_ACCEL_ACOEF, fMove_Counter), current_speed.y, 0);*/
+
+                fMove_Counter += 1f * Time.deltaTime * MOVE_ACCEL_TIME;
+                MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, fMove_Counter);
+                current_speed = new Vector3(MOVE_ACCEL_ACOEF, current_speed.y, 0);
 
                 if (current_speed.x >= MOVE_SPEED)
                 {
@@ -549,9 +557,13 @@ public class PrinceMovement : MonoBehaviour
                     fMove_Counter = 0;
                 }
 
-                fMove_Counter += 1f / (FPS * MOVE_ACCEL_TIME);
-                MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, (1f / MOVE_ACCEL_TIME));
-                current_speed = new Vector3(-(Mathf.Pow(MOVE_ACCEL_ACOEF, fMove_Counter) + MOVE_ACCEL_X), current_speed.y, 0);
+                /* fMove_Counter += 1f / (Time.deltaTime * MOVE_ACCEL_TIME);
+                 MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, (1f / MOVE_ACCEL_TIME));
+                 current_speed = new Vector3(-(Mathf.Pow(MOVE_ACCEL_ACOEF, fMove_Counter) + MOVE_ACCEL_X), current_speed.y, 0);*/
+
+                fMove_Counter += 1f * Time.deltaTime * MOVE_ACCEL_TIME;
+                MOVE_ACCEL_ACOEF = Mathf.Pow(MOVE_SPEED, fMove_Counter);
+                current_speed = new Vector3(-MOVE_ACCEL_ACOEF, current_speed.y, 0);
 
                 if (current_speed.x <= -MOVE_SPEED)
                 {
