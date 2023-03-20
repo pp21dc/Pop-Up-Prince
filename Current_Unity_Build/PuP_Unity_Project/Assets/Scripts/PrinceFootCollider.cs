@@ -96,6 +96,7 @@ public class PrinceFootCollider : MonoBehaviour
         {
             Debug.Log(0);
             player.transform.SetPositionAndRotation(new Vector3(px, gy + mF_yBounds + c_yb - player_groundSinkY, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+            transform.SetPositionAndRotation(transform.position, player.transform.rotation);
         }
         else if (ground_script.left || ground_script.right && ground_script.slope == 0 && !PM.isSlope) // Hitting a wall and player is not currently on a slope
         {
@@ -105,11 +106,13 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 Debug.Log(1.1);
                 player.transform.SetPositionAndRotation(new Vector3(ground_script.rightSide.x + Mathf.Abs(clDif) + player_groundSinkX_left, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                transform.SetPositionAndRotation(transform.position, player.transform.rotation);
             }
             else if (ground_script.right && !PM.isSlope)
             {
                 Debug.Log(1.2);
                 player.transform.SetPositionAndRotation(new Vector3(ground_script.leftSide.x - Mathf.Abs(crDif) - player_groundSinkX_right, py, 0), new Quaternion(0, 0, other.transform.rotation.z, other.transform.rotation.w));
+                transform.SetPositionAndRotation(transform.position, player.transform.rotation);
             }
             
         }
@@ -122,25 +125,28 @@ public class PrinceFootCollider : MonoBehaviour
             float x = ((px + (player_xBounds * ground_script.snap_multiplyer * xBoundDir)));
 
             Vector3 S = Vector3.Lerp(ground_script.leftSide, ground_script.rightSide, x / Vector3.Distance(ground_script.leftSide, ground_script.rightSide));
-            Debug.DrawLine(ground_script.leftSide, ground_script.rightSide);
+            //Debug.DrawLine(ground_script.leftSide, ground_script.rightSide);
 
-            Debug.Log(ground_script.slope);
+            //Debug.Log(ground_script.slope);
             if (py + player_groundSinkY_slope >= gy + slopeY)
             {
                 if (ground_script.slope != 0 && PM.currentSlope == 0)
                 {
                     Debug.Log(2.1);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY), 0 ), other.transform.rotation);
+                    transform.SetPositionAndRotation(transform.position, player.transform.rotation);
                 }
                 else if (PM.isSlope && xBoundDir == 0 && ground_script.slope != 0)
                 {
                     Debug.Log(2.2);
-                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY), 0), player.transform.rotation);
+                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY) - player_groundSinkY_slopeTop, 0), other.transform.rotation);
+                    transform.SetPositionAndRotation(transform.position, player.transform.rotation);
                 }
                 else if (ground_script.slope == 0)
                 {
                     Debug.Log(2.3);
                     player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), ground_script.leftSide.y, 0), other.transform.rotation);
+                    transform.SetPositionAndRotation(transform.position, player.transform.rotation);
                 }
                 PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, true, PM.isRoof, PM.friction_current);
                 ground_script.top = true;

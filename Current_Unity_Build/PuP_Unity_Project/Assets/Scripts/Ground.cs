@@ -85,7 +85,7 @@ public class Ground : MonoBehaviour
 
             float RadAngle = (90 - transform.eulerAngles.z) * Mathf.PI / 180;
 
-            verticalWidthAP = Mathf.Abs(widthY / (Mathf.Sin(RadAngle)));
+            verticalWidthAP = Mathf.Abs(widthY / (Mathf.Sin(RadAngle))) * mF.transform.localScale.y;
 
         }
         else if (transform.eulerAngles.z < 0 || transform.eulerAngles.z > 90)
