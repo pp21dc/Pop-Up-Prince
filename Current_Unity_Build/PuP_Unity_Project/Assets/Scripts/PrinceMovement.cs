@@ -84,7 +84,7 @@ public class PrinceMovement : MonoBehaviour
     public float speed_dashx = 0f;
     float speed_dashy = 0f;
 
-    
+    public float heightFactor;
 
     float FPS;
     float frame = 0f;
@@ -163,6 +163,7 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        heightFactor = transform.position.y / -2;
         hasKey2 = hasKey;
         if (!grabbed) { 
             //Checks
@@ -336,7 +337,7 @@ public class PrinceMovement : MonoBehaviour
             }
             Quaternion pRotation = gameObject.transform.rotation;
             pRotation.eulerAngles = new Vector3(FP.rotation.x, FP.rotation.y, FP.rotation.z);
-            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom), pRotation);
+            cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom + heightFactor), pRotation);
 
             if (isRoof)
             {
