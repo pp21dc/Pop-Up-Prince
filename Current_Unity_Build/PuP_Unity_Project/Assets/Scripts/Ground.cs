@@ -48,8 +48,8 @@ public class Ground : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, 0);
 
         Collider mF = GetComponent<Collider>();
-        widthY = 0.5f * transform.localScale.y;
-        widthX = 0.5f * transform.localScale.x;
+        widthY = mF.bounds.extents.y / mF.transform.localScale.y;
+        widthX = mF.bounds.extents.x/mF.transform.localScale.x;
 
         //GameObject tempLeft = transform.GetChild(0).gameObject;
         //GameObject tempRight = transform.GetChild(1).gameObject;
@@ -59,9 +59,9 @@ public class Ground : MonoBehaviour
         tempBottom.transform.parent = transform;
         tempLeft.transform.parent = transform;
         tempRight.transform.parent = transform;
-        tempLeft.transform.localPosition = new Vector3(-0.5f,0.5f);
-        tempRight.transform.localPosition = new Vector3(0.5f,0.5f);
-        tempBottom.transform.localPosition = new Vector3(0.0f,-0.5f);
+        tempLeft.transform.localPosition = new Vector3(-widthX, widthY);
+        tempRight.transform.localPosition = new Vector3(widthX, widthY);
+        tempBottom.transform.localPosition = new Vector3(0.0f,-widthY);
 
         transform.eulerAngles = new Vector3(0, 0, rot.z);
 

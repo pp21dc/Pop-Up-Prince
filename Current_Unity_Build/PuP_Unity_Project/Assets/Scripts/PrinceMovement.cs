@@ -85,6 +85,7 @@ public class PrinceMovement : MonoBehaviour
     float speed_dashy = 0f;
 
     public float heightFactor;
+    public float scrollFactor;
 
     float FPS;
     float frame = 0f;
@@ -164,6 +165,7 @@ public class PrinceMovement : MonoBehaviour
     void Update()
     {
         heightFactor = transform.position.y / -2;
+        
         hasKey2 = hasKey;
         if (!grabbed) { 
             //Checks
@@ -322,6 +324,37 @@ public class PrinceMovement : MonoBehaviour
             //Debug.Log(current_speed + " | " + terminal_vel);
         }
     }
+    private float CalculateTotalXMove()
+    {
+        float totalXMove = 0;
+        if ((isWallLeft || isWallRight) && current_speed.x == 0 && speed_dashx == 0) //Player is not moving next to a wall... duh
+        {
+            Debug.Log(801);
+            totalXMove = 0;
+        }
+        else if (isWallLeft || isWallRight) //hitting a wall and moving
+        {
+            if (isWallLeft && current_speed.x >= 0 && speed_dashx >= 0)//leaving right wall
+            {
+                Debug.Log(901);
+                totalXMove = (current_speed.x + speed_x + speed_dashx);
+            }
+            else if (isWallRight && current_speed.x <= 0 && speed_dashx <= 0)//leaving left wall
+            {
+                Debug.Log(902);
+                totalXMove = (current_speed.x + speed_x + speed_dashx);
+            }
+        }
+        else if (!isWallLeft && !isWallRight)//not touching anywalls
+        {
+            totalXMove = (current_speed.x + speed_x + speed_dashx);
+        }
+        else
+        {
+            totalXMove = 0;
+        }
+        return totalXMove;
+    }
 
     private void CheckGroundCollisions()
     {
@@ -346,15 +379,9 @@ public class PrinceMovement : MonoBehaviour
             }
             else
             {
-                if (isWallLeft || isWallRight )
-                {
-                    transform.position += new Vector3(0, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
-                }
-                else
-                {
-                    transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
-                }
-                
+                float totalXMove = CalculateTotalXMove();
+                transform.position += new Vector3(totalXMove * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND
+
             }
 
             if (current_speed.y > terminal_vel && (currentGroundScript == null || !isFloor))
@@ -391,15 +418,7 @@ public class PrinceMovement : MonoBehaviour
             }
             else
             {
-                if (isWallLeft || isWallRight)
-                {
-                    totalXMove = 0;
-                }
-                else
-                {
-                    totalXMove = (current_speed.x + speed_x + speed_dashx);
-                }
-                
+                totalXMove = CalculateTotalXMove();
             }
 
             if ((isFloor || onCurve) && !isRoof)
@@ -442,14 +461,15 @@ public class PrinceMovement : MonoBehaviour
             }
             if (!onCurve)
             {
-                //Debug.Log("Shift");
+                Debug.Log("SPEED: " + totalXMove);
+                //Debug.Log(isWallLeft + " : " + isWallRight);
                 transform.position += transform.TransformDirection((totalXMove) * Time.deltaTime, 0, 0);
             }
 
         }
         else if (grabbed && dashing && !isWallLeft && !isWallLeft && !isFloor && !isRoof) 
         {
-            Debug.Log("HEEEELELEOEOEOLEPEPEPLEPE");
+            
             transform.position += new Vector3((speed_dashx) *Time.deltaTime, (speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
     }
