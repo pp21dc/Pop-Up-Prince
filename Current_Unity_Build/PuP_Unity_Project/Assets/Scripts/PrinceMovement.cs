@@ -345,8 +345,15 @@ public class PrinceMovement : MonoBehaviour
             }
             else
             {
-                //Debug.Log((current_speed.x + " " + speed_x + " " + speed_dashx) + " " + isWallRight);
-                transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                if (isWallLeft || isWallRight )
+                {
+                    transform.position += new Vector3(0, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                }
+                else
+                {
+                    transform.position += new Vector3((current_speed.x + speed_x + speed_dashx) * Time.deltaTime, (current_speed.y + speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                }
+                
             }
 
             if (current_speed.y > terminal_vel && (currentGroundScript == null || !isFloor))
@@ -383,7 +390,15 @@ public class PrinceMovement : MonoBehaviour
             }
             else
             {
-                totalXMove = (current_speed.x + speed_x + speed_dashx);
+                if (isWallLeft || isWallRight)
+                {
+                    totalXMove = 0;
+                }
+                else
+                {
+                    totalXMove = (current_speed.x + speed_x + speed_dashx);
+                }
+                
             }
 
             if ((isFloor || onCurve) && !isRoof)
@@ -414,18 +429,26 @@ public class PrinceMovement : MonoBehaviour
             //Debug.Log(isFloor);
             if (!onCurve || speed_y > 0)
             {
-                transform.position += new Vector3(0, (speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                if (isFloor)
+                {
+                    transform.position += new Vector3(0, (speed_y) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                }
+                else
+                {
+                    transform.position += new Vector3(0, (speed_y + speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
+                }
+                
             }
             if (!onCurve)
             {
                 //Debug.Log("Shift");
-                transform.position += transform.TransformDirection((totalXMove + speed_dashx) * Time.deltaTime, 0, 0);
+                transform.position += transform.TransformDirection((totalXMove) * Time.deltaTime, 0, 0);
             }
 
         }
-        else if (grabbed && dashing) 
+        else if (grabbed && dashing && !isWallLeft && !isWallLeft && !isFloor && !isRoof) 
         {
-
+            Debug.Log("HEEEELELEOEOEOLEPEPEPLEPE");
             transform.position += new Vector3((speed_dashx) *Time.deltaTime, (speed_dashy) * Time.deltaTime, 0); //MOVES THE PLAYER TO EQUATE TO 1 SECOND 
         }
     }
@@ -576,6 +599,7 @@ public class PrinceMovement : MonoBehaviour
         GM.resetKeys();
 
         CollisionDetected(false, false, false, false, 30);
+        isWallLeft = false;
         PFC.contacts = 0;
 
         Debug.Log("Respawn");

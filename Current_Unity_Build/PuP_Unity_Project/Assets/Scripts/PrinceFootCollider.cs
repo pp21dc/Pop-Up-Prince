@@ -677,7 +677,7 @@ public class PrinceFootCollider : MonoBehaviour
                         Debug.Log("Top Exit2");
                     }*/
                 }
-                if (BR.transform.position.y >= ground_script.leftSide.y + player_groundSinkY && ground_script.slope == 0 && PM.currentSlope == 0)
+                if (BR.transform.position.y >= ground_script.leftSide.y + 0.05f && ground_script.slope == 0 && PM.currentSlope == 0)
                 {
                     Debug.Log("TopExit2 Start");
                     if (PM.currentGroundScript != null && PM.previousGroundScript != null)
