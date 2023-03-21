@@ -141,6 +141,11 @@ public class PrinceMovement : MonoBehaviour
     float dash_delayCounter = 0f;
 
     [HideInInspector]
+    public bool respawn = false;
+    float respawn_counter = 0f;
+    float respawn_length = 5f;
+
+    [HideInInspector]
     public Vector3 Checkpoint;
     [HideInInspector]
     public GrabScript current_grab;
@@ -169,7 +174,7 @@ public class PrinceMovement : MonoBehaviour
             heightFactor = transform.position.y / -2;
         }
 
-        Debug.Log(transform.position.y);
+        //Debug.Log(transform.position.y);
         
         
         hasKey2 = hasKey;
@@ -270,6 +275,16 @@ public class PrinceMovement : MonoBehaviour
 
     private void timers()
     {
+        if (respawn && respawn_counter < respawn_length)
+        {
+            respawn_counter += 1f * Time.deltaTime;
+        }
+        else if (respawn_counter > respawn_length)
+        {
+            respawn_counter = 0;
+            respawn = false;
+        }
+
         //DELAY UNTIL NEXT DASH
         if (dash_delay_start && dash_delayCounter < DASH_DELAY)
         {
@@ -623,11 +638,13 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
+        respawn = true;
         if (current_grab != null)
         {
             current_grab.grabbed = false;
         }
         grabbed = false;
+        
         speed_dashx = 0;
         speed_dashy = 0;
         speed_x = 0;

@@ -79,7 +79,7 @@ public class PrinceFootCollider : MonoBehaviour
         transform.localPosition = new Vector3(0,0,0);
     }
 
-    private void SetPlayerY(Collider other, float gY, float pY_bounds, float gX)
+    public void SetPlayerY(Collider other)
     {
         float px = player.transform.position.x;
         float py = player.transform.position.y; //Changed, removed bound minus
@@ -394,7 +394,7 @@ public class PrinceFootCollider : MonoBehaviour
         cam.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + script_followPlayer.lead, player.transform.position.y + script_followPlayer.height, player.transform.position.z + script_followPlayer.zoom + PM.heightFactor), pRotation);
     }
 
-    private void CheckCollisions(GameObject groundObject, GameObject playerBody)
+    public void CheckCollisions(GameObject groundObject, GameObject playerBody)
     {
         mF_xBounds = groundObject.GetComponent<Collider>().bounds.extents.x;
         mF_yBounds = groundObject.GetComponent<Collider>().bounds.extents.y;
@@ -583,7 +583,7 @@ public class PrinceFootCollider : MonoBehaviour
             {
                 isSlope();
                 CheckCollisions(other.gameObject, body);
-                SetPlayerY(other, ground_trans.position.y + mF_yBounds, player_yBounds, mF_yBounds);
+                SetPlayerY(other);
                 PM.previousSlope = PM.currentSlope;
                 PM.currentSlope = ground_script.slope;
                 

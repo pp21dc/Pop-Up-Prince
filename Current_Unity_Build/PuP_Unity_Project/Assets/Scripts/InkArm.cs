@@ -5,7 +5,7 @@ using UnityEngine;
 public class InkArm : MonoBehaviour
 {
 
-    Transform player;
+    GameObject player;
     PrinceFootCollider PFC;
     bool move = false;
     Vector3 player_position = new Vector3(0,0,0);
@@ -35,9 +35,13 @@ public class InkArm : MonoBehaviour
     {
         if (player != null && PFC != null && !Disable)
         {
+            float xDif = player.transform.position.x - GS.transform.position.x;
+            float yDif = player.transform.position.y - GS.transform.position.y;
             player_position = new Vector3(player.transform.position.x, player.transform.position.y + PFC.TR.transform.localPosition.y / 2, player.transform.position.z);
             Vector3 moveTo = Vector3.MoveTowards(transform.position, player_position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
+            Vector3 moveToAA = Vector3.MoveTowards(new Vector3(transform.position.x + xDif, transform.position.y + yDif), ANCHOR.position, ARM_SPEED * Time.deltaTime);
+            Vector3 moveToH = Vector3.MoveTowards(player.transform.position, transform.position, ARM_SPEED * Time.deltaTime);
             if (move && (!Stretched(moveTo)) && !GS.grabbed && !reachLock)
             {
                 //Debug.Log("TARGET: PLAYER");
@@ -47,6 +51,11 @@ public class InkArm : MonoBehaviour
             {
                 //Debug.Log("TARGET: ANCHOR");
                 transform.position = moveToA;
+                if (!PFC.PM.dashing)
+                {
+                    player.transform.position = moveToAA;
+                }
+                
                 if (reachLock && timerx < 10 && timerOn) 
                 {
                     //Debug.Log("COUNTING");
@@ -94,7 +103,7 @@ public class InkArm : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PFC = other.gameObject.GetComponent<PrinceFootCollider>();
-            player = other.transform;
+            player = other.gameObject.transform.parent.gameObject;
             //player = other.transform;
             move = true;
             //Debug.Log("player entererererererer");
@@ -115,8 +124,9 @@ public class InkArm : MonoBehaviour
         {
            // Debug.Log("PLAYER EXIT MANNNNNN");
             PFC = other.gameObject.GetComponent<PrinceFootCollider>();
-            player = other.transform;
+            player = other.gameObject;
             move = false;
+            
         }
     }
 
