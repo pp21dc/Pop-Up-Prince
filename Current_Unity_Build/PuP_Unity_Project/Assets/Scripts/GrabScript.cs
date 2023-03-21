@@ -33,17 +33,31 @@ public class GrabScript : MonoBehaviour
                 grabbed = true;
                 PFC.PM.grabbed = true;
             }
-            else
-            {
-                
-            }
 
-            
-            
-            
         }
         
         
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+
+            player = collision.gameObject;
+            PFC = collision.transform.GetComponent<PrinceFootCollider>();
+            PM = collision.transform.parent.GetComponent<PrinceMovement>();
+            PFC.PM.current_grab = gameObject.GetComponent<GrabScript>();
+
+
+            if (!PM.dashing)
+            {
+                grabbed = true;
+                PFC.PM.grabbed = true;
+            }
+
+            
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -58,6 +72,17 @@ public class GrabScript : MonoBehaviour
             PFC.CheckCollisions(PFC.PM.currentGroundScript.gameObject, player);
             PFC.SetPlayerY(other);
         }
+        else if (PM.respawn && other.tag == "Player")
+        {
+            grabbed = false;
+            player = other.gameObject;
+            PFC = other.transform.GetComponent<PrinceFootCollider>();
+            PFC.PM.current_grab = null;
+            PFC.PM.grabbed = false;
+            PFC.CheckCollisions(PFC.PM.currentGroundScript.gameObject, player);
+            PFC.SetPlayerY(other);
+        }
+
 
     }
 

@@ -40,7 +40,7 @@ public class InkArm : MonoBehaviour
             player_position = new Vector3(player.transform.position.x, player.transform.position.y + PFC.TR.transform.localPosition.y / 2, player.transform.position.z);
             Vector3 moveTo = Vector3.MoveTowards(transform.position, player_position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
-            Vector3 moveToAA = Vector3.MoveTowards(new Vector3(transform.position.x + xDif, transform.position.y + yDif), ANCHOR.position, ARM_SPEED * Time.deltaTime);
+            Vector3 moveToAA = Vector3.MoveTowards(new Vector3(transform.position.x + xDif, transform.position.y + yDif), ANCHOR.transform.position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToH = Vector3.MoveTowards(player.transform.position, transform.position, ARM_SPEED * Time.deltaTime);
             if (move && (!Stretched(moveTo)) && !GS.grabbed && !reachLock)
             {
@@ -49,7 +49,7 @@ public class InkArm : MonoBehaviour
             }
             if ((!move | GS.grabbed) || reachLock)
             {
-                //Debug.Log("TARGET: ANCHOR");
+                Debug.Log("TARGET: ANCHOR");
                 transform.position = moveToA;
                 if (!PFC.PM.dashing)
                 {

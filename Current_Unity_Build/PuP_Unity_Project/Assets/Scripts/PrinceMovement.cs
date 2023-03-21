@@ -182,7 +182,7 @@ public class PrinceMovement : MonoBehaviour
             //Checks
             friction();
             CheckGroundCollisions(); //Manages player movement
-
+            
 
             //Movement
             HorizontalMovement(Input.GetAxisRaw("Horizontal"));
