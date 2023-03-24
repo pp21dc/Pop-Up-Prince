@@ -168,10 +168,10 @@ MonoBehaviour:
   player_sinkY: 0.25
   player_sinkX: 0.25
   player_groundSinkY: 1.56
-  player_groundSinkX_right: 0.12
+  player_groundSinkX_right: 0.1
   player_groundSinkX_left: 0.14
   player_groundSinkY_slope: 0.6
-  player_groundSinkY_slopeTop: 0
+  player_groundSinkY_slopeTop: 0.05
   pointedFallOff: 0
   slope_tpmultiplyer: 4.5
   slope_edgeDetector: 1
@@ -333,6 +333,7 @@ MonoBehaviour:
   grabbed: 0
   onCurve: 0
   dashing: 0
+  respawn: 0
   Checkpoint: {x: 0, y: 0, z: 0}
   current_grab: {fileID: 0}
 --- !u!1818360609 &8103393664427841980
