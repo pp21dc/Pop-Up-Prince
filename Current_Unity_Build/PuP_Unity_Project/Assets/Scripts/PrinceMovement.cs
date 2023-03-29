@@ -63,6 +63,14 @@ public class PrinceMovement : MonoBehaviour
     public ParticleSystem PS;
     bool PS_lock = false;
 
+    [Header("Audio/SFX")]
+    public AudioSource AS;
+    public AudioClip AS_walking;
+    public AudioClip AS_jumping;
+    public AudioClip AS_landing;
+    public AudioClip AS_dash;
+    
+
     [HideInInspector]
     public float MASS = 75f;
     [HideInInspector]
@@ -172,6 +180,10 @@ public class PrinceMovement : MonoBehaviour
     void Update()
     {
         particleEffects();
+        if (current_speed == new Vector3(0, 0, 0) && dashing == false)
+        {
+            AS.Stop();
+        }
 
         if (transform.position.y - 12 >= -11)
         {
@@ -210,6 +222,13 @@ public class PrinceMovement : MonoBehaviour
         //Debug.Log(current_speed.y);
     }
 
+    private void playSound(AudioClip AC)
+    {
+        AS.Stop();
+        AS.clip = AC;
+        AS.Play();
+    }
+
     private void particleEffects()
     {
         if (PS != null)
@@ -218,6 +237,11 @@ public class PrinceMovement : MonoBehaviour
             {
                 PS.Play();
                 PS_lock = true;
+                if (true)
+                {
+                    Debug.Log("SOUND: LANDING");
+                    playSound(AS_landing);
+                }
             }
             else if (PS_lock && !isFloor)
             {
@@ -534,6 +558,12 @@ public class PrinceMovement : MonoBehaviour
             //Debug.Log(UD + " :?: " + LR);
 
             dashEffect.GetComponent<ParticleSystem>().Play();
+            if (true)
+            {
+                Debug.Log("SOUND: DASHING");
+                playSound(AS_dash);
+            }
+            
         }
     }
 
@@ -541,8 +571,11 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!dashing && !grabbed)
         {
+
             if (dir > 0 && !jump_held && !isRoof)
             {
+                playSound(AS_jumping);
+                Debug.Log("SOUND: JUMPING");
                 jump_held = true;
                 jumpQueued = true;
             }
@@ -567,6 +600,12 @@ public class PrinceMovement : MonoBehaviour
     {
         if (!dashing && !grabbed)
         {
+            if (!AS.isPlaying && isFloor && dir != 0)
+            {
+                Debug.Log("SOUND: WALKING");
+                playSound(AS_walking);
+            }
+
             speed_x = 0;
             if (dir > 0 && !isWallRight)
             {
@@ -620,6 +659,7 @@ public class PrinceMovement : MonoBehaviour
             }
             prevDir = dir;
         }
+
     }
 
 
