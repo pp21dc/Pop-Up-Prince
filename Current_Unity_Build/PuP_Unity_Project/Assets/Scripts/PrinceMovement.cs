@@ -60,6 +60,8 @@ public class PrinceMovement : MonoBehaviour
     [Header("PlayerPieces")]
     public PrinceFootCollider PFC;
     public BezierFollow BzF;
+    public ParticleSystem PS;
+    bool PS_lock = false;
 
     [HideInInspector]
     public float MASS = 75f;
@@ -169,6 +171,8 @@ public class PrinceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        particleEffects();
+
         if (transform.position.y - 12 >= -11)
         {
             heightFactor = transform.position.y / -2;
@@ -204,6 +208,22 @@ public class PrinceMovement : MonoBehaviour
 
         objectController();
         //Debug.Log(current_speed.y);
+    }
+
+    private void particleEffects()
+    {
+        if (PS != null)
+        {
+            if (!PS_lock && isFloor)
+            {
+                PS.Play();
+                PS_lock = true;
+            }
+            else if (PS_lock && !isFloor)
+            {
+                PS_lock = false;
+            }
+        }
     }
 
     private void objectController()
