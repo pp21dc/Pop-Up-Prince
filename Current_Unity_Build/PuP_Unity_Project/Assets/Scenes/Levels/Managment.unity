@@ -148,6 +148,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1642113831627220111, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642113831627220111, guid: 7a18e997d34a1fc43ba00ce78b896957,
+        type: 3}
       propertyPath: m_Intensity
       value: 131.51
       objectReference: {fileID: 0}
@@ -218,11 +223,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9104533272879030164, guid: 7a18e997d34a1fc43ba00ce78b896957,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9104533272879030164, guid: 7a18e997d34a1fc43ba00ce78b896957,
+        type: 3}
       propertyPath: m_Intensity
       value: 131.51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a18e997d34a1fc43ba00ce78b896957, type: 3}
+--- !u!1 &637808608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637808610}
+  - component: {fileID: 637808609}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &637808609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637808608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db93b25547b3644f920c39da616d947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WorldStart: {x: 0, y: 0, z: 0}
+  WorldEnd: {x: 0, y: 0, z: 0}
+  PlayerLocation: {x: 0, y: 0, z: 0}
+  currentPositionPercent: 0
+  Light: {fileID: 1631900509}
+--- !u!4 &637808610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637808608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -452.62665, y: 4.34243, z: 8.845414}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1631900509
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +311,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.97721696, b: 0.9009434, a: 1}
+  m_Color: {r: 0.90588236, g: 0.8980392, b: 0.87058824, a: 1}
   m_Intensity: 1.29
   m_Range: 10
   m_SpotAngle: 30
@@ -262,7 +321,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.363
+    m_Strength: 0.518
     m_Bias: 3.63
     m_NormalBias: 0
     m_NearPlane: 0.58
