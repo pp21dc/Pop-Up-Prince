@@ -5,12 +5,13 @@ using UnityEngine;
 public class Gate : MonoBehaviour
 {
     /**
-     * Script for unlocking and raising the gates
+     * Script now for flag raising
      */
 
     public float moveSpeed = 3f;
     public float moveTime = 1f;
     float startPos;
+    public float riseMultiplier = 2;
     public bool rise = false;
 
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class Gate : MonoBehaviour
             //move object up
             transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
 
-            if (transform.position.y > (startPos*2))
+            if (transform.position.y > (startPos*riseMultiplier))
             {
                 rise = false;
             }
@@ -39,13 +40,10 @@ public class Gate : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player" && PrinceMovement.hasKey == true)
+        if (collider.gameObject.tag == "Player")
         {
 
-            // get rid of princes key
-            PrinceMovement.hasKey = false;
-
-            //tell gate to rise
+            //tell flag to rise
             rise = true;
 
         }
