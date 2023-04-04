@@ -21,15 +21,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: tree2
-  m_Shader: {fileID: -6465566751694194690, guid: dbaaee01ff1d9534382e94c68e66a023,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -113,22 +113,33 @@ Material:
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
+    - _GlossinessSource: 0
     - _GlossyReflections: 0
-    - _Height: 0.07
+    - _Height: 0.02
+    - _Height_Smoothstep: -3.16
+    - _Height_Voronoi_Offset: 120.72781
     - _Metallic: 0
-    - _Noise_Scale_Height: 56.66
-    - _Noise_Scale_Width: 75.16
+    - _Noise_Scale_Height: 92
+    - _Noise_Scale_Width: 99.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Shininess: 0
     - _Smoothness: 0.5
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
+    - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Width: 0.52
+    - _Transparency_Blotching_Intensity: 1.38
+    - _Transparency_Noise_Strength: 1.87
+    - _Transparency_Voronoi_Offset: 120.72781
+    - _Width: 0.13
+    - _Width_Smoothstep: -2.86
+    - _Width_Voronoi_Offset: 120.72781
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
