@@ -185,7 +185,7 @@ public class PrinceMovement : MonoBehaviour
             AS.Stop();
         }
 
-        if (transform.position.y - 12 >= -11)
+        if (transform.position.y - 12 >= -11 && transform.position.y < 20)
         {
             heightFactor = transform.position.y / -2;
         }
