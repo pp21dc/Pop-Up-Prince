@@ -11,6 +11,7 @@ public class StartRisingInk : MonoBehaviour
      */
 
     //public bool canRise;
+    
 
     // Start is called before the first frame update
     void Start()
