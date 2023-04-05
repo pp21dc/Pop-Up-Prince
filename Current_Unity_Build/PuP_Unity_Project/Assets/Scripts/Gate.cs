@@ -27,7 +27,7 @@ public class Gate : MonoBehaviour
         if (rise == true)
         {
             //move object up
-            transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
+            transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
 
             if (transform.position.y > (startPos*riseMultiplier))
             {
