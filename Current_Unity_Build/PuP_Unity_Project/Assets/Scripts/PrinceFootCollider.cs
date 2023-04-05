@@ -77,7 +77,14 @@ public class PrinceFootCollider : MonoBehaviour
     private void Update()
     {
         transform.localPosition = new Vector3(0,0,0);
+        if (ground_script.leftSide.y < BR.transform.position.y)
+        {
+            PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
+            ground_script.top = false;
+            Debug.Log("Top Exit | NO TOP");
+        }
     }
+
 
     public void SetPlayerY(Collider other)
     {
@@ -675,11 +682,19 @@ public class PrinceFootCollider : MonoBehaviour
                     if (PM.currentGroundScript != null && PM.previousGroundScript != null)
                     {
                         Debug.Log("TopExit2 CheckTops");
-                        if ((true)) { 
+                        //Debug.Log("PREVIOUS GS: " + PM.previousGroundScript.name);
+                        if ((BR.transform.position.y > PM.previousGroundScript.leftSide.y)) { 
                             PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
                             ground_script.top = false;
                             Debug.Log(other.name);
                             Debug.Log("Top Exit2");
+                        }
+                        else if (ground_script.leftSide.y < BR.transform.position.y)
+                        {
+                            PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
+                            ground_script.top = false;
+                            Debug.Log(other.name);
+                            Debug.Log("Top Exit | NO TOP");
                         }
                     }
                 }
@@ -688,7 +703,7 @@ public class PrinceFootCollider : MonoBehaviour
 
 
                 //Nothing Above
-                if (body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds && body_trans.position.y + player_yBounds < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
+                if (TR.transform.position.y < ground_trans.position.y - mF_yBounds && TR.transform.position.y < ground_trans.position.y - mF_yBounds + (player_sinkY * 2))
                 {
                     PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, PM.isFloor, false, PM.friction_current);
                     ground_script.roof = false;

@@ -239,7 +239,7 @@ public class PrinceMovement : MonoBehaviour
                 PS_lock = true;
                 if (true)
                 {
-                    Debug.Log("SOUND: LANDING");
+                    //Debug.Log("SOUND: LANDING");
                     playSound(AS_landing);
                 }
             }
@@ -425,6 +425,7 @@ public class PrinceMovement : MonoBehaviour
 
     private void CheckGroundCollisions()
     {
+        cam.transform.SetPositionAndRotation(new Vector3(transform.position.x + FP.lead, transform.position.y + FP.height, transform.position.z + FP.zoom + heightFactor), cam.transform.rotation);
         if (!isFloor && !grabbed && !onCurve)
         {
 
@@ -560,7 +561,7 @@ public class PrinceMovement : MonoBehaviour
             dashEffect.GetComponent<ParticleSystem>().Play();
             if (true)
             {
-                Debug.Log("SOUND: DASHING");
+                //Debug.Log("SOUND: DASHING");
                 playSound(AS_dash);
             }
             
@@ -575,7 +576,7 @@ public class PrinceMovement : MonoBehaviour
             if (dir > 0 && !jump_held && !isRoof)
             {
                 playSound(AS_jumping);
-                Debug.Log("SOUND: JUMPING");
+                //Debug.Log("SOUND: JUMPING");
                 jump_held = true;
                 jumpQueued = true;
             }
@@ -602,7 +603,7 @@ public class PrinceMovement : MonoBehaviour
         {
             if (!AS.isPlaying && isFloor && dir != 0)
             {
-                Debug.Log("SOUND: WALKING");
+                //Debug.Log("SOUND: WALKING");
                 playSound(AS_walking);
             }
 
