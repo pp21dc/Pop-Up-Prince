@@ -77,7 +77,7 @@ public class PrinceFootCollider : MonoBehaviour
     private void Update()
     {
         transform.localPosition = new Vector3(0,0,0);
-        if (ground_script.leftSide.y < BR.transform.position.y)
+        if (ground_script.leftSide.y < BR.transform.position.y && ground_script.top == false)
         {
             PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
             ground_script.top = false;
