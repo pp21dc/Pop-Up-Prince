@@ -82,6 +82,16 @@ public class GrabScript : MonoBehaviour
             PFC.CheckCollisions(PFC.PM.currentGroundScript.gameObject, player);
             PFC.SetPlayerY(other);
         }
+        else if (other.tag == "Player")
+        {
+            grabbed = false;
+            player = other.gameObject;
+            PFC = other.transform.GetComponent<PrinceFootCollider>();
+            PFC.PM.current_grab = null;
+            PFC.PM.grabbed = false;
+            PFC.CheckCollisions(PFC.PM.currentGroundScript.gameObject, player);
+            PFC.SetPlayerY(other);
+        }
 
 
     }
