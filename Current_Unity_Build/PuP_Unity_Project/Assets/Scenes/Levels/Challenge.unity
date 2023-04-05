@@ -255,12 +255,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 526244bdb74cc8b4ca1ac946da8750c6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.74
+      value: 14.056341
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 526244bdb74cc8b4ca1ac946da8750c6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54.1
+      value: 94.98109
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 526244bdb74cc8b4ca1ac946da8750c6,
         type: 3}
@@ -1361,12 +1361,12 @@ PrefabInstance:
     - target: {fileID: 2147663059971131953, guid: 2c8c228da63f9fd48bd8ed08cc9e4ddf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.796341
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2147663059971131953, guid: 2c8c228da63f9fd48bd8ed08cc9e4ddf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54.218903
+      value: 95.1
       objectReference: {fileID: 0}
     - target: {fileID: 2147663059971131953, guid: 2c8c228da63f9fd48bd8ed08cc9e4ddf,
         type: 3}
@@ -1901,7 +1901,7 @@ PrefabInstance:
     - target: {fileID: 7656033190571556216, guid: 2c8c228da63f9fd48bd8ed08cc9e4ddf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7656033190665225311, guid: 2c8c228da63f9fd48bd8ed08cc9e4ddf,
         type: 3}
@@ -3284,6 +3284,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8533682006801749084, guid: 8a60319bab3757040a2108b4517252fd,
+        type: 3}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 1814723102}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a60319bab3757040a2108b4517252fd, type: 3}
 --- !u!1 &1272924365 stripped
@@ -3761,6 +3766,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3d989fe64e7c0f47a76c9032628ff90, type: 3}
+--- !u!65 &1814723102 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8533682006801749085, guid: 8a60319bab3757040a2108b4517252fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1264361570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1821130458
 PrefabInstance:
   m_ObjectHideFlags: 0
