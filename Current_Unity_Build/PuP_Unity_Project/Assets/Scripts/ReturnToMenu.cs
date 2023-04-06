@@ -37,6 +37,6 @@ public class ReturnToMenu : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(7);
     }
 }
