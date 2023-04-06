@@ -37,7 +37,7 @@ public class RisingInk : MonoBehaviour
             //move object up
             transform.Translate(Vector3.up * (moveSpeed * Time.deltaTime), Space.World);
 
-            if (transform.position.y > (startPos * heightMultiplier))
+            if (transform.position.y > (Mathf.Abs(startPos) * heightMultiplier))
             {
                 canRise = false;
             }

@@ -29,7 +29,7 @@ public class Gate : MonoBehaviour
             //move object up
             transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
 
-            if (transform.position.y > (startPos*riseMultiplier))
+            if (transform.position.y > (Mathf.Abs(startPos) * riseMultiplier))
             {
                 rise = false;
             }
