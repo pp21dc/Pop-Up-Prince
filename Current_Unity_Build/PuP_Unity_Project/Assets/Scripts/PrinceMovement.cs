@@ -69,6 +69,7 @@ public class PrinceMovement : MonoBehaviour
     public AudioClip AS_jumping;
     public AudioClip AS_landing;
     public AudioClip AS_dash;
+    public AudioClip AS_collect;
     
 
     [HideInInspector]
@@ -222,7 +223,7 @@ public class PrinceMovement : MonoBehaviour
         //Debug.Log(current_speed.y);
     }
 
-    private void playSound(AudioClip AC)
+    public void playSound(AudioClip AC)
     {
         AS.Stop();
         AS.clip = AC;

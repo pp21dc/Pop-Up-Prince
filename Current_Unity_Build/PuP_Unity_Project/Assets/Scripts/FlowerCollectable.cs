@@ -34,6 +34,7 @@ public class FlowerCollectable : MonoBehaviour
             {
                 PM.flowerCount++;
                 this.gameObject.SetActive(false);
+                PM.playSound(PM.AS_collect);
             }
         }
     }

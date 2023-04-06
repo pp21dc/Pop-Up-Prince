@@ -9,6 +9,8 @@ public class KeyCollectable : MonoBehaviour
      * picks up key and destroys game object
      */
 
+    PrinceMovement PM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,10 @@ public class KeyCollectable : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            PM = collider.gameObject.transform.parent.GetComponent<PrinceMovement>();
             PrinceMovement.hasKey = true;
             this.gameObject.SetActive(false);
+            PM.playSound(PM.AS_collect);
         }
     }
 

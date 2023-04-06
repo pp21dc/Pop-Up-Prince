@@ -19,7 +19,12 @@ public class InkArm : MonoBehaviour
     public float timerRate = 0.1f;
     public bool RETURN = false;
     public bool timerOn = false;
+    public GameObject Arm;
     GrabScript GS;
+
+    Vector3 targetPoint;
+    Quaternion targetRotation;
+
 
     float timerx = 0;
     bool reachLock = false;
@@ -42,10 +47,15 @@ public class InkArm : MonoBehaviour
             Vector3 moveToA = Vector3.MoveTowards(transform.position, ANCHOR.position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToAA = Vector3.MoveTowards(new Vector3(transform.position.x + xDif, transform.position.y + yDif), ANCHOR.transform.position, ARM_SPEED * Time.deltaTime);
             Vector3 moveToH = Vector3.MoveTowards(player.transform.position, transform.position, ARM_SPEED * Time.deltaTime);
+
+            
+
+
             if (move && (!Stretched(moveTo)) && !GS.grabbed && !reachLock)
             {
                 //Debug.Log("TARGET: PLAYER");
                 transform.position = moveTo;
+                //transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, rotateToP.z));
             }
             if ((!move | GS.grabbed) || reachLock)
             {
