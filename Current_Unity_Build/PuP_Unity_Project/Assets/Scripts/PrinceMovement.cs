@@ -230,11 +230,11 @@ public class PrinceMovement : MonoBehaviour
         AS.Play();
     }
 
-    private void particleEffects()
+    public void particleEffects()
     {
         if (PS != null)
         {
-            if (!PS_lock && isFloor)
+            if (!PS_lock && (isFloor || onCurve))
             {
                 PS.Play();
                 PS_lock = true;
@@ -556,7 +556,11 @@ public class PrinceMovement : MonoBehaviour
 
             speed_dashy = UD * DASH_SPEED;
             speed_dashx = LR * DASH_SPEED;
-            current_speed.y = current_speed.y/3;
+            if (current_speed.y < 0)
+            {
+                current_speed.y = current_speed.y/5;
+            }
+            
             //Debug.Log(UD + " :?: " + LR);
 
             dashEffect.GetComponent<ParticleSystem>().Play();
@@ -684,9 +688,13 @@ public class PrinceMovement : MonoBehaviour
 
         if (isRoof || isSlope)
         {
+            Debug.Log("ROOF DETECTED");
             speed_dashy = 0;
             speed_y = 0;
-            current_speed = new Vector3(0, -2.45f, 0);
+            if (isRoof)
+            {
+                current_speed = new Vector3(0, -2.45f, 0);
+            }
         }
 
         if (isFloor)

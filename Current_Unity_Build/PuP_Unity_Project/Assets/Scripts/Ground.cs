@@ -44,6 +44,7 @@ public class Ground : MonoBehaviour
         float tanResult = 0;
         leftSide = transform.position;
         rightSide = transform.position;
+        bottom = transform.position;
 
         transform.eulerAngles = new Vector3(0, 0, 0);
 
