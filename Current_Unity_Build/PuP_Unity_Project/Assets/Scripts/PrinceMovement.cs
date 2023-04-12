@@ -708,6 +708,7 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
+        transform.position = Checkpoint;
         respawn = true;
         if (current_grab != null)
         {
@@ -720,12 +721,15 @@ public class PrinceMovement : MonoBehaviour
         speed_x = 0;
         speed_y = 0;
         current_speed = (Vector3.zero);
-        transform.position = Checkpoint;
+        
         GM.resetFlowers();
         GM.resetKeys();
 
+        
         CollisionDetected(false, false, false, false, 30);
         isWallLeft = false;
+        isFloor = false;
+        
         PFC.contacts = 0;
 
         Debug.Log("Respawn");
