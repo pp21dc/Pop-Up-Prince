@@ -11,7 +11,7 @@ public class Gate : MonoBehaviour
     public float moveSpeed = 3f;
     public float moveTime = 1f;
     float startPos;
-    public float riseMultiplier = 2;
+    public float riseMultiplier = 3;
     public bool rise = false;
 
     public bool lock1 = false;
@@ -57,7 +57,7 @@ public class Gate : MonoBehaviour
         //move object up
         transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
 
-        if (transform.position.y > (Mathf.Abs(startPos) * riseMultiplier))
+        if (transform.position.y > (Mathf.Abs(startPos) + riseMultiplier))
         {
             rise = false;
             confettiMaster1.gameObject.GetComponent<playConfetii>().playAllConfetti();
