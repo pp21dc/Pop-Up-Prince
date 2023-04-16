@@ -6,13 +6,14 @@ public class loadin : MonoBehaviour
 {
     [HideInInspector]
     public float rotation;
+    public float speed = 0.5f;
     bool lk = false;
     // Update is called once per frame
     void Update()
     {
         if (transform.rotation.x < 0.9999 && !lk)
         {
-            transform.Rotate(0.5f, 0, 0);
+            transform.Rotate(speed, 0, 0);
 
         }
         else
@@ -26,6 +27,6 @@ public class loadin : MonoBehaviour
     public void exit()
     {
         Debug.Log(rotation);
-        transform.Rotate(-0.5f, 0, 0);
+        transform.Rotate(-speed, 0, 0);
     }
 }
