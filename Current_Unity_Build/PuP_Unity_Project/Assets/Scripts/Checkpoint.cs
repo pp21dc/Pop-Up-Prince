@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
         if (other.tag == "Player")
         {
             PM = other.transform.parent.GetComponent<PrinceMovement>();
-            PM.Checkpoint = new Vector3(transform.position.x, transform.position.y, 0);
+            PM.Checkpoint = new Vector3(transform.position.x, transform.position.y + 1, 0);
         }
     }
 }
