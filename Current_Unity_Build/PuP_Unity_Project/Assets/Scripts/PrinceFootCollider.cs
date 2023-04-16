@@ -77,12 +77,12 @@ public class PrinceFootCollider : MonoBehaviour
     private void Update()
     {
         transform.localPosition = new Vector3(0,0,0);
-        if (ground_script.leftSide.y < BR.transform.position.y && ground_script.top == false)
+        /*if (ground_script.leftSide.y < BR.transform.position.y && ground_script.top == false)
         {
             PM.CollisionDetected(PM.isWallLeft, PM.isWallRight, false, PM.isRoof, PM.friction_air);
             ground_script.top = false;
             Debug.Log("Top Exit | NO TOP");
-        }
+        }*/
     }
 
 
@@ -140,7 +140,7 @@ public class PrinceFootCollider : MonoBehaviour
                 if (ground_script.slope != 0 && PM.currentSlope == 0)
                 {
                     Debug.Log(2.1);
-                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY), 0 ), other.transform.rotation);
+                    player.transform.SetPositionAndRotation(new Vector3((px) + (player_xBounds * ground_script.snap_multiplyer * xBoundDir), gy + (slopeY) - player_groundSinkY_slopeTop, 0 ), other.transform.rotation);
                     transform.SetPositionAndRotation(transform.position, player.transform.rotation);
                 }
                 else if (PM.isSlope && xBoundDir == 0 && ground_script.slope != 0)

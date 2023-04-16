@@ -59,7 +59,7 @@ public class InkArm : MonoBehaviour
             }
             if ((!move | GS.grabbed) || reachLock)
             {
-                Debug.Log("TARGET: ANCHOR");
+                //Debug.Log("TARGET: ANCHOR");
                 transform.position = moveToA;
                 if (!PFC.PM.dashing)
                 {
