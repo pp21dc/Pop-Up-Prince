@@ -14,6 +14,10 @@ public class Gate : MonoBehaviour
     public float riseMultiplier = 2;
     public bool rise = false;
 
+    public bool lock1 = false;
+
+    public GameObject confettiMaster1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +30,9 @@ public class Gate : MonoBehaviour
 
         if (rise == true)
         {
-            //move object up
-            transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
-
-            if (transform.position.y > (Mathf.Abs(startPos) * riseMultiplier))
+            if(lock1 == false)
             {
-                rise = false;
+                translate();
             }
 
         }
@@ -46,6 +47,22 @@ public class Gate : MonoBehaviour
             //tell flag to rise
             rise = true;
 
+            //confettiMaster1.gameObject.GetComponent<playConfetii>().playAllConfetti();
+
         }
+    }
+
+    void translate()
+    {
+        //move object up
+        transform.Translate(Vector3.left * (moveSpeed * Time.deltaTime));
+
+        if (transform.position.y > (Mathf.Abs(startPos) * riseMultiplier))
+        {
+            rise = false;
+            confettiMaster1.gameObject.GetComponent<playConfetii>().playAllConfetti();
+            lock1 = true;
+        }
+     
     }
 }
