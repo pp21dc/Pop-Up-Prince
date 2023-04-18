@@ -15401,6 +15401,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 825fd98f58d8e2d43b8a6ba709c07b02,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 22894df3083026c4b88003c3e44b7fa0, type: 2}
     - target: {fileID: 919132149155446097, guid: 825fd98f58d8e2d43b8a6ba709c07b02,
         type: 3}
       propertyPath: m_Name
@@ -15414,6 +15419,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 618183932}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &618183934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 825fd98f58d8e2d43b8a6ba709c07b02,
+    type: 3}
+  m_PrefabInstance: {fileID: 618183932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &618183935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618183934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc11898d8d15d5740ac45bc2317c3c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 22894df3083026c4b88003c3e44b7fa0, type: 2}
+  _Voronoi_Increase_Rate: 1
+  _Voronoi_Height: 0
+  _Voronoi_Width: 0
+  _Voronoi_Blotch: 0
+  _HeightAndWidthIncrease: 0.01
 --- !u!1001 &619261933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49147,6 +49176,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1783763305}
     m_Modifications:
+    - target: {fileID: 4825301423418634969, guid: a973ee8c361c56643b654583da38a273,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f6cde637e9757843bd4f21d2d12dcf2, type: 2}
     - target: {fileID: 5962140046438042038, guid: a973ee8c361c56643b654583da38a273,
         type: 3}
       propertyPath: m_RootOrder
@@ -49209,3 +49243,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a973ee8c361c56643b654583da38a273, type: 3}
+--- !u!1 &6326572595943226126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6482393332594135820, guid: a973ee8c361c56643b654583da38a273,
+    type: 3}
+  m_PrefabInstance: {fileID: 6326572595943226125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6326572595943226127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326572595943226126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc11898d8d15d5740ac45bc2317c3c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 2f6cde637e9757843bd4f21d2d12dcf2, type: 2}
+  _Voronoi_Increase_Rate: 1
+  _Voronoi_Height: 0
+  _Voronoi_Width: 0
+  _Voronoi_Blotch: 0
+  _HeightAndWidthIncrease: 0.01
