@@ -755,7 +755,7 @@ public class PrinceMovement : MonoBehaviour
 
     public void FullRespawn()
     {
-        transform.position = Checkpoint;
+        transform.position = new Vector3(Checkpoint.x, Checkpoint.y + 0.25f, transform.position.z);
         if (current_grab != null)
         {
             current_grab.grabbed = false;
