@@ -62,6 +62,13 @@ public class PrinceMovement : MonoBehaviour
     public BezierFollow BzF;
     public ParticleSystem PS;
     bool PS_lock = false;
+    public GameObject ink_effect;
+    public float ink_riseHeight;
+    public float ink_riseSpeed;
+    public Vector3 ink_startPos;
+    bool ink_rise;
+    bool ink_top;
+
 
     [Header("Audio/SFX")]
     public AudioSource AS;
@@ -173,6 +180,7 @@ public class PrinceMovement : MonoBehaviour
         GM = manager.GetComponent<GameManager>();
         FP = cam.GetComponent<FollowPlayer>();
         Checkpoint = transform.position;
+        
 
         //MOVE_ACCEL_ACOEF = MOVE_SPEED / Mathf.Log10(MOVE_ACCEL_TIME); //Creates quadratic function to fufil time/speed acceleration requirements
     }
@@ -181,6 +189,12 @@ public class PrinceMovement : MonoBehaviour
     void Update()
     {
         particleEffects();
+
+        if (ink_rise)
+        {
+            RiseInk();
+        }
+
         if (current_speed == new Vector3(0, 0, 0) && dashing == false)
         {
             AS.Stop();
@@ -221,6 +235,32 @@ public class PrinceMovement : MonoBehaviour
 
         objectController();
         //Debug.Log(current_speed.y);
+    }
+
+    public void RiseInk()
+    {
+        ink_startPos = new Vector3(ink_effect.transform.position.x, transform.position.y - 1, ink_effect.transform.position.z);
+        if (ink_effect.transform.position.y < transform.position.y + ink_riseHeight && ! ink_top)
+        {
+            Vector3 ink_target = new Vector3(ink_effect.transform.position.x, transform.position.y + ink_riseHeight, ink_effect.transform.position.z);
+            ink_effect.transform.position = Vector3.MoveTowards(ink_effect.transform.position, ink_target, ink_riseSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (!ink_top)
+            {
+                FullRespawn();
+            }
+            
+            ink_top = true;
+            //Vector3 ink_target = new Vector3(ink_effect.transform.position.x, ink_startPos.y, ink_effect.transform.position.z);
+            ink_effect.transform.position = Vector3.MoveTowards(ink_effect.transform.position, ink_startPos, ink_riseSpeed * Time.deltaTime);
+            if (ink_effect.transform.position.y <= transform.position.y)
+            {
+                ink_rise = false;
+                ink_top = false;
+            }
+        }
     }
 
     public void playSound(AudioClip AC)
@@ -708,32 +748,38 @@ public class PrinceMovement : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = Checkpoint;
         respawn = true;
+        ink_rise = true;
+        ink_top = false;
+    }
+
+    public void FullRespawn()
+    {
+        transform.position = Checkpoint;
         if (current_grab != null)
         {
             current_grab.grabbed = false;
         }
         grabbed = false;
-        
+
         speed_dashx = 0;
         speed_dashy = 0;
         speed_x = 0;
         speed_y = 0;
         current_speed = (Vector3.zero);
-        
+
         GM.resetFlowers();
         GM.resetKeys();
 
-        
+
         CollisionDetected(false, false, false, false, 30);
         isWallLeft = false;
         isFloor = false;
-        
+
         PFC.contacts = 0;
-
+        //ink_rise = false;
         Debug.Log("Respawn");
-
     }
+        
 
 }
