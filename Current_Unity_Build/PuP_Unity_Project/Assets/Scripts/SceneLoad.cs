@@ -10,7 +10,7 @@ public class SceneLoad : MonoBehaviour
      * Script to load next scene
      */
     public loadin LN;
-    bool east = false;
+    public bool east = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +23,15 @@ public class SceneLoad : MonoBehaviour
     {
         if (east)
         {
-            LN.exit();
             
-            if (LN.rotation <= 0.015)
+            
+            if (LN.exit())
             {
                 LoadNextScene();
+            }
+            else
+            {
+                LN.exit();
             }
         }
     }

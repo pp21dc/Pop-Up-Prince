@@ -7,13 +7,16 @@ public class loadin : MonoBehaviour
     [HideInInspector]
     public float rotation;
     public float speed = 0.5f;
+    public PrinceMovement PM;
+    public float top = 2.2f;
+    public float bottom = 4f;
     bool lk = false;
     // Update is called once per frame
     void Update()
     {
-        if (transform.rotation.x < 0.9999 && !lk)
+        if (transform.position.y > PM.transform.position.y - bottom && !lk)
         {
-            transform.Rotate(speed, 0, 0);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, PM.transform.position.y - bottom, transform.position.z), speed * Time.deltaTime);
 
         }
         else
@@ -24,9 +27,14 @@ public class loadin : MonoBehaviour
         
     }
 
-    public void exit()
+    public bool exit()
     {
-        Debug.Log(rotation);
-        transform.Rotate(-speed, 0, 0);
+        //Debug.Log(rotation);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, PM.transform.position.y + top, transform.position.z), speed * Time.deltaTime);
+        if (transform.position.y >= PM.transform.position.y + (top - 0.05f))
+        {
+            return true;
+        }
+        return false;
     }
 }
