@@ -14,6 +14,11 @@ public class Sinking : MonoBehaviour
     public float sinkingMultiplier = 2;
     public bool sink = false;
 
+    public ParticleSystem left;
+    public ParticleSystem right;
+    public Material towerInk;
+    public float height = 0.51f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +31,18 @@ public class Sinking : MonoBehaviour
 
         if (sink == true)
         {
+
+
             //move object up
             transform.Translate(Vector3.down * (moveSpeed * Time.deltaTime), Space.World);
+            height += Vector3.down.y * (moveSpeed * Time.deltaTime);
+            towerInk.SetFloat("_Height", height);
 
             if (transform.position.y < (startPos * sinkingMultiplier))
             {
                 sink = false;
+                left.Stop();
+                right.Stop();
             }
 
         }
@@ -46,6 +57,8 @@ public class Sinking : MonoBehaviour
             //tell flag to rise
             sink = true;
 
+            left.Play();
+            right.Play();
         }
     }
 }
