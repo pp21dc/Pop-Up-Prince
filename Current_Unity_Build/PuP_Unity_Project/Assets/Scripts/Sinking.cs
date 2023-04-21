@@ -17,7 +17,7 @@ public class Sinking : MonoBehaviour
     public ParticleSystem left;
     public ParticleSystem right;
     public Material towerInk;
-    public float height = 0.03f;
+    public Vector2 height = new Vector2(0,0.51f);
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,8 @@ public class Sinking : MonoBehaviour
 
             //move object up
             transform.Translate(Vector3.down * (moveSpeed * Time.deltaTime), Space.World);
-            height += Vector3.down.y * (moveSpeed * Time.deltaTime);
-            towerInk.SetFloat("_Height", height);
+            height += new Vector2(0,1) * (moveSpeed * Time.deltaTime);
+            towerInk.SetVector("_Offset", height);
 
             if (transform.position.y < (startPos * sinkingMultiplier))
             {
