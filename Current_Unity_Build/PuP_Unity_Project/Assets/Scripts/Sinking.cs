@@ -17,7 +17,7 @@ public class Sinking : MonoBehaviour
     public ParticleSystem left;
     public ParticleSystem right;
     public Material towerInk;
-    public float height = 0.51f;
+    public float height = 0.03f;
 
     // Start is called before the first frame update
     void Start()
